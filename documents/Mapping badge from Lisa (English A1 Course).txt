@@ -1,0 +1,55 @@
+{
+//set the context, which establishes the special terms we will be using
+//must be adjusted enventually
+  "@context": [
+    "https://www.moodle/badges/badge.php",
+    "https://w3c-ccg.github.io/vc-ed-models/context.json"
+  ],
+
+//credential's identifier -> URI or URL
+  "id": "urn:uuid:a63a60be-f4af-491c-87fc-2c8fd3007a58",
+//credential type, which declare what data to expect in the credential
+  "type": [
+    "VerifiableCredential",
+    "OpenBadgeCredential"
+  ],
+
+//name of open badge instance -> ?!
+  "name": "Teacher",
+  "issuer": {
+//for disambiguation, but what format?! 
+    "type": ["Profile"],
+//DID of issuer Moodle4
+    "id": "did:key:z6MktiSzqF9kqwdU8VkdBKx56EYzXfpgnNPUAGznpicNiWfn",
+//name of issuer
+    "name": "Moodle4"
+  },
+
+//date and time when a credential becomes valid (ISO 8601-format)
+  "issuanceDate": "2023-03-22T09:52:00Z",
+//holder of credential
+  "credentialSubject": { 
+    "type": ["AchievementSubject"],
+//Lisa's DID
+    "id": "did:key:123",
+    "achievement": {
+//achievement's identifier 
+      "id": "urn:uuid:bd6d9316-f7ae-4073-a1e5-2f7f5bd22922",
+      "type": ["Achievement"],
+      "achievementType": "Proof of language knowledge",
+      "name": "English A1 Course",
+      "description": "The holder of this credential has passed the English A1 course from teacher.",
+      "criteria": {
+        "type": "Criteria",
+        "narrative": "Successfully pass the following course content: 
+    	File - lecture,
+    	Quiz - Basic Quiz,
+    	File - lecture,
+    	Chat - Chat,
+    	URL - Englisch crash course,
+    	Feedback - Feedback
+"
+      }
+    }
+  }
+}
