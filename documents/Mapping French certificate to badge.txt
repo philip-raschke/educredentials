@@ -1,0 +1,63 @@
+{
+//set the context, which establishes the special terms we will be using
+//must be adjusted enventually
+  "@context": [
+    "https://www.moodle/badges/badge.php",
+    "https://w3c-ccg.github.io/vc-ed-models/context.json"
+  ],
+
+//credential's identifier -> URI or URL
+  "id": "urn:uuid:a63a60be-f4af-491c-87fc-2c8fd3007a58",
+//credential type, which declare what data to expect in the credential
+  "type": [
+    "VerifiableCredential",
+    "OpenBadgeCredential"
+  ],
+
+//name of open badge instance -> vielleicht auch moodle instance ?!
+  "name": "Teacher",
+  "issuer": {
+//for disambiguation, but what format?! 
+    "type": ["Profile"],
+//DID of Jean-Philippe Hashold (issuer)
+    "id": "did:key:z6MktiSzqF9kqwdU8VkdBKx56EYzXfpgnNPUAGznpicNiWfn",
+//name of issuer
+    "name": "Jean-Philippe Hashold"
+  },
+
+//date and time when a credential becomes valid (ISO 8601-format)
+  "issuanceDate": "2023-01-16T09:52:00Z",
+//holder of credential
+  "credentialSubject": { 
+    "type": ["AchievementSubject"],
+//Jonas's DID
+    "id": "did:key:123",
+    "achievement": {
+//achievement's identifier 
+      "id": "urn:uuid:bd6d9316-f7ae-4073-a1e5-2f7f5bd22922",
+      "type": ["Achievement"],
+      "achievementType": "Certificate of Successful Completion",
+      "name": "French A1 for academic purposes",
+      "description": "Learning objectives and outcomes: The course “Français sur objectif	universitaire A1” leads to level A1 of the CEFR. It is designed for the academic context. At the end of the course, students will be able to 	understand and use familiar, everyday expressions and	very simple sentences aimed at satisfying concrete needs. They can introduce themselves and others and ask other people questions about themselves - e.g. where they live, 	people they know and things they own - and can respond to questions of this kind. Students can communicate in a simple way if the person they are talking 	with speak slowly and clearly and is willing to help. (Source: Global	Scale CEFR)
+	The course is based on the textbook: Défi 1 (A1) Livre de l'élève + CD and Défi 1 (A1) 
+	Cahier d'exercices + MP3 téléchargeables
+	Methodology: Language skills (reading, writing, listening and speaking) are taught according to the action-oriented approach, i.e. language use plays an important role in 
+	the lessons. Grammar and vocabulary are discussed and explained in context. 
+	ECTS and Workload: The course is credited by the Council the Faculty of Humanities at	TU Berlin with 6 ECTS. This corresponds to a workload of 180 hours.
+	Attendance: Students are required to fulfil a minimum of 80% of the online tasks in order to be allowed to take the end-of-tern exam.
+	Exam form: The end-of-term exam consists of four parts representing each 25% of the final grade (listening comprehension, reading comprehension, oral competence, written 
+	competence). Students can achieve 100 points (100%).
+	",
+      "criteria": {
+        "type": "Criteria",
+        "narrative": "Get at least 50 points from 100 (50 % of all points to be earned in the course).: 
+    	Listening Comprehension - 20 / 25,
+    	Reading Comprehension - 22.5 / 25,
+    	Oral Competence - 23 / 25,
+    	Written Competence - 20 / 25,
+    	Total - 85.50 point (85.50%)
+"
+      }
+    }
+  }
+}
