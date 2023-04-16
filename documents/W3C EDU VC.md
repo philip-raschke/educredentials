@@ -1,6 +1,6 @@
 # Basic Verifiable Education Credential
 
-<img width="293" alt="Screenshot 2023-04-16 203803" src="https://user-images.githubusercontent.com/103564990/232334449-4bc8973c-0566-4c7b-856b-babe033970fe.png">
+<img width="800" alt="Screenshot 2023-04-16 203803" src="https://user-images.githubusercontent.com/103564990/232334449-4bc8973c-0566-4c7b-856b-babe033970fe.png">
 
 # Explanation of data model
 -	Context (used in same sense as in VC-Data-Model)
@@ -20,14 +20,14 @@
 
 # Diploma Issued as an Basic Open Badge
 
-<img width="234" alt="Screenshot 2023-04-16 203819" src="https://user-images.githubusercontent.com/103564990/232334479-dc25eccb-fa59-4042-aebf-432286cb8f46.png">
+<img width="800" alt="Screenshot 2023-04-16 203819" src="https://user-images.githubusercontent.com/103564990/232334479-dc25eccb-fa59-4042-aebf-432286cb8f46.png">
 
 -	Additional information, such as name of Open Badge Instance, issuer type, and additional credential subject properties
 
 # References
-https://w3c-ccg.github.io/vc-ed-use-cases/
-https://w3c-ccg.github.io/vc-ed-models/ 
-https://www.w3.org/TR/vc-data-model/
+- https://w3c-ccg.github.io/vc-ed-use-cases/
+- https://w3c-ccg.github.io/vc-ed-models/ 
+- https://www.w3.org/TR/vc-data-model/
 
 
 
