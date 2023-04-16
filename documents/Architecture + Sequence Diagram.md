@@ -4,4 +4,5 @@
 <img width="600" alt="Screenshot 2023-04-16 200009" src="https://user-images.githubusercontent.com/103564990/232333080-ff09d8b0-7e77-444c-9295-c998b2cef5c7.png">
 
 
-![Screenshot 2023-04-16 200115](https://user-images.githubusercontent.com/103564990/232333352-76311bb4-e7ca-47fa-b52e-a049a49a8c21.png)
+
+<img width="254" alt="Screenshot 2023-04-16 202110" src="https://user-images.githubusercontent.com/103564990/232333423-b2f03b23-af29-48f5-b1c8-f9c0793f3cd8.png">
