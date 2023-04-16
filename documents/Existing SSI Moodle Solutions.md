@@ -5,7 +5,7 @@ Urban Vidoviˇc(B), Vid Kerˇsiˇc, and Muhamed Turkanovi´c Faculty of Electric
 - Moodle plugin is a bridge between client, EduCTX blockchain network (https://platform.eductx.org) and the moodle server
 -	 MetaMask browser extension needed
 
-<img width="551" alt="Screenshot 2023-04-16 202701" src="https://user-images.githubusercontent.com/103564990/232333947-19d284c0-d473-420c-ba19-618c21832aa5.png">
+<img width="800" alt="Screenshot 2023-04-16 202701" src="https://user-images.githubusercontent.com/103564990/232333947-19d284c0-d473-420c-ba19-618c21832aa5.png">
 
 
  
@@ -60,7 +60,7 @@ Erinç KARATAŞ 1 1Computer Technologies Department, Elmadag Vocational School, 
 
 -	Approach: Semantic Blockchain
 
-<img width="544" alt="Screenshot 2023-04-16 202726" src="https://user-images.githubusercontent.com/103564990/232334059-e7287d62-a062-403e-85f9-d4759250ef2c.png">
+<img width="800" alt="Screenshot 2023-04-16 202726" src="https://user-images.githubusercontent.com/103564990/232334059-e7287d62-a062-403e-85f9-d4759250ef2c.png">
 
  
 -	Solid Personal Data Pod belongs to student (holder) with learning record
