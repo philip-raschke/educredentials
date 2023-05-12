@@ -38,7 +38,7 @@ $PAGE->set_url('/local/badge_data/index.php'); // Seiten-URL festlegen
 $PAGE->set_title('JSON Badge'); // Seiten-Titel festlegen
 $PAGE->set_heading('Badge in JSON'); // Seitenüberschrift festlegen
 
-
+var_dump($PAGE);die;
 
 echo $OUTPUT->header(); // Header der Seite anzeigen
 
@@ -64,6 +64,7 @@ foreach ($badges_detail as $badge_id=>$badge){
         ],
         "credentialSubject"=> [
             "id"=> $badge->recipient->id,
+            "name"=> $badge->recipient->firstname.($badge->recipient->middlename===""?"": " ".$badge->recipient->middlename)." ".$badge->recipient->lastname,
             "achievement"=> [
                 "id"=> [$badge->issued['badge']['id']],
                 #"type"=> ['Achievement'],
