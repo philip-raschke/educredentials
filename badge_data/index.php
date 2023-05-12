@@ -38,7 +38,7 @@ $PAGE->set_url('/local/badge_data/index.php'); // Seiten-URL festlegen
 $PAGE->set_title('JSON Badge'); // Seiten-Titel festlegen
 $PAGE->set_heading('Badge in JSON'); // Seitenüberschrift festlegen
 
-var_dump($PAGE);die;
+#var_dump($PAGE);die;
 
 echo $OUTPUT->header(); // Header der Seite anzeigen
 

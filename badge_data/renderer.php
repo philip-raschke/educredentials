@@ -375,6 +375,7 @@ class core_badges_renderer extends plugin_renderer_base {
         $actionhtml = $this->output->single_button(
                     new moodle_url('/badges/mybadges.php', array('downloadall' => true, 'sesskey' => sesskey())),
                     get_string('downloadall'), 'POST', array('class' => 'activatebadge'));
+        $actionhtml .= "<a class='ml-3 btn btn-secondary' href='".new moodle_url('/local/badge_data/')."'>Badges as JSON</a>";
         $downloadall = $this->output->box('', 'col-md-3');
         $downloadall .= $this->output->box($actionhtml, 'col-md-9');
         $downloadall = $this->output->box($downloadall, 'row ml-5');
@@ -389,7 +390,7 @@ class core_badges_renderer extends plugin_renderer_base {
 
             $htmllist = $this->print_badges_list($badges->badges, $USER->id);
             $localhtml .= $backpackconnect . $countmessage . $searchform;
-            $localhtml .= $htmlpagingbar . $htmllist . $htmlpagingbar . $downloadall . "<button>JSON</button>";
+            $localhtml .= $htmlpagingbar . $htmllist . $htmlpagingbar . $downloadall;
         } else {
             $localhtml .= $searchform . $this->output->notification(get_string('nobadges', 'badges'), 'info');
         }
