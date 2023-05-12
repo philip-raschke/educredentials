@@ -24,8 +24,6 @@ if (empty($CFG->enablebadges)) {
 
 $badges = badges_get_user_badges($USER->id);
 
-
-
 $badges_detail = [];
 foreach ($badges as $badge_id => $badge) {
     $badges_detail[$badge_id] = new \core_badges\output\issued_badge($badge_id);
@@ -49,16 +47,33 @@ echo $OUTPUT->header(); // Header der Seite anzeigen
 $JSON_badges = [];
 
 
-foreach ($badges as $badge_id=>$badge){
-
-    
-
-    $badge_obj = new \core_badges\output\issued_badge($badge_id);
+foreach ($badges_detail as $badge_id=>$badge){
 
     $JSON_badges[$badge_id] = [
-        "@context"=> [$badge_obj->issued['badge']['@context']],
-        "id"=> [$badge_obj->issued['badge']['id']],
-
+        "@context"=> [$badge->issued['badge']['@context']],
+        "id"=> [$badge->issued['badge']['id']],
+        "type"=> [
+            "VerifiableCredential",
+            "OpenBadgeCredential"
+          ],
+        "name"=> $badge->issued['badge']['name'],
+        "issuer"=> [
+            "id"=> $badge->issued['badge']['issuer']['id'],
+            "name"=> $badge->issued['badge']['issuer']['name'],
+            "issuanceDate" => date('c',$badge->issued['badge']['issuedOn']),
+        ],
+        "credentialSubject"=> [
+            "id"=> $badge->recipient->id,
+            "achievement"=> [
+                "id"=> [$badge->issued['badge']['id']],
+                #"type"=> ['Achievement'],
+                #"achievementType"=> "BachelorDegree",
+                "name"=> $badge->issued['badge']['name'],
+                "description"=> $badge->issued['badge']['description'], 
+                "criteria"=> $badge->issued['badge']['criteria'],
+                    
+            ]
+        ]
 
     ];
 
