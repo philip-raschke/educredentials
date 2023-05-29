@@ -20,7 +20,6 @@ The Moodle Badges JSON Plugin is designed for Moodle version 4.1.2 or higher. It
 <img width="841" alt="github Bilder1" src="https://github.com/pherbke/educredentials/assets/103564990/87530c07-caf3-4e8d-a8ac-3e7cc3fef475">
 
 
-
 3. Click on one of the badges you have been awarded.
 
 
