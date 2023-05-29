@@ -13,6 +13,14 @@ The Moodle Badges JSON Plugin is designed for Moodle version 4.1.2 or higher. It
 
 ## Usage
 
+<style>
+img {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
+}
+</style>
+
 1. After installing the plugin, log in to Moodle as a course participant.
 2. Navigate to your profile (user/profile.php)
 <img width="841" alt="github Bilder1" src="https://github.com/pherbke/educredentials/assets/103564990/87530c07-caf3-4e8d-a8ac-3e7cc3fef475">
