@@ -1,0 +1,208 @@
+<mxfile host="app.diagrams.net" modified="2023-06-04T15:50:34.172Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="h00b5gkvodJoiWDBVKmW" version="21.3.7" type="github">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="3243" dy="1918" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="0" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-2" value="" style="swimlane;startSize=0;fillColor=#0066CC;strokeWidth=1;fontColor=none;noLabel=1;gradientColor=default;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-1140" y="-360" width="880" height="880" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-5" value="" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="19" y="320" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-6" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Moodle&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="50" y="335" width="49.5" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-9" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007FFF;strokeColor=#007FFF;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="420" y="95" width="410" height="495" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-10" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="530" y="205" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-11" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="530" y="325" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-12" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="530.5" y="450" width="189.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-13" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fillColor=#d5e8d4;strokeColor=#82b366;exitX=1;exitY=0.5;exitDx=0;exitDy=0;strokeWidth=2;" edge="1" parent="Slypm1w9Lz4L_I-pSVXP-2" source="Slypm1w9Lz4L_I-pSVXP-5" target="Slypm1w9Lz4L_I-pSVXP-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140" y="230" as="sourcePoint" />
+            <mxPoint x="189" y="190" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-14" value="&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 18px; background-color: initial;&quot;&gt;API:&lt;/span&gt;&lt;/div&gt;&lt;font style=&quot;&quot;&gt;&lt;div style=&quot;text-align: left;&quot;&gt;&lt;span style=&quot;font-size: 14px; background-color: initial;&quot;&gt;Austellen und verifizieren von Credential&lt;/span&gt;&lt;/div&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="534.75" y="220" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-15" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;esatus Sowl SSI Agent&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="530" y="340" width="185.25" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-16" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Hyperledger Aries&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="530" y="465" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-17" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;JSON VC&lt;/b&gt;&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#CCCCCC;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="260" y="370" width="81" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-20" value="&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;...&lt;/b&gt;&lt;/span&gt;&lt;br&gt;&lt;/font&gt;" style="text;strokeColor=#666666;fillColor=#CCCCCC;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=#333333;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-17">
+          <mxGeometry y="30" width="81" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-21" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Indirekte Kommunikation mit Gateways über API&lt;/font&gt;" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="130" y="180" width="240" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-23" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="Slypm1w9Lz4L_I-pSVXP-2" source="Slypm1w9Lz4L_I-pSVXP-11" target="Slypm1w9Lz4L_I-pSVXP-10">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="580.5" y="325" as="sourcePoint" />
+            <mxPoint x="630.5" y="275" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-24" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="Slypm1w9Lz4L_I-pSVXP-2" source="Slypm1w9Lz4L_I-pSVXP-12" target="Slypm1w9Lz4L_I-pSVXP-11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="589.5" y="445" as="sourcePoint" />
+            <mxPoint x="589.5" y="385" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-27" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Conatiner 1&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="720" y="245" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-28" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Conatiner 2&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="720" y="325" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-29" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;Library&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="720" y="490" width="80" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-30" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;SSI Agent - Docker Container&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="500" y="120" width="220" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-37" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="930" y="220" as="sourcePoint" />
+            <mxPoint x="920" y="150" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="890" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-38" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="290.5" y="370" as="sourcePoint" />
+            <mxPoint x="310" y="300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-61" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Wird von esatus bereitgestellt&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="610" y="560" width="220" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-64" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;DID: Protokoll, über das zwei Parteien kommunizieren.&lt;br&gt;Besteht aus Public &amp;amp; Private Key - Nachrichten werden verschlüsselt &amp;amp; signiert&lt;br&gt;Public Key wird auf der Blockchain gespeichert&lt;br&gt;Pro Verbindung zw. StudentIn &amp;amp; Austausch wird eine DID ausgetauscht (persistente DID) - Handling der DID innerhalb der StudentIn-Wallet&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="417.88" y="680" width="409.5" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-69" value="Neo4j DB&lt;br&gt;Connections, Credentials, Credentialdefinitions, Schemadefinitions" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#CCCCCC;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-2">
+          <mxGeometry x="720" y="345" width="140" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-72" value="" style="endArrow=none;dashed=1;html=1;rounded=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="Slypm1w9Lz4L_I-pSVXP-2" target="Slypm1w9Lz4L_I-pSVXP-70">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="830" y="540" as="sourcePoint" />
+            <mxPoint x="840" y="480" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-33" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Holder (Student)&lt;/font&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-150" y="-170" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-34" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;fillColor=#d5e8d4;strokeColor=#82b366;strokeWidth=2;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="Slypm1w9Lz4L_I-pSVXP-10" target="Slypm1w9Lz4L_I-pSVXP-33">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-280" y="160" as="sourcePoint" />
+            <mxPoint x="-230" y="110" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-4" value="&lt;span style=&quot;font-size: 24px;&quot;&gt;TU Berlin Netzwerk/Infrastruktur&lt;/span&gt;" style="text;html=1;strokeColor=#d6b656;fillColor=#fff2cc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-1150" y="-370" width="370" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-39" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.3333333333333333;exitDx=0;exitDy=0;fillColor=#d5e8d4;strokeColor=#82b366;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitPerimeter=0;strokeWidth=2;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="Slypm1w9Lz4L_I-pSVXP-33" target="Slypm1w9Lz4L_I-pSVXP-46">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-160" y="-140.5" as="sourcePoint" />
+            <mxPoint x="210" y="-140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-40" value="&lt;span style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;VC-Presentation&lt;/b&gt;&lt;/span&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#CCCCCC;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-70" y="-270" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-41" value="&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;DIDCom v1 (HTTPS)&lt;/font&gt;&lt;br&gt;&lt;/font&gt;" style="text;strokeColor=#666666;fillColor=#CCCCCC;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=#333333;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-40">
+          <mxGeometry y="30" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-42" value="" style="endArrow=none;dashed=1;html=1;rounded=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-10" y="-150" as="sourcePoint" />
+            <mxPoint y="-210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-43" value="" style="swimlane;startSize=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="210" y="-390" width="240" height="450" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-46" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;Organization&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-43">
+          <mxGeometry x="30" y="210" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-67" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;AWS, &lt;br&gt;Azure, ...&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-43">
+          <mxGeometry x="5" y="10" width="75" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-35" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;&lt;b&gt;JSON VC&lt;/b&gt;&lt;/font&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#CCCCCC;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-290" y="-270" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-36" value="&lt;font style=&quot;&quot;&gt;&lt;font style=&quot;font-size: 14px;&quot;&gt;DIDCom v1 (HTTPS)&lt;/font&gt;&lt;br&gt;&lt;/font&gt;" style="text;strokeColor=#666666;fillColor=#CCCCCC;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;fontColor=#333333;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-35">
+          <mxGeometry y="30" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-44" value="" style="swimlane;startSize=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="490" y="-390" width="280" height="450" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-48" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#007FFF;strokeColor=#007FFF;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-44">
+          <mxGeometry x="35" y="120" width="210" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-50" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;SSI Agent -Docker Container&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-44">
+          <mxGeometry x="50" y="130" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-51" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;esatus Sowl SSI Agent&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-44">
+          <mxGeometry x="75" y="200" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-53" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Verifizierungskomponene&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-44">
+          <mxGeometry x="130" y="300" width="165" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-68" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;AWS, &lt;br&gt;Azure, ...&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="Slypm1w9Lz4L_I-pSVXP-44">
+          <mxGeometry x="195" y="10" width="75" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-45" value="&lt;span style=&quot;font-size: 24px;&quot;&gt;Verifier Infrastruktur&lt;/span&gt;" style="text;html=1;strokeColor=#d6b656;fillColor=#fff2cc;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="270" y="-438" width="370" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-55" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;DLT/Blockchain Aries (Knotenbetrieb IDunion)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="340" y="100" width="380" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-56" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fillColor=#d5e8d4;strokeColor=#82b366;entryX=-0.008;entryY=0.383;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="Slypm1w9Lz4L_I-pSVXP-12" target="Slypm1w9Lz4L_I-pSVXP-55">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="-310" y="170" as="sourcePoint" />
+            <mxPoint x="90" y="175.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-57" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;entryX=0.325;entryY=0.967;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=2;fillColor=#d5e8d4;strokeColor=#82b366;exitX=0.687;exitY=0.017;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="Slypm1w9Lz4L_I-pSVXP-55" target="Slypm1w9Lz4L_I-pSVXP-51">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="80" as="sourcePoint" />
+            <mxPoint x="460" y="-70" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-59" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;exitX=1.008;exitY=0.367;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=2;fillColor=#d5e8d4;strokeColor=#82b366;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="Slypm1w9Lz4L_I-pSVXP-46" target="Slypm1w9Lz4L_I-pSVXP-51">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="430" y="-110" as="sourcePoint" />
+            <mxPoint x="530" y="-158" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-62" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Verifier agent entweder bei &lt;br&gt;esatus gehostet oder auf Ogranisationssystem&lt;/font&gt;" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="335" y="-390" width="250" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-70" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;DIDCom v1 (HTTPS) DID Doc vom Holder - Schema/Credential Def&lt;br&gt;keine personbezogenen Daten&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#CCCCCC;fontColor=#333333;strokeColor=#666666;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-230" y="200" width="230" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-73" value="&lt;font style=&quot;font-size: 18px;&quot;&gt;esatus Wallet&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-190" y="-80" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Slypm1w9Lz4L_I-pSVXP-74" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;Wallet&lt;br&gt;StudentIn&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="-170" y="-50" width="80" height="40" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
