@@ -36,7 +36,14 @@ Urban Vidoviˇc(B), Vid Kerˇsiˇc, and Muhamed Turkanovi´c Faculty of Electric
 ### Plugin
 -	in PHP and Java Script
 
-
+## Questions asked in the Board:
+- Who is the issuer?: Teacher
+-> The teacher uses the Moodle platform integrated with the EduCTX plugin to issue certificates to students. The certificates are stored on the EduCTX network, which is a permissioned blockchain, and the teacher's MetaMask wallet is used to establish the connection and initiate the issuance of certificates.
+- Are there DIDs?: Could be
+-> The method for identifying entities in "EduCTX" depends on the specific implementation.
+-> "EduCTX" is a concept for blockchain-based platforms but is not a blockchain itself.
+-> Common techniques used for entity identification include Decentralized Identifiers (DIDs), wallet addresses, and digital certificates.
+-> The choice of implementation depends on the developers and the specific system requirements.
 
 
 # Developing Ethereum Blockchain-Based Document Verification Smart Contract for Moodle Learning Management System
