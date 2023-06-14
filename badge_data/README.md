@@ -2,7 +2,7 @@
 
 The Moodle Plugin for Verifiable Credentials is designed for Moodle version 4.1.2. It enables students or course participants to view their earned badges in JSON format, which can be useful for transferring them to the esatus Self-Sovereign Identity (SSI) agent.
 
-## Installation
+## Installation of the Plugin
 
 1. Make sure you have Moodle version 4.1.2 installed (refer to the Moodle installation guide in "educredentials\README" of this Github repository).
 2. Clone the repository to obtain the plugin from https://github.com/pherbke/educredentials.
