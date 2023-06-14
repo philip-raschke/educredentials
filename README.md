@@ -52,7 +52,7 @@
 2. Follow the installation steps displayed in the browser.
 3. Once the installation is complete, you will be logged in as the Administrator.
 
-**Issuing Badges**
+## Issuing Badges
 
 1. To create a new course, click on "My courses" at the top of the page ("http://localhost/moodle4/my/courses.php").
 2. Click on "New course" to create a new course ("http://localhost/moodle4/course/edit.php?category=1").
