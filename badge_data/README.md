@@ -4,9 +4,9 @@ The Moodle Badges JSON Plugin is designed for Moodle version 4.1.2 or higher. It
 
 ## Installation
 
-1. Ensure you have Moodle version 4.1.2 or higher installed.
-2. Download the plugin folder (badeg_data) from https://github.com/pherbke/educredentials.
-3. Extract the plugin folder and copy it into the "local" directory of your Moodle installation.
+1. Make sure you have Moodle version 4.1.2 installed (refer to the Moodle installation guide in "educredentials\README").
+2. Clone the repository to obtain the plugin from https://github.com/pherbke/educredentials.
+3. Copy the plugin folder into the "local" directory of your local Moodle instance.
 4. Start Moodle in your browser as an administrator.
 5. Follow the prompts to update Moodle.
 6. Once the installation is complete, the plugin should be installed and ready to use.
@@ -14,16 +14,16 @@ The Moodle Badges JSON Plugin is designed for Moodle version 4.1.2 or higher. It
 ## Usage
 
 1. After installing the plugin, log in to Moodle as a course participant.
-2. Navigate to your profile (user/profile.php)
-<img width="841" alt="github Bilder1" src="https://github.com/pherbke/educredentials/assets/103564990/87530c07-caf3-4e8d-a8ac-3e7cc3fef475"><br><br><br><br>
+2. Go to your profile (`user/profile.php`).
+   ![Profile](https://github.com/pherbke/educredentials/assets/103564990/87530c07-caf3-4e8d-a8ac-3e7cc3fef475)
 3. Click on one of the badges you have been awarded.
-<img width="835" alt="github Bilder2" src="https://github.com/pherbke/educredentials/assets/103564990/66147928-1bf5-453f-bd60-d60273d350ae"><br><br><br><br>
-4. Click on "Manage badges" to access the page where your badges are listed (/badges/mybadges.php).
-<img width="831" alt="github Bilder3" src="https://github.com/pherbke/educredentials/assets/103564990/4a274a7d-5dd2-44f8-8b59-b564edcdd9a1"><br><br><br><br>
-5. Click on the button "Badges as JSON".
-<img width="833" alt="github Bilder4" src="https://github.com/pherbke/educredentials/assets/103564990/4f305ca6-3099-4037-839b-3ca78d0c06ff"><br><br><br><br>
+   ![Badge](https://github.com/pherbke/educredentials/assets/103564990/66147928-1bf5-453f-bd60-d60273d350ae)
+4. Click on "Manage badges" to access the page where your badges are listed (`/badges/mybadges.php`).
+   ![Manage Badges](https://github.com/pherbke/educredentials/assets/103564990/4a274a7d-5dd2-44f8-8b59-b564edcdd9a1)
+5. Click on the "Badges as JSON" button.
+   ![JSON Button](https://github.com/pherbke/educredentials/assets/103564990/4f305ca6-3099-4037-839b-3ca78d0c06ff)
 6. On the left side of the page, you will find a list of all your badges.
 7. Clicking on a badge will display its corresponding JSON format in the field on the right side.
-<img width="949" alt="github Bilder5" src="https://github.com/pherbke/educredentials/assets/103564990/5442083a-93f1-40bb-9482-041685a0dc87"><br><br><br><br>
-8. Below the JSON field, you will find a copy button.<br>
+   ![JSON Format](https://github.com/pherbke/educredentials/assets/103564990/5442083a-93f1-40bb-9482-041685a0dc87)
+8. Below the JSON field, you will find a copy button.
    - Clicking on this button will copy the JSON badge to your clipboard.
