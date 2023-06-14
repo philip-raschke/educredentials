@@ -6,8 +6,8 @@ The Moodle Badges JSON Plugin is designed for Moodle version 4.1.2 or higher. It
 
 1. Make sure you have Moodle version 4.1.2 installed (refer to the Moodle installation guide in "educredentials\README" of this Github repository).
 2. Clone the repository to obtain the plugin from https://github.com/pherbke/educredentials.
-3. Copy the plugin folder ("badge_data") into the "local" directory of your local Moodle instance.
-4. Start Moodle in your browser as an administrator.
+3. Copy the plugin folder ("educredentials\badge_data") of this Github repository into the "C:\wamp64\www\moodle4\local" directory of your local Moodle instance.
+4. Start Moodle in your browser as an administrator by typing "http://localhost/moodle4/".
 5. Follow the prompts to update Moodle.
 6. Once the installation is complete, the plugin should be installed and ready to use.
 
