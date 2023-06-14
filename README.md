@@ -28,21 +28,26 @@
 # Moodle local setup
 **Download and Install WampServer64:**
 
-1. Visit the official WampServer website at [https://www.wampserver.com/en/download-wampserver-64bits/](https://www.wampserver.com/en/download-wampserver-64bits/).
+1. Visit the official WampServer website at [https://www.wampserver.com/en/download-wampserver-64bits/].
 2. Choose the appropriate version for your operating system and download WampServer64.
-3. After the download completes, extract the contents of the ZIP archive to your local hard drive.
-4. Use the default installation path "C:\wamp64" for the installation.
+3. After the download completes, extract the contents of the ZIP archive to your local hard drive (default installation path: "C:\wamp64").
 
 **Configure WampServer64:**
 
-1. Open the extracted WampServer64 directory and locate the "www" folder.
-2. Create a file named ".htaccess" within the "www" directory.
+1. Open the extracted WampServer64 directory and locate the "C:\wamp64\www" directory.
+2. Create a file named ".htaccess" within the "C:\wamp64\www" directory.
 3. Open the ".htaccess" file with a text editor and add the line "php_value max_input_vars 5000".
    This configuration option optimizes the handling of input variables in the plugin, ensuring smooth capture and processing of learner data.
 
 
 **Download and Install Moodle 4.1.2:**
 
-1. Visit the official Moodle website at [https://moodle.en.uptodown.com/windows/download](https://moodle.en.uptodown.com/windows/download).
+1. Visit the official Moodle website at [https://moodle.en.uptodown.com/windows/download].
 2. From there, download the appropriate Windows version of Moodle 4.1.2.
-3. Start the installation process following the instructions provided on the website.
+3. Unzip the moodle zip folder to "C:\wamp64\www".
+4. Rename yout moodle folder to "moodle4" ("C:\wamp64\www\moodle4") 
+
+**Start Moodle 4.1.2 in Browser**
+
+1. Open your preffered browser and type in the searchbar "http://localhost/moodle4/"
+2. follow the installation steps shown to you in the browser
