@@ -14,11 +14,11 @@ The Moodle Badges JSON Plugin is designed for Moodle version 4.1.2 or higher. It
 ## Usage
 
 1. After installing the plugin, log in to Moodle as a course participant.
-2. Go to your profile (`[user/profile.php](http://localhost/moodle4/user/profile.php)`).
+2. Go to your profile (`http://localhost/moodle4/user/profile.php`).
    ![Profile](https://github.com/pherbke/educredentials/assets/103564990/87530c07-caf3-4e8d-a8ac-3e7cc3fef475)
 3. Click on one of the badges you have been awarded.
    ![Badge](https://github.com/pherbke/educredentials/assets/103564990/66147928-1bf5-453f-bd60-d60273d350ae)
-4. Click on "Manage badges" to access the page where your badges are listed (`/badges/mybadges.php`).
+4. Click on "Manage badges" to access the page where your badges are listed (`http://localhost/moodle4/badges/mybadges.php`).
    ![Manage Badges](https://github.com/pherbke/educredentials/assets/103564990/4a274a7d-5dd2-44f8-8b59-b564edcdd9a1)
 5. Click on the "Badges as JSON" button.
    ![JSON Button](https://github.com/pherbke/educredentials/assets/103564990/4f305ca6-3099-4037-839b-3ca78d0c06ff)
