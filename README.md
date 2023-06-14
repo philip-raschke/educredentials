@@ -24,11 +24,11 @@
 - It allows running web applications like Moodle on a local computer for testing and development purposes before deploying them to a production server.
 - WampServer64 can be utilized to install and operate Moodle locally, enabling developers and administrators to test the Moodle installation, make customizations, and validate changes before deploying them to a public or production server.
 
+# Moodle Local Setup
 
-# Moodle local setup
 **Download and Install WampServer64:**
 
-1. Visit the official WampServer website at [https://www.wampserver.com/en/download-wampserver-64bits/].
+1. Visit the official WampServer website at [https://www.wampserver.com/en/download-wampserver-64bits/](https://www.wampserver.com/en/download-wampserver-64bits/).
 2. Choose the appropriate version for your operating system and download WampServer64.
 3. After the download completes, extract the contents of the ZIP archive to your local hard drive (default installation path: "C:\wamp64").
 
@@ -39,15 +39,28 @@
 3. Open the ".htaccess" file with a text editor and add the line "php_value max_input_vars 5000".
    This configuration option optimizes the handling of input variables in the plugin, ensuring smooth capture and processing of learner data.
 
-
 **Download and Install Moodle 4.1.2:**
 
-1. Visit the official Moodle website at [https://moodle.en.uptodown.com/windows/download].
+1. Visit the official Moodle website at [https://moodle.en.uptodown.com/windows/download](https://moodle.en.uptodown.com/windows/download).
 2. From there, download the appropriate Windows version of Moodle 4.1.2.
-3. Unzip the moodle zip folder to "C:\wamp64\www".
-4. Rename yout moodle folder to "moodle4" ("C:\wamp64\www\moodle4") 
+3. Unzip the Moodle ZIP folder to "C:\wamp64\www".
+4. Rename your Moodle folder to "moodle4" ("C:\wamp64\www\moodle4").
 
 **Start Moodle 4.1.2 in Browser**
 
-1. Open your preffered browser and type in the searchbar "http://localhost/moodle4/"
-2. follow the installation steps shown to you in the browser
+1. Open your preferred browser and enter "http://localhost/moodle4/" in the address bar.
+2. Follow the installation steps displayed in the browser.
+3. Once the installation is complete, you will be logged in as the Administrator.
+
+**Issuing Badges**
+
+1. To create a new course, click on "My courses" at the top of the page ("http://localhost/moodle4/my/courses.php").
+2. Click on "New course" to create a new course ("http://localhost/moodle4/course/edit.php?category=1").
+3. Customize the course according to your preferences.
+4. Invite participants to join the course.
+5. Once the invitations are accepted, course instructors can issue badges.
+6. Click on "More" on the course page.
+7. Select "Badges" from the dropdown menu.
+8. Click on "Add a new badge".
+9. Create the badge according to your preferences, including criteria, badge picture, etc.
+10. Students who meet the badge requirements you set will receive the corresponding badge.
