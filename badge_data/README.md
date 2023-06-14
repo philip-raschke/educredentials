@@ -4,7 +4,7 @@ The Moodle Plugin for Verifiable Credentials is designed for Moodle version 4.1.
 
 ## Installation of the Plugin
 
-1. Make sure you have Moodle version 4.1.2 installed (refer to the Moodle installation guide in "educredentials\README" of this Github repository).
+1. Make sure you have Moodle version 4.1.2 installed (refer to the Moodle installation guide in https://github.com/pherbke/educredentials/blob/main/README.md).
 2. Clone the repository to obtain the plugin from https://github.com/pherbke/educredentials.
 3. Copy the plugin folder ("educredentials\badge_data") of this Github repository into the "C:\wamp64\www\moodle4\local" directory of your local Moodle instance.
 4. Start Moodle in your browser as an administrator by typing "http://localhost/moodle4/".
