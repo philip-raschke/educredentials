@@ -65,7 +65,7 @@
 9. Create the badge according to your preferences, including criteria, badge picture, etc.
 10. Students who meet the badge requirements you set will receive the corresponding badge.
 
-In the `educredentials/documents` folder of this GitHub repository, you will find transcripts and project materials such as diagrams and research.
+In the `educredentials/documents` directory of this GitHub repository, you will find transcripts and project materials such as diagrams and research.
 
-The `educredentials/badge_data` folder in this GitHub repository contains the Moodle plugin. Inside this folder, you will find a README file explaining how to install and use the plugin.
+The `educredentials/badge_data` in this GitHub repository is the Moodle plugin for verifiable credentials. Inside this directory, you will find a README file explaining how to install and use the plugin.
 
