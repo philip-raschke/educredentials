@@ -24,6 +24,8 @@
 - It allows running web applications like Moodle on a local computer for testing and development purposes before deploying them to a production server.
 - WampServer64 can be utilized to install and operate Moodle locally, enabling developers and administrators to test the Moodle installation, make customizations, and validate changes before deploying them to a public or production server.
 
+
+# Moodle local setup
 **Download and Install WampServer64:**
 
 1. Visit the official WampServer website at [https://www.wampserver.com/en/download-wampserver-64bits/](https://www.wampserver.com/en/download-wampserver-64bits/).
@@ -37,6 +39,7 @@
 2. Create a file named ".htaccess" within the "www" directory.
 3. Open the ".htaccess" file with a text editor and add the line "php_value max_input_vars 5000".
    This configuration option optimizes the handling of input variables in the plugin, ensuring smooth capture and processing of learner data.
+
 
 **Download and Install Moodle 4.1.2:**
 
