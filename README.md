@@ -1,6 +1,6 @@
 # Moodle Plugin for Verifiable Credentials
 
-The need for validation and verification of educational achievements in the era of digital learning tools has led to the development of a Moodle plugin for exporting verifiable credentials in educational institutions. This plugin leverages Moodle and the Open Badges standard to issue verifiable credentials based on the W3C Verifiable Credentials Data Model. These credentials signify the completion of language courses and acquisition of language proficiency certificates.
+The development of a Moodle plugin for exporting verifiable credentials in educational institutions addresses the growing need for validation and verification of educational achievements in the digital learning era. This plugin leverages Moodle and the Open Badges standard to issue verifiable credentials based on the W3C Verifiable Credentials Data Model. It specifically integrates with the IDunion network, which is built on Self-Sovereign Identity (SSI) principles, allowing for the issuance and storage of verifiable credentials within the network. These credentials validate language course completion and language proficiency certificates while benefiting from the decentralized and privacy-enhancing features of SSI.
 
 ## Moodle
 
