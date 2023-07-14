@@ -3,7 +3,7 @@
 The contribution of this repository is the development of a Moodle plugin that enables educational institutions to export verifiable credentials. These credentials serve the purpose of validating language certificates. The plugin utilizes Moodle and adheres to the Open Badges standard, issuing verifiable credentials based on the W3C Verifiable Credentials Data Model. By aligning with the principles of Self-Sovereign Identity (SSI), the plugin contributes to the advancement of the IDunion network. Within this network, it facilitates the issuance, storage, and verification of these verifiable credentials. Our contribution focuses specifically on the issuance of these credentials.
 ## Moodle
 
-Moodle is a popular open-source e-learning platform used for creating and managing online courses. It offers a range of features for learners and educators.
+Moodle is an open-source e-learning platform used for creating and managing online courses. It offers a range of features for learners and educators [1].
 
 ## Stakeholders
 
@@ -48,3 +48,6 @@ In Moodle, badges are verifiable credentials awarded to learners for their achie
 - `educredentials/badge_data`: Contains the Moodle plugin for verifiable credentials. Inside this directory, you will find a README file with installation and usage instructions.
 
 For any further information or inquiries, please contact us at krause@tu-berlin.de.
+
+## References
+- [1] Beatty, B., & Ulasewicz, C. (2006). Faculty perspectives on moving from Blackboard to the Moodle learning management system. TechTrends, 50(4), 36-45.
