@@ -10,7 +10,7 @@ Moodle is an open-source e-learning platform used for creating and managing onli
 - **Learners**: Primary users who access course content, complete assignments, participate in discussions, and track their progress.
 - **Educators**: Utilize Moodle to create courses, provide materials, assign tasks, conduct tests, and monitor learners' progress.
 - **Administrators**: Responsible for installing, configuring, and maintaining the Moodle platform, managing user accounts, and ensuring system security and availability.
-- **Developers**: The Moodle community includes developers who continuously improve the platform, add features, fix bugs, and develop extensions.
+- **Developers**: The Moodle community includes developers who continuously improve the platform, add features, fix bugs, and develop extensions [1][2].
 
 ## Badges
 
@@ -51,3 +51,5 @@ For any further information or inquiries, please contact us at krause@tu-berlin.
 
 ## References
 - [1] Beatty, B., & Ulasewicz, C. (2006). Faculty perspectives on moving from Blackboard to the Moodle learning management system. TechTrends, 50(4), 36-45.
+- [2]. Ziraba, A., Akwene, G. C., & Lwanga, S. C. (2020). The adoption and use of Moodle learning management system in higher institutions of learning: A systematic literature review. American Journal of Online and Distance Learning, 2(1), 1-21.
+- 
