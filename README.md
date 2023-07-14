@@ -14,7 +14,7 @@ Moodle is an open-source e-learning platform used for creating and managing onli
 
 ## Badges
 
-In Moodle, badges are verifiable credentials awarded to learners for their achievements and progress in a course. Badges can be granted based on specific goals or criteria, such as course completion, reaching a target score, or active participation in discussions. Course instructors or administrators set the criteria, and learners receive badges automatically in their profiles when they meet the requirements.
+In Moodle, badges are verifiable credentials awarded to learners for their achievements and progress in a course. Badges can be granted based on specific goals or criteria, such as course completion, reaching a target score, or active participation in discussions. Course instructors or administrators set the criteria, and learners receive badges automatically in their profiles when they meet the requirements [3] [4].
 
 ## Moodle Local Setup
 
@@ -52,4 +52,5 @@ For any further information or inquiries, please contact us at krause@tu-berlin.
 ## References
 - [1] Beatty, B., & Ulasewicz, C. (2006). Faculty perspectives on moving from Blackboard to the Moodle learning management system. TechTrends, 50(4), 36-45.
 - [2]. Ziraba, A., Akwene, G. C., & Lwanga, S. C. (2020). The adoption and use of Moodle learning management system in higher institutions of learning: A systematic literature review. American Journal of Online and Distance Learning, 2(1), 1-21.
-- 
+- [3] Iwata, J., Clayton, J., & Saravani, S. J. (2017). Learner autonomy, microcredentials and self-reflection: a review of a Moodle-based medical English review course. International Journal of Information and Communication Technology, 10(1), 42-50.
+- [4] Zhou, L., Chen, L., Fan, Q., & Ji, Y. (2019). Students’ perception of using digital badges in blended learning classrooms. Sustainability, 11(7), 2151.
