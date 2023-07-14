@@ -1,20 +1,20 @@
 # Moodle Plugin for Verifiable Credentials
 
-The contribution of this repository is the development of a Moodle plugin that enables educational institutions to export verifiable credentials. These credentials serve the purpose of validating language certificates. The plugin utilizes Moodle and adheres to the Open Badges standard, issuing verifiable credentials based on the W3C Verifiable Credentials Data Model. By aligning with the principles of Self-Sovereign Identity (SSI), the plugin contributes to the advancement of the IDunion network. Within this network, it facilitates the issuance, storage, and verification of these verifiable credentials. Our contribution focuses specifically on the issuance of these credentials.
+The contribution of this repository is the development of a Moodle plugin that enables educational institutions to export verifiable credentials. These credentials serve the purpose of validating language certificates. The plugin utilizes Moodle and adheres to the Open Badges standard, issuing verifiable credentials based on the W3C Verifiable Credentials Data Model [1]. By aligning with the principles of Self-Sovereign Identity (SSI), the plugin contributes to the advancement of the IDunion network. Within this network, it facilitates the issuance, storage, and verification of these verifiable credentials. Our contribution focuses specifically on the issuance of these credentials.
 ## Moodle
 
-Moodle is an open-source e-learning platform used for creating and managing online courses. It offers a range of features for learners and educators [1].
+Moodle is an open-source e-learning platform used for creating and managing online courses. It offers a range of features for learners and educators [2][3].
 
 ## Stakeholders
 
 - **Learners**: Primary users who access course content, complete assignments, participate in discussions, and track their progress.
 - **Educators**: Utilize Moodle to create courses, provide materials, assign tasks, conduct tests, and monitor learners' progress.
 - **Administrators**: Responsible for installing, configuring, and maintaining the Moodle platform, managing user accounts, and ensuring system security and availability.
-- **Developers**: The Moodle community includes developers who continuously improve the platform, add features, fix bugs, and develop extensions [1][2].
+- **Developers**: The Moodle community includes developers who continuously improve the platform, add features, fix bugs, and develop extensions [2][4].
 
 ## Badges
 
-In Moodle, badges are verifiable credentials awarded to learners for their achievements and progress in a course. Badges can be granted based on specific goals or criteria, such as course completion, reaching a target score, or active participation in discussions. Course instructors or administrators set the criteria, and learners receive badges automatically in their profiles when they meet the requirements [3] [4].
+In Moodle, badges are verifiable credentials awarded to learners for their achievements and progress in a course. Badges can be granted based on specific goals or criteria, such as course completion, reaching a target score, or active participation in discussions. Course instructors or administrators set the criteria, and learners receive badges automatically in their profiles when they meet the requirements [5] [6].
 
 ## Moodle Local Setup
 
@@ -50,7 +50,9 @@ In Moodle, badges are verifiable credentials awarded to learners for their achie
 For any further information or inquiries, please contact us at krause@tu-berlin.de.
 
 ## References
-- [1] Beatty, B., & Ulasewicz, C. (2006). Faculty perspectives on moving from Blackboard to the Moodle learning management system. TechTrends, 50(4), 36-45.
-- [2]. Ziraba, A., Akwene, G. C., & Lwanga, S. C. (2020). The adoption and use of Moodle learning management system in higher institutions of learning: A systematic literature review. American Journal of Online and Distance Learning, 2(1), 1-21.
-- [3] Iwata, J., Clayton, J., & Saravani, S. J. (2017). Learner autonomy, microcredentials and self-reflection: a review of a Moodle-based medical English review course. International Journal of Information and Communication Technology, 10(1), 42-50.
-- [4] Zhou, L., Chen, L., Fan, Q., & Ji, Y. (2019). Students’ perception of using digital badges in blended learning classrooms. Sustainability, 11(7), 2151.
+- [1] Devedžić, V., & Jovanović, J. (2015). Developing open badges: A comprehensive approach. Educational Technology Research and Development, 63, 603-620.
+- [2] Beatty, B., & Ulasewicz, C. (2006). Faculty perspectives on moving from Blackboard to the Moodle learning management system. TechTrends, 50(4), 36-45.
+- [3] Al-Ajlan, A., & Zedan, H. (2008, October). Why moodle. In 2008 12th IEEE International Workshop on Future Trends of Distributed Computing Systems (pp. 58-64). IEEE.
+- [4]. Ziraba, A., Akwene, G. C., & Lwanga, S. C. (2020). The adoption and use of Moodle learning management system in higher institutions of learning: A systematic literature review. American Journal of Online and Distance Learning, 2(1), 1-21.
+- [5] Iwata, J., Clayton, J., & Saravani, S. J. (2017). Learner autonomy, microcredentials and self-reflection: a review of a Moodle-based medical English review course. International Journal of Information and Communication Technology, 10(1), 42-50.
+- [6] Zhou, L., Chen, L., Fan, Q., & Ji, Y. (2019). Students’ perception of using digital badges in blended learning classrooms. Sustainability, 11(7), 2151.
