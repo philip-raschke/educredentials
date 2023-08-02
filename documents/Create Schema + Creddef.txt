@@ -1,0 +1,63 @@
+1. Create Schema
+{
+  "schema_version": "1.0",
+  "attributes": [
+    "@context",
+    "id",
+    "type",
+    "name",
+    "issuer",
+    "credentialSubject"
+  ],
+  "schema_name": "OpenBadges"
+}
+
+
+
+
+-------->Antwort
+
+{
+  "schema_id": "23Y3xe3JrQ2mHuzsSRUXZY:2:OpenBadges:1.0",
+  "schema": {
+    "ver": "1.0",
+    "id": "23Y3xe3JrQ2mHuzsSRUXZY:2:OpenBadges:1.0",
+    "name": "OpenBadges",
+    "version": "1.0",
+    "attrNames": [
+      "type",
+      "@context",
+      "credentialSubject",
+      "id",
+      "issuer",
+      "name"
+    ],
+    "seqNo": 217214
+  }
+}
+
+
+
+
+
+2.Create Credential Defintion
+
+{
+  "revocation_registry_size": 1000,
+  "schema_id": "23Y3xe3JrQ2mHuzsSRUXZY:2:OpenBadges:1.0",
+  "support_revocation": true,
+  "tag": "default"
+}
+
+
+
+
+--------->Antwort
+
+{
+  "credential_definition_id": "23Y3xe3JrQ2mHuzsSRUXZY:3:CL:217214:default"
+}
+
+
+
+
