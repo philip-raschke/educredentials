@@ -1,0 +1,23 @@
+teacher
+username: admin
+PW: safsaf!34bhsA
+
+
+
+students
+username: lisa
+PW: _&Gy8BVzsQD"4P3
+
+username: max
+PW: MMMM&Gy8BVasQD"4P3
+
+
+
+
+
+
+
+
+
+
+
