@@ -11,6 +11,7 @@
 - DIDs are known to all
 - DID documents are stored in the Ledger containing the Public Keys 
 
+### Process ###
 1. Connection Request from F to A signed with PrivKeyF and encrypted with PubKeyA from DID Document
 2. A decrypts Connection Request with PrivKeyA and verifies Signature (made with PrivKeyF) using PubKeyF from DID Document
 3. A sends Connection Request signed with PrivKeyA and encrypted with PubKeyF from DID Document
