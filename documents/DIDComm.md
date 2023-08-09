@@ -16,3 +16,7 @@
 3. A sends Connection Request signed with PrivKeyA and encrypted with PubKeyF from DID Document
 4. F decrypts Connection Request with PrivKeyF and verifies Signature (made with PrivKeyA) using PubKeyA from DID Document
 5. Connection established!
+
+
+### Short Description ###
+DIDComm is a communication protocol leveraging Decentralized Identifiers (DIDs) to enable secure, peer-to-peer communication between entities. By utilizing paired public and private keys linked to DIDs, it allows parties to authenticate each other without reliance on Trusted Third Parties (TTPs), preserving privacy by obscuring visibility from outside entities. Overall, DIDComm fosters secure and trustworthy digital communication, enhancing privacy and integrity in decentralized networks.
