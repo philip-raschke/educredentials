@@ -1,5 +1,5 @@
 # DIDComm #
-- Creates bidirectional secure communication channel between two entities that know each other’s DIDs and nothing else
+- Creates bidirectional secure communication channel between entities that know each other’s DIDs and nothing else
 - Both sides authenticate each other without authentication to a TTP (e.g. with credentials)
 - TTPs (Trusted Third Parties) lose visibility into user communications, activities
 - For any transport: HTTP, BlueTooth, SMTP, raw sockets, and sneakernet, etc.
