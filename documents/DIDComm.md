@@ -3,7 +3,7 @@
 - Both sides authenticate each other without authentication to a TTP (e.g. with credentials)
 - TTPs (Trusted Third Parties) lose visibility into user communications, activities
 - For any transport: HTTP, BlueTooth, SMTP, raw sockets, and sneakernet, etc.
-x
+
 ## Workflow ##
 - Alice = A, Faber = F, Public Key from Alice/Faber = PubKeyA/PubKeyB, Private Key from Alice/Faber = PrivKeyA/PrivKeyB
 
