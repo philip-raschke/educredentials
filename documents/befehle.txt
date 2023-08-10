@@ -1,0 +1,53 @@
+--------------------------Setup von-network----------------------------------------------------------------------------------------------
+start von-network: "./manage start --logs"
+
+
+
+
+
+
+
+
+--------------------------Setup Tails Server--------------------------------------------------------------------------------------------
+
+start Tails Server: "...indy-tails-server/docker$ ./manage start"
+
+get ngrok-url: "docker logs docker-ngrok-tails-server-1"
+
+
+
+
+
+
+
+
+----------------------------Setup aca-py--------------------------------------------------------------------------------------------------
+
+start faber agent in terminal1: LEDGER_URL=http://dev.greenlight.bcovrin.vonx.io ./run_demo faber
+start alice agent in terminal2: LEDGER_URL=http://dev.greenlight.bcovrin.vonx.io ./run_demo alice
+
+start faber in swagger: 
+
+1. Create connection between faber and alice
+- Put invation data of Faber(terminal1) into alices terminal
+example:
+Faber's Terminal1
+Invitation Data:
+{"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation", "@id": "2408f545-9830-48af-8212-db7f90190221", "label": "Faber.Agent", "serviceEndpoint": "http://192.168.65.4:8020", "recipientKeys": ["8DMSvWrWf6UdZME2KkiDtW5zwuWdXhqqkK3UZRTtv3GX"]}
+
+put into...
+
+Alices' Terminal2(Invitation details)
+{"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation", "@id": "2408f545-9830-48af-8212-db7f90190221", "label": "Faber.Agent", "serviceEndpoint": "http://192.168.65.4:8020", "recipientKeys": ["8DMSvWrWf6UdZME2KkiDtW5zwuWdXhqqkK3UZRTtv3GX"]}
+
+
+2. Issue random credential
+- follow the instruction number in the terminal
+
+
+
+
+-----------------------------------------wrong approach in the beginning------------------------------------------------------------------
+start aca-py as issuer: "PORTS="5000 5001" ./run_docker start -l Issuer -it http 0.0.0.0 5000 -ot http --admin 0.0.0.0 5001 --admin-insecure-mode -e http://192.168.224.160:5000 --genesis-url http://192.168.224.160:9000/genesis"
+
+open swagger in browser: "http://192.168.224.160:5001/api/doc"
