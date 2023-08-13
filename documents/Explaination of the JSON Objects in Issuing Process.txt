@@ -1,8 +1,8 @@
 1. Create Schema
 {
-  "schema_version": "1.0",
-  "schema_name": "OpenBadges",
-  "attributes": [
+  "schema_version": "1.0",					//Schema version				
+  "schema_name": "OpenBadges",					//Schema name					
+  "attributes": [						
     "@context",
     "id",
     "type",
@@ -16,7 +16,7 @@
     "credentialSubject.achievement.name",
     "credentialSubject.achievement.description",
     "credentialSubject.achievement.criteria.id",
-    "credentialSubject.achievement.criteria.narrative"
+    "credentialSubject.achievement.criteria.narrative"		//Schema claims
   ]
 }
 
@@ -25,12 +25,12 @@
 -------->Antwort
 
 {
-  "schema_id": "RQUDcP7ZgqdCeVDpw99Rfi:2:OpenBadges:1.0",
-  "schema": {
-    "ver": "1.0",
-    "id": "RQUDcP7ZgqdCeVDpw99Rfi:2:OpenBadges:1.0",
-    "name": "OpenBadges",
-    "version": "1.0",
+  "schema_id": "RQUDcP7ZgqdCeVDpw99Rfi:2:OpenBadges:1.0",	//generated schema ID
+  "schema": {							
+    "ver": "1.0",						//Schema Version
+    "id": "RQUDcP7ZgqdCeVDpw99Rfi:2:OpenBadges:1.0",		//Schema ID
+    "name": "OpenBadges",					//Schema name
+    "version": "1.0",						//Schema Version
     "attrNames": [
       "issuer.id",
       "id",
@@ -45,9 +45,9 @@
       "credentialSubject.name",
       "issuer.issuanceDate",
       "credentialSubject.achievement.description",
-      "credentialSubject.achievement.criteria.narrative"
+      "credentialSubject.achievement.criteria.narrative"	//Claims
     ],
-    "seqNo": 219361
+    "seqNo": 219361						//Transaction Number
   }
 }
 
@@ -55,10 +55,10 @@
 2.Create Credential Defintion
 
 {
-  "revocation_registry_size": 1000,
-  "schema_id": "RQUDcP7ZgqdCeVDpw99Rfi:2:OpenBadges:1.0",
-  "support_revocation": false,
-  "tag": "default"
+  "revocation_registry_size": 1000,				//size of revocation registry
+  "schema_id": "RQUDcP7ZgqdCeVDpw99Rfi:2:OpenBadges:1.0",	// schema id
+  "support_revocation": false,					// credential with this cred def not revocable
+  "tag": "default"						// describes standard definition of the schema
 }
 
 
@@ -67,7 +67,7 @@
 --------->Antwort
 
 {
-  "credential_definition_id": "RQUDcP7ZgqdCeVDpw99Rfi:3:CL:219361:default"
+  "credential_definition_id": "RQUDcP7ZgqdCeVDpw99Rfi:3:CL:219361:default"		//genereated cred def ID
 }
 
 
@@ -389,224 +389,5 @@
   "updated_at": "2023-08-10 08:43:24.856781Z",
   "conn_id": "ba23b037-5d86-4a30-a1c1-10f06e4c7eeb"
 }
-
-
-
-
-
-
-4. Fetch credentials from Wallet. Alice's Swagger
-
-GET/credentials
-
-
-
-----------------------------SEE TRANSACTIONS in LEDGER---------------------------
-http://dev.greenlight.bcovrin.vonx.io/browse/domain?page=21991          // Set a higher page number!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-------------------------------------------------------Different Approach (no need!)-------------------------------------------------------------------
-create revocation registry
-{
-  "credential_definition_id": "T6hp18jqGqu3KzzXk9iMh5:3:CL:217772:default",
-  "max_cred_num": 1000
-}
-
-
-
----------->Antwort
-{
-  "result": {
-    "revoc_def_type": "CL_ACCUM",
-    "max_cred_num": 1000,
-    "state": "generated",
-    "tails_local_path": "/home/indy/.indy_client/tails/T6hp18jqGqu3KzzXk9iMh5:4:T6hp18jqGqu3KzzXk9iMh5:3:CL:217772:default:CL_ACCUM:646ffea3-9ad5-4657-a26d-729e60c071bf/GrtpfhHyvsdfvKVaqqkMVXe5MZZdXAVhRPnJS8rLXDJe",
-    "pending_pub": [],
-    "revoc_reg_entry": {
-      "ver": "1.0",
-      "value": {
-        "accum": "21 136EFB86E7F948BE5E2D32CE4394CCF91D64FC435D8CB251B2734FDF13EF510B0 21 12F4CE2786711124939FB4DEE7E0A16D9484D0C3E78813223370CFD0F4B5AE7F0 6 7858A5A05CB2F6F17A6569742C4A04D3FDB76C67BAF7CF1BCFAF5760AE09336F 4 288AA8E50D155919541649C00A3CEB8958BC858407A5FCC13FA09F18276C36C9 6 6C8142D79F2E9B47CE30BF4BC6069406FDCED83B109BA87A39FEADEC163FFBAF 4 29A8F586034A4A679FB4E1BF710D25ECBB047D6CBFB1FC09FB1BA2A96E243E1D"
-      }
-    },
-    "tag": "646ffea3-9ad5-4657-a26d-729e60c071bf",
-    "revoc_reg_def": {
-      "ver": "1.0",
-      "id": "T6hp18jqGqu3KzzXk9iMh5:4:T6hp18jqGqu3KzzXk9iMh5:3:CL:217772:default:CL_ACCUM:646ffea3-9ad5-4657-a26d-729e60c071bf",
-      "revocDefType": "CL_ACCUM",
-      "tag": "646ffea3-9ad5-4657-a26d-729e60c071bf",
-      "credDefId": "T6hp18jqGqu3KzzXk9iMh5:3:CL:217772:default",
-      "value": {
-        "issuanceType": "ISSUANCE_BY_DEFAULT",
-        "maxCredNum": 1000,
-        "publicKeys": {
-          "accumKey": {
-            "z": "1 046E6E18F7CF2CD9D738130D4F2574681A89AB0F813A7D3F9D37DC6D40F9140D 1 073D1FDB5054711D9AF2B7FFA5814DF96E9F0C4DFE6AE99C940B0D83BA0CD177 1 0410E316B61328CBD3F79DF1635BF69E4B0CD2BBB017BBD7F4CF42953C590ABC 1 0884CEDE4592B3F8D6398CA3B3B6EB20B49D36CFFC0BB86EC78BD9E6AA051118 1 0BE7277C80C3EE50AF87E1FDA3712D814FB7BF981E910ADB36C51F97E51E6E66 1 0C660D2D61F678C10EE8321296CED0460C87A41B12BCF9762B2A336F6ECC10AF 1 2468E20D371CB1D28A9F6CC95A94EA27CDD03FC2156EAC2944970B2FE20B5C1C 1 1262959859EC6E462CB5F731B19244EA05DDA715EC6D4250A4999CA48A2B93AB 1 0157756425C714B7D429E164F1B823BC92AED2A38FF6B16722A702B1C54B6644 1 16BCCBC129ADAEF755150AE027C1061E9C85D501FFA3185F68593661C3DB32D9 1 06C0CD15DD3C71AC20BF2D4C0530611DA5F3D7D4793ACFF7B251071714F8411F 1 1E73AEA8EB7DB9802D90DD5A6827593570E2105462422100678667B7443D1AD4"
-          }
-        },
-        "tailsHash": "GrtpfhHyvsdfvKVaqqkMVXe5MZZdXAVhRPnJS8rLXDJe",
-        "tailsLocation": "/home/indy/.indy_client/tails/.hopper/GrtpfhHyvsdfvKVaqqkMVXe5MZZdXAVhRPnJS8rLXDJe"
-      }
-    },
-    "cred_def_id": "T6hp18jqGqu3KzzXk9iMh5:3:CL:217772:default",
-    "record_id": "646ffea3-9ad5-4657-a26d-729e60c071bf",
-    "updated_at": "2023-08-04 09:46:50.759358Z",
-    "issuer_did": "T6hp18jqGqu3KzzXk9iMh5",
-    "created_at": "2023-08-04 09:46:49.155985Z",
-    "revoc_reg_id": "T6hp18jqGqu3KzzXk9iMh5:4:T6hp18jqGqu3KzzXk9iMh5:3:CL:217772:default:CL_ACCUM:646ffea3-9ad5-4657-a26d-729e60c071bf",
-    "tails_hash": "GrtpfhHyvsdfvKVaqqkMVXe5MZZdXAVhRPnJS8rLXDJe"
-  }
-}
-
-
-
-
-
----------------------------Issue Credential (different approach)-----------------------------------------------
-
-{
-  "auto_remove": true,
-  "comment": "OpenBadges credential issuance",
-  "connection_id": "c08590dd-eaad-410c-9322-7ccc2e574203", 
-  "credential_preview": {
-    "@type": "issue-credential/2.0/credential-preview",
-    "attributes": [
-      {
-        "name": "@context",
-        "value": "https://w3id.org/openbadges/v2"
-      },
-      {
-        "name": "id",
-        "value": "http://localhost/moodle4/badges/badge_json.php?id=2"
-      },
-      {
-        "name": "type",
-        "value": "VerifiableCredential,OpenBadgeCredential"
-      },
-      {
-        "name": "name",
-        "value": "French A1"
-      },
-      {
-        "name": "issuer.id",
-        "value": "http://localhost/moodle4/badges/issuer_json.php?id=2"
-      },
-      {
-        "name": "issuer.name",
-        "value": "Faber"
-      },
-      {
-        "name": "issuer.issuanceDate",
-        "value": "2023-08-04T09:23:16+01:00"
-      },
-      {
-        "name": "credentialSubject.id",
-        "value": "3"
-      },
-      {
-        "name": "credentialSubject.name",
-        "value": "Alice Smith"
-      },
-      {
-        "name": "credentialSubject.achievement.id",
-        "value": "http://localhost/moodle4/badges/badge_json.php?id=2"
-      },
-      {
-        "name": "credentialSubject.achievement.name",
-        "value": "French A1"
-      },
-      {
-        "name": "credentialSubject.achievement.description",
-        "value": "The owner of this badge achieved the French A1 level!"
-      },
-      {
-        "name": "credentialSubject.achievement.criteria.id",
-        "value": "http://localhost/moodle4/badges/badgeclass.php?id=2"
-      },
-      {
-        "name": "credentialSubject.achievement.criteria.narrative",
-        "value": "Users are awarded this badge when they complete the following requirement:\n* ALL of the following activities are completed:\n\"File - Basics\"\n\"URL - French Link\"\n\n"
-      }
-    ]
-  },
-  "filter": {
-    "indy": {
-      "cred_def_id": "T6hp18jqGqu3KzzXk9iMh5:3:CL:217772:default",
-      "issuer_did": "T6hp18jqGqu3KzzXk9iMh5",
-      "schema_id": "T6hp18jqGqu3KzzXk9iMh5:2:OpenBadges:1.0",
-      "schema_issuer_did": "T6hp18jqGqu3KzzXk9iMh5",
-      "schema_name": "OpenBadges",
-      "schema_version": "1.0"
-    }
-  },
-  "trace": false
-}
-
-
-
-
-
-
-
 
 
