@@ -12,5 +12,5 @@
 - Faber belongs to Moodle.
 
   ## Notes
-  - Invitation Data: {"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation", "@id": "9ed31ff5-bfec-4151-b509-ed40223a6c8a", "serviceEndpoint": "http://192.168.65.4:8020", "label": "Faber.Agent", "recipientKeys": ["FTkzF9B8Pd7YbkcB8CKE6VyjKkSdBAocqJKQkx4DKR1i"]}
+  - Invitation Data: {"@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/connections/1.0/invitation", "@id": "9ed31ff5-bfec-4151-b509-ed40223a6c8a", "serviceEndpoint": "localhost:8020", "label": "Faber.Agent", "recipientKeys": ["FTkzF9B8Pd7YbkcB8CKE6VyjKkSdBAocqJKQkx4DKR1i"]}
  -> id and recipientKeys are always different
