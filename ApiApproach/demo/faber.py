@@ -140,8 +140,6 @@ class FaberAgent(DemoAgent):
 
 
 
-
-
 async def generate_invitation(agent, use_did_exchange: bool, auto_accept: bool = True):
     agent._connection_ready = asyncio.Future()
     with log_timer("Generate invitation duration:"):
@@ -158,16 +156,11 @@ async def generate_invitation(agent, use_did_exchange: bool, auto_accept: bool =
     log_msg(json.dumps(invi_rec["invitation"]), label="Invitation Data:", color=None)
     qr.print_ascii(invert=True)
 
-    
+    api.start_api_server(invi_rec["invitation"])  # Start API server with invitation data
 
     log_msg("Waiting for connection...")
-    
-    # Hier starten wir die Flask-App aus api.py direkt mit den Einladungsdaten.
-    api.start_api_server(invi_rec["invitation"])  # Start API server with invitation data
-    
     await agent.detect_connection()
 
-    
 
     
 
