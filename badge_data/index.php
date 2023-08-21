@@ -143,56 +143,57 @@ foreach ($badges_detail as $badge_id => $badge) {
     }
 
     function issueCredential() {
-        var curlData = {
-            "schema_version": "1.0",
-            "schema_name": "OpenBadges",
-            "attributes": [
-                "@context", "id", "type", "name", "issuer.id", "issuer.name",
-                "issuer.issuanceDate", "credentialSubject.id", "credentialSubject.name",
-                "credentialSubject.achievement.id", "credentialSubject.achievement.name",
-                "credentialSubject.achievement.description", "credentialSubject.achievement.criteria.id",
-                "credentialSubject.achievement.criteria.narrative"
-            ]
-        };
+    var curlData = {
+        "schema_version": "1.0",
+        "schema_name": "OpenBadges",
+        "attributes": [
+            "@context", "id", "type", "name", "issuer.id", "issuer.name",
+            "issuer.issuanceDate", "credentialSubject.id", "credentialSubject.name",
+            "credentialSubject.achievement.id", "credentialSubject.achievement.name",
+            "credentialSubject.achievement.description", "credentialSubject.achievement.criteria.id",
+            "credentialSubject.achievement.criteria.narrative"
+        ]
+    };
 
-        var xhr1 = new XMLHttpRequest();
-        xhr1.open("POST", "http://192.168.224.1:8021/schemas", true);
-        xhr1.setRequestHeader("accept", "application/json");
-        xhr1.setRequestHeader("Content-Type", "application/json");
-        xhr1.onreadystatechange = function () {
-            if (xhr1.readyState === XMLHttpRequest.DONE) {
-                if (xhr1.status === 200) {
-                    var response = JSON.parse(xhr1.responseText);
-                    schemaId = response.schema_id;
+    var xhr1 = new XMLHttpRequest();
+    xhr1.open("POST", "http://192.168.224.1:8021/schemas", true);
+    xhr1.setRequestHeader("accept", "application/json");
+    xhr1.setRequestHeader("Content-Type", "application/json");
+    xhr1.onreadystatechange = function () {
+        if (xhr1.readyState === XMLHttpRequest.DONE) {
+            if (xhr1.status === 200) {
+                var response = JSON.parse(xhr1.responseText);
+                schemaId = response.schema_id;
 
-                    // Führe den zweiten cURL-Befehl aus
-                    var credentialData = {
-                        "schema_id": schemaId,
-                        "support_revocation": false,
-                        "tag": "default"
-                    };
+                // Führe den zweiten cURL-Befehl aus
+                var credentialData = {
+                    "schema_id": schemaId,
+                    "support_revocation": false,
+                    "tag": "default"
+                };
 
-                    var xhr2 = new XMLHttpRequest();
-                    xhr2.open("POST", "http://192.168.224.1:8021/credential-definitions", true);
-                    xhr2.setRequestHeader("accept", "application/json");
-                    xhr2.setRequestHeader("Content-Type", "application/json");
-                    xhr2.onreadystatechange = function () {
-                        if (xhr2.readyState === XMLHttpRequest.DONE) {
-                            if (xhr2.status === 200) {
-                                // Erfolgreich ausgeführt, keine Notwendigkeit, die Antwort anzuzeigen
-                            } else {
-                                alert("Error: Unable to create credential definition.");
-                            }
+                var xhr2 = new XMLHttpRequest();
+                xhr2.open("POST", "http://192.168.224.1:8021/credential-definitions", true);
+                xhr2.setRequestHeader("accept", "application/json");
+                xhr2.setRequestHeader("Content-Type", "application/json");
+                xhr2.onreadystatechange = function () {
+                    if (xhr2.readyState === XMLHttpRequest.DONE) {
+                        if (xhr2.status === 200) {
+                            var response = JSON.parse(xhr2.responseText);
+                            credentialDefinitionId = response.credential_definition_id; // Speichere die Credential-Definition-ID
+                        } else {
+                            alert("Error: Unable to create credential definition.");
                         }
-                    };
-                    xhr2.send(JSON.stringify(credentialData, null, 2));
-                } else {
-                    alert("Error: Unable to create schema.");
-                }
+                    }
+                };
+                xhr2.send(JSON.stringify(credentialData, null, 2));
+            } else {
+                alert("Error: Unable to create schema.");
             }
-        };
-        xhr1.send(JSON.stringify(curlData, null, 2));
-    }
+        }
+    };
+    xhr1.send(JSON.stringify(curlData, null, 2));
+}
 </script>
 
 <?php
