@@ -82,6 +82,9 @@ foreach ($badges_detail as $badge_id => $badge) {
             <button id="run-curl-button" class="btn btn-primary mt-3 p-3" onclick="runCurl();">
                 Get Invitation Data
             </button>
+            <button id="issue-credential-button" class="btn btn-secondary mt-3 p-3" onclick="issueCredential();">
+                Issue Credential
+            </button>
             <div id="curl-result" style="margin-top: 20px;"></div>
         </div>
     </div>
@@ -108,6 +111,7 @@ foreach ($badges_detail as $badge_id => $badge) {
     document.getElementById('JSON').value = '';
 
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
+    var schemaId = ''; // Variable zum Speichern der Schema-ID
 
     function fillTextarea(badgeId, liElem) {
         document.getElementById('JSON').value = JSON.stringify(JSONBadge[badgeId], null, "\t");
@@ -118,25 +122,77 @@ foreach ($badges_detail as $badge_id => $badge) {
     }
 
     function runCurl() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://192.168.224.1:8021/connections/create-invitation?alias=Alice", true);
-    xhr.setRequestHeader("accept", "application/json");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                var invitationData = response.invitation;
-                var resultDiv = document.getElementById("curl-result");
-                resultDiv.innerHTML = "<pre>" + JSON.stringify(invitationData, null, 2) + "</pre>";
-                resultDiv.style.display = "block"; // Zeige das Ergebnisfeld an
-            } else {
-                alert("Error: Unable to execute cURL command.");
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://192.168.224.1:8021/connections/create-invitation?alias=Alice", true);
+        xhr.setRequestHeader("accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    var invitationData = response.invitation;
+                    var resultDiv = document.getElementById("curl-result");
+                    resultDiv.innerHTML = "<pre>" + JSON.stringify(invitationData, null, 2) + "</pre>";
+                    resultDiv.style.display = "block"; // Zeige das Ergebnisfeld an
+                } else {
+                    alert("Error: Unable to execute cURL command.");
+                }
             }
-        }
-    };
-    xhr.send("{}");
-}
+        };
+        xhr.send("{}");
+    }
+
+    function issueCredential() {
+        var curlData = {
+            "schema_version": "1.0",
+            "schema_name": "OpenBadges",
+            "attributes": [
+                "@context", "id", "type", "name", "issuer.id", "issuer.name",
+                "issuer.issuanceDate", "credentialSubject.id", "credentialSubject.name",
+                "credentialSubject.achievement.id", "credentialSubject.achievement.name",
+                "credentialSubject.achievement.description", "credentialSubject.achievement.criteria.id",
+                "credentialSubject.achievement.criteria.narrative"
+            ]
+        };
+
+        var xhr1 = new XMLHttpRequest();
+        xhr1.open("POST", "http://192.168.224.1:8021/schemas", true);
+        xhr1.setRequestHeader("accept", "application/json");
+        xhr1.setRequestHeader("Content-Type", "application/json");
+        xhr1.onreadystatechange = function () {
+            if (xhr1.readyState === XMLHttpRequest.DONE) {
+                if (xhr1.status === 200) {
+                    var response = JSON.parse(xhr1.responseText);
+                    schemaId = response.schema_id;
+
+                    // Führe den zweiten cURL-Befehl aus
+                    var credentialData = {
+                        "schema_id": schemaId,
+                        "support_revocation": false,
+                        "tag": "default"
+                    };
+
+                    var xhr2 = new XMLHttpRequest();
+                    xhr2.open("POST", "http://192.168.224.1:8021/credential-definitions", true);
+                    xhr2.setRequestHeader("accept", "application/json");
+                    xhr2.setRequestHeader("Content-Type", "application/json");
+                    xhr2.onreadystatechange = function () {
+                        if (xhr2.readyState === XMLHttpRequest.DONE) {
+                            if (xhr2.status === 200) {
+                                // Erfolgreich ausgeführt, keine Notwendigkeit, die Antwort anzuzeigen
+                            } else {
+                                alert("Error: Unable to create credential definition.");
+                            }
+                        }
+                    };
+                    xhr2.send(JSON.stringify(credentialData, null, 2));
+                } else {
+                    alert("Error: Unable to create schema.");
+                }
+            }
+        };
+        xhr1.send(JSON.stringify(curlData, null, 2));
+    }
 </script>
 
 <?php
