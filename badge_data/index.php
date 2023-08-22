@@ -35,6 +35,71 @@ echo $OUTPUT->header();
 
 $JSON_badges = [];
 
+#Openbadges without shading
+foreach ($badges_detail as $badge_id => $badge) {
+    $JSON_badges[$badge_id] = [
+        [
+            "name" => "@context",
+            "value" => $badge->issued['badge']['@context'],
+        ],
+        [
+            "name" => "id",
+            "value" => $badge->issued['badge']['id'],
+        ],
+        [
+            "name" => "type",
+            "value" => "VerifiableCredential,OpenBadgeCredential",
+        ],
+        [
+            "name" => "name",
+            "value" => $badge->issued['badge']['name'],
+        ],
+        [
+            "name" => "issuer.id",
+            "value" => $badge->issued['badge']['issuer']['id'],
+        ],
+        [
+            "name" => "issuer.name",
+            "value" => $badge->issued['badge']['issuer']['name'],
+        ],
+        [
+            "name" => "issuer.issuanceDate",
+            "value" => date('c', $badge->issued['badge']['issuedOn']),
+        ],
+        [
+            "name" => "credentialSubject.id",
+            "value" => $badge->recipient->id,
+        ],
+        [
+            "name" => "credentialSubject.name",
+            "value" => $badge->recipient->firstname . ($badge->recipient->middlename === "" ? "" : " " . $badge->recipient->middlename) . " " . $badge->recipient->lastname,
+        ],
+        [
+            "name" => "credentialSubject.achievement.id",
+            "value" => $badge->issued['badge']['id'],
+        ],
+        [
+            "name" => "credentialSubject.achievement.name",
+            "value" => $badge->issued['badge']['name'],
+        ],
+        [
+            "name" => "credentialSubject.achievement.description",
+            "value" => $badge->issued['badge']['description'],
+        ],
+        [
+            "name" => "credentialSubject.achievement.criteria.id",
+            "value" => $badge->issued['badge']['criteria']['id'],
+        ],
+        [
+            "name" => "credentialSubject.achievement.criteria.narrative",
+            "value" => $badge->issued['badge']['criteria']['narrative'],
+        ],
+    ];
+}
+
+
+#Openbadges Standard with shading:
+/* 
 foreach ($badges_detail as $badge_id => $badge) {
     $JSON_badges[$badge_id] = [
         "@context" => [$badge->issued['badge']['@context']],
@@ -61,6 +126,16 @@ foreach ($badges_detail as $badge_id => $badge) {
         ]
     ];
 }
+*/
+
+
+
+
+
+
+
+
+
 ?>
 
 <div class="container-fluid">
