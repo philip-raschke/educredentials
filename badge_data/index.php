@@ -280,10 +280,8 @@ foreach ($badges_detail as $badge_id => $badge) {
                                                 xhr4.onreadystatechange = function () {
                                                     if (xhr4.readyState === XMLHttpRequest.DONE) {
                                                         if (xhr4.status === 200) {
-                                                            var response = JSON.parse(xhr4.responseText);
-                                                            var resultDiv = document.getElementById("curl-result");
-                                                            resultDiv.innerHTML += "<pre>" + JSON.stringify(response, null, 2) + "</pre>";
-                                                            resultDiv.style.display = "block";
+                                                            
+                                                            alert("Badge Issued!");
                                                         } else {
                                                             alert("Error: Unable to execute the 4th cURL command.");
                                                         }
