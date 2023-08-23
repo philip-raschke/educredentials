@@ -114,3 +114,17 @@ Alice      | 2023-08-23 14:23:53,423 aries_cloudagent.utils.tracing INFO  acapy.
 Alice      | 2023-08-23 14:23:53,424 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "N/A", "thread_id": "71d03ff0-8dd7-4345-9499-fd4d361a34ad", "traced_type": "dict:Exchange", "timestamp": 1692800633.424537, "str_time": "2023-08-23 14:23:53.424537", "handler": "Alice.Agent.trace", "ellapsed_milli": 1, "outcome": "OutboundTransportManager.DELIVER.END.http://192.168.65.4:8032/webhooks/topic/issue_credential_v2_0/"}
 Alice      | Credential: state = done, cred_ex_id bfe71a17-8bb7-417e-a032-dd640c0feb33
 Alice      | Stored credential 144c078f-85d1-45a9-8bae-b95f58a913e7 in wallet
+
+### Description
+
+- Msg_id & Thread_id: Each message has a unique msg_id. The thread_id is used to link all messages that belong to a specific operation.
+
+- Traced_type: Specifies the message type. For example, "offer-credential" means that a credential offer was sent, and "request-credential" means that a request for a credential was sent.
+
+- Timestamp & Str_time: These are timestamps that indicate when the message was processed.
+
+- Handler: Shows the name of the handler that processed the message. For example, "Alice.Agent.trace" means that the handler in Alice's agent processed the message.
+
+- Ellapsed_milli: The elapsed time in milliseconds from the start of processing the message to its completion.
+
+- Outcome: indicates the result or status of the process. For example, "START" indicates that the process has started, and "END" indicates that it has completed.
