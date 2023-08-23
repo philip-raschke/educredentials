@@ -1,6 +1,6 @@
 ## Setting "trace" true
 
-###Issuing credential by setting trace = true
+### Issuing credential by setting trace = true
 {
   "auto_remove": true,
   "comment": "Ausstellung des OpenBadge für French A1",
