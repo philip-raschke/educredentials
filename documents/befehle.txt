@@ -51,3 +51,25 @@ Alices' Terminal2(Invitation details)
 start aca-py as issuer: "PORTS="5000 5001" ./run_docker start -l Issuer -it http 0.0.0.0 5000 -ot http --admin 0.0.0.0 5001 --admin-insecure-mode -e http://192.168.224.160:5000 --genesis-url http://192.168.224.160:9000/genesis"
 
 open swagger in browser: "http://192.168.224.160:5001/api/doc"
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------Api---------------------------------------------------------------------------------------------------
+create invitation data: 
+curl -X POST "http://192.168.224.1:8021/connections/create-invitation?alias=Alice" -H "accept: application/json" -H "Content-Type: application/json" -d "{}"
+
+
+
+
+
+
+
+Docker build: "jkrause96@DESKTOP-AUB2NSC:/mnt/c/aries-cloudagent-python$ docker build -t faber-alice-demo -f docker/Dockerfile.demo ."
