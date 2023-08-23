@@ -117,10 +117,6 @@ Alice      | Stored credential 144c078f-85d1-45a9-8bae-b95f58a913e7 in wallet
 
 ### Description
 
-- Msg_id & Thread_id: Each message has a unique msg_id. The thread_id is used to link all messages that belong to a specific operation.
-
-- Traced_type: Specifies the message type. For example, "offer-credential" means that a credential offer was sent, and "request-credential" means that a request for a credential was sent.
-
 - Timestamp & Str_time: These are timestamps that indicate when the message was processed.
 
 - Handler: Shows the name of the handler that processed the message. For example, "Alice.Agent.trace" means that the handler in Alice's agent processed the message.
