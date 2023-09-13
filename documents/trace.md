@@ -78,7 +78,7 @@
 
 ### Response
 
-- Trace information in the terminal provide information about the credential issuance process from Alice to Faber in Aca-py
+- Trace information in the terminal provide information about the credential issuance process from Faber to Alice in Aca-py
 
 
   Alice      | 2023-08-23 14:23:51,582 aries_cloudagent.utils.tracing INFO  acapy.events {"msg_id": "71d03ff0-8dd7-4345-9499-fd4d361a34ad", "thread_id": "71d03ff0-8dd7-4345-9499-fd4d361a34ad", "traced_type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/issue-credential/2.0/offer-credential", "timestamp": 1692800631.5818691, "str_time": "2023-08-23 14:23:51.581869", "handler": "Alice.Agent.trace", "ellapsed_milli": 0, "outcome": "Dispatcher.handle_message.START"}
