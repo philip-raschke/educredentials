@@ -2,57 +2,37 @@
 
 
 {
+  "comment": "Proof Request for English A1",
+  "connection_id": "e89b39f6-3a99-499f-a819-59d32f44c01b",
   "proof_request": {
-    "requested_attributes": {
-      "attribute_1": {
-        "name": "favouriteDrink",
-        "non_revoked": {
-          "to": 1601974900,
-          "from": 1601974900
-        },
-        "restrictions": [
-          {
-            "schema_version": "1.0",
-            "schema_id": "49iWxpGtW8RxDvj4xy8pJ2:2:OpenBadges:1.0",
-            "cred_def_id": "49iWxpGtW8RxDvj4xy8pJ2:3:CL:224122:default",
-            "schema_issuer_did": "49iWxpGtW8RxDvj4xy8pJ2",
-            "issuer_did": "49iWxpGtW8RxDvj4xy8pJ2",
-            "schema_name": "OpenBadges"
-          }
-        ]
-      }
-    },
-    "requested_predicates": {
-      "predicate_1": {
-        "name": "index",
-        "p_type": ">=",
-        "p_value": 0,
-        "non_revoked": {
-          "to": 1601974900,
-          "from": 1601974900
-        },
-        "restrictions": [
-          {
-            "schema_version": "1.0",
-            "schema_id": "49iWxpGtW8RxDvj4xy8pJ2:2:OpenBadges:1.0",
-            "cred_def_id": "49iWxpGtW8RxDvj4xy8pJ2:3:CL:224122:default",
-            "schema_issuer_did": "49iWxpGtW8RxDvj4xy8pJ2",
-            "issuer_did": "49iWxpGtW8RxDvj4xy8pJ2",
-            "schema_name": "OpenBadges"
-          }
-        ]
-      }
-    },
-    "version": "1.0",
-    "name": "Proof request",
-    "nonce": "1234567890",
+    "name": "Proof for English A1",
     "non_revoked": {
-      "to": 1601974900,
-      "from": 1601974900
-    }
+      "to": 1695043896
+    },
+    "nonce": "1234567890",
+    "requested_attributes": {
+      "0_credentialSubject.achievement.id": {
+        "name": "credentialSubject.achievement.id",
+        "restrictions": [{
+          "cred_def_id": "HgCgZVHP9r7pVMAgXwdYDL:3:CL:224251:default"
+        }]
+      },
+      "1_id": {
+        "name": "id",
+        "restrictions": [{
+          "cred_def_id": "HgCgZVHP9r7pVMAgXwdYDL:3:CL:224251:default"
+        }]
+      },
+      "2_credentialSubject.achievement.name": {
+        "name": "credentialSubject.achievement.name",
+        "restrictions": [{
+          "cred_def_id": "HgCgZVHP9r7pVMAgXwdYDL:3:CL:224251:default"
+        }]
+      }
+    },
+    "requested_predicates": {},
+    "version": "1.0"
   },
-  "comment": "string",
-  "connection_id": "3f5c47d1-e6a2-4295-8a6a-1fa251cad89c",
   "trace": false
 }
 
@@ -60,186 +40,471 @@
 
 
 
-
 -> Antwort
 
 
 
 
 {
-  "presentation_exchange_id": "48f9aa14-9d2f-4354-bf1a-86817ec0b0c1",
+  "thread_id": "bdbdcf4d-4979-484f-95fc-e419e6a3c263",
+  "updated_at": "2023-09-18 14:02:15.295162Z",
+  "role": "verifier",
+  "initiator": "self",
+  "auto_present": false,
+  "connection_id": "e89b39f6-3a99-499f-a819-59d32f44c01b",
+  "presentation_exchange_id": "2c7c6a18-6638-4460-b0ca-251f7f2779d3",
+  "trace": false,
+  "created_at": "2023-09-18 14:02:15.295162Z",
   "presentation_request_dict": {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/request-presentation",
-    "@id": "c464f768-a609-44f6-a63f-85fb337f4841",
+    "@id": "bdbdcf4d-4979-484f-95fc-e419e6a3c263",
+    "comment": "Proof Request for English A1",
     "request_presentations~attach": [
       {
         "@id": "libindy-request-presentation-0",
         "mime-type": "application/json",
         "data": {
-          "base64": "eyJyZXF1ZXN0ZWRfYXR0cmlidXRlcyI6IHsiYXR0cmlidXRlXzEiOiB7Im5hbWUiOiAiZmF2b3VyaXRlRHJpbmsiLCAibm9uX3Jldm9rZWQiOiB7InRvIjogMTYwMTk3NDkwMCwgImZyb20iOiAxNjAxOTc0OTAwfSwgInJlc3RyaWN0aW9ucyI6IFt7InNjaGVtYV92ZXJzaW9uIjogIjEuMCIsICJzY2hlbWFfaWQiOiAiNDlpV3hwR3RXOFJ4RHZqNHh5OHBKMjoyOk9wZW5CYWRnZXM6MS4wIiwgImNyZWRfZGVmX2lkIjogIjQ5aVd4cEd0VzhSeER2ajR4eThwSjI6MzpDTDoyMjQxMjI6ZGVmYXVsdCIsICJzY2hlbWFfaXNzdWVyX2RpZCI6ICI0OWlXeHBHdFc4UnhEdmo0eHk4cEoyIiwgImlzc3Vlcl9kaWQiOiAiNDlpV3hwR3RXOFJ4RHZqNHh5OHBKMiIsICJzY2hlbWFfbmFtZSI6ICJPcGVuQmFkZ2VzIn1dfX0sICJyZXF1ZXN0ZWRfcHJlZGljYXRlcyI6IHsicHJlZGljYXRlXzEiOiB7Im5hbWUiOiAiaW5kZXgiLCAicF90eXBlIjogIj49IiwgInBfdmFsdWUiOiAwLCAibm9uX3Jldm9rZWQiOiB7InRvIjogMTYwMTk3NDkwMCwgImZyb20iOiAxNjAxOTc0OTAwfSwgInJlc3RyaWN0aW9ucyI6IFt7InNjaGVtYV92ZXJzaW9uIjogIjEuMCIsICJzY2hlbWFfaWQiOiAiNDlpV3hwR3RXOFJ4RHZqNHh5OHBKMjoyOk9wZW5CYWRnZXM6MS4wIiwgImNyZWRfZGVmX2lkIjogIjQ5aVd4cEd0VzhSeER2ajR4eThwSjI6MzpDTDoyMjQxMjI6ZGVmYXVsdCIsICJzY2hlbWFfaXNzdWVyX2RpZCI6ICI0OWlXeHBHdFc4UnhEdmo0eHk4cEoyIiwgImlzc3Vlcl9kaWQiOiAiNDlpV3hwR3RXOFJ4RHZqNHh5OHBKMiIsICJzY2hlbWFfbmFtZSI6ICJPcGVuQmFkZ2VzIn1dfX0sICJ2ZXJzaW9uIjogIjEuMCIsICJuYW1lIjogIlByb29mIHJlcXVlc3QiLCAibm9uY2UiOiAiMTIzNDU2Nzg5MCIsICJub25fcmV2b2tlZCI6IHsidG8iOiAxNjAxOTc0OTAwLCAiZnJvbSI6IDE2MDE5NzQ5MDB9fQ=="
+          "base64": "eyJuYW1lIjogIlByb29mIGZvciBFbmdsaXNoIEExIiwgIm5vbl9yZXZva2VkIjogeyJ0byI6IDE2OTUwNDM4OTZ9LCAibm9uY2UiOiAiMTIzNDU2Nzg5MCIsICJyZXF1ZXN0ZWRfYXR0cmlidXRlcyI6IHsiMF9jcmVkZW50aWFsU3ViamVjdC5hY2hpZXZlbWVudC5pZCI6IHsibmFtZSI6ICJjcmVkZW50aWFsU3ViamVjdC5hY2hpZXZlbWVudC5pZCIsICJyZXN0cmljdGlvbnMiOiBbeyJjcmVkX2RlZl9pZCI6ICJIZ0NnWlZIUDlyN3BWTUFnWHdkWURMOjM6Q0w6MjI0MjUxOmRlZmF1bHQifV19LCAiMV9pZCI6IHsibmFtZSI6ICJpZCIsICJyZXN0cmljdGlvbnMiOiBbeyJjcmVkX2RlZl9pZCI6ICJIZ0NnWlZIUDlyN3BWTUFnWHdkWURMOjM6Q0w6MjI0MjUxOmRlZmF1bHQifV19LCAiMl9jcmVkZW50aWFsU3ViamVjdC5hY2hpZXZlbWVudC5uYW1lIjogeyJuYW1lIjogImNyZWRlbnRpYWxTdWJqZWN0LmFjaGlldmVtZW50Lm5hbWUiLCAicmVzdHJpY3Rpb25zIjogW3siY3JlZF9kZWZfaWQiOiAiSGdDZ1pWSFA5cjdwVk1BZ1h3ZFlETDozOkNMOjIyNDI1MTpkZWZhdWx0In1dfX0sICJyZXF1ZXN0ZWRfcHJlZGljYXRlcyI6IHt9LCAidmVyc2lvbiI6ICIxLjAifQ=="
         }
       }
-    ],
-    "comment": "string"
+    ]
   },
-  "thread_id": "c464f768-a609-44f6-a63f-85fb337f4841",
-  "state": "request_sent",
-  "updated_at": "2023-09-15 14:31:58.637278Z",
-  "trace": false,
-  "role": "verifier",
-  "created_at": "2023-09-15 14:31:58.637278Z",
-  "initiator": "self",
   "presentation_request": {
-    "requested_attributes": {
-      "attribute_1": {
-        "name": "favouriteDrink",
-        "non_revoked": {
-          "to": 1601974900,
-          "from": 1601974900
-        },
-        "restrictions": [
-          {
-            "schema_version": "1.0",
-            "schema_id": "49iWxpGtW8RxDvj4xy8pJ2:2:OpenBadges:1.0",
-            "cred_def_id": "49iWxpGtW8RxDvj4xy8pJ2:3:CL:224122:default",
-            "schema_issuer_did": "49iWxpGtW8RxDvj4xy8pJ2",
-            "issuer_did": "49iWxpGtW8RxDvj4xy8pJ2",
-            "schema_name": "OpenBadges"
-          }
-        ]
-      }
-    },
-    "requested_predicates": {
-      "predicate_1": {
-        "name": "index",
-        "p_type": ">=",
-        "p_value": 0,
-        "non_revoked": {
-          "to": 1601974900,
-          "from": 1601974900
-        },
-        "restrictions": [
-          {
-            "schema_version": "1.0",
-            "schema_id": "49iWxpGtW8RxDvj4xy8pJ2:2:OpenBadges:1.0",
-            "cred_def_id": "49iWxpGtW8RxDvj4xy8pJ2:3:CL:224122:default",
-            "schema_issuer_did": "49iWxpGtW8RxDvj4xy8pJ2",
-            "issuer_did": "49iWxpGtW8RxDvj4xy8pJ2",
-            "schema_name": "OpenBadges"
-          }
-        ]
-      }
-    },
-    "version": "1.0",
-    "name": "Proof request",
-    "nonce": "1234567890",
+    "name": "Proof for English A1",
     "non_revoked": {
-      "to": 1601974900,
-      "from": 1601974900
-    }
+      "to": 1695043896
+    },
+    "nonce": "1234567890",
+    "requested_attributes": {
+      "0_credentialSubject.achievement.id": {
+        "name": "credentialSubject.achievement.id",
+        "restrictions": [
+          {
+            "cred_def_id": "HgCgZVHP9r7pVMAgXwdYDL:3:CL:224251:default"
+          }
+        ]
+      },
+      "1_id": {
+        "name": "id",
+        "restrictions": [
+          {
+            "cred_def_id": "HgCgZVHP9r7pVMAgXwdYDL:3:CL:224251:default"
+          }
+        ]
+      },
+      "2_credentialSubject.achievement.name": {
+        "name": "credentialSubject.achievement.name",
+        "restrictions": [
+          {
+            "cred_def_id": "HgCgZVHP9r7pVMAgXwdYDL:3:CL:224251:default"
+          }
+        ]
+      }
+    },
+    "requested_predicates": {},
+    "version": "1.0"
   },
-  "auto_present": false,
-  "connection_id": "3f5c47d1-e6a2-4295-8a6a-1fa251cad89c"
+  "state": "request_sent"
 }
 
 
 
 
 2. GET/present-proof​/records​/{pres_ex_id}
-- get pres_ex_id from previous respond (48f9aa14-9d2f-4354-bf1a-86817ec0b0c1) and paste it
+- get pres_ex_id from previous respond (2c7c6a18-6638-4460-b0ca-251f7f2779d3) and paste it
 
 
 -> Antwort
 
 
 {
-  "presentation_exchange_id": "48f9aa14-9d2f-4354-bf1a-86817ec0b0c1",
+  "thread_id": "bdbdcf4d-4979-484f-95fc-e419e6a3c263",
+  "updated_at": "2023-09-18 14:02:17.220626Z",
+  "role": "verifier",
+  "initiator": "self",
+  "auto_present": false,
+  "connection_id": "e89b39f6-3a99-499f-a819-59d32f44c01b",
+  "presentation_exchange_id": "2c7c6a18-6638-4460-b0ca-251f7f2779d3",
+  "trace": false,
+  "created_at": "2023-09-18 14:02:15.295162Z",
+  "verified": "true",
   "presentation_request_dict": {
     "@type": "did:sov:BzCbsNYhMrjHiqZDTUASHg;spec/present-proof/1.0/request-presentation",
-    "@id": "c464f768-a609-44f6-a63f-85fb337f4841",
+    "@id": "bdbdcf4d-4979-484f-95fc-e419e6a3c263",
+    "comment": "Proof Request for English A1",
     "request_presentations~attach": [
       {
         "@id": "libindy-request-presentation-0",
         "mime-type": "application/json",
         "data": {
-          "base64": "eyJyZXF1ZXN0ZWRfYXR0cmlidXRlcyI6IHsiYXR0cmlidXRlXzEiOiB7Im5hbWUiOiAiZmF2b3VyaXRlRHJpbmsiLCAibm9uX3Jldm9rZWQiOiB7InRvIjogMTYwMTk3NDkwMCwgImZyb20iOiAxNjAxOTc0OTAwfSwgInJlc3RyaWN0aW9ucyI6IFt7InNjaGVtYV92ZXJzaW9uIjogIjEuMCIsICJzY2hlbWFfaWQiOiAiNDlpV3hwR3RXOFJ4RHZqNHh5OHBKMjoyOk9wZW5CYWRnZXM6MS4wIiwgImNyZWRfZGVmX2lkIjogIjQ5aVd4cEd0VzhSeER2ajR4eThwSjI6MzpDTDoyMjQxMjI6ZGVmYXVsdCIsICJzY2hlbWFfaXNzdWVyX2RpZCI6ICI0OWlXeHBHdFc4UnhEdmo0eHk4cEoyIiwgImlzc3Vlcl9kaWQiOiAiNDlpV3hwR3RXOFJ4RHZqNHh5OHBKMiIsICJzY2hlbWFfbmFtZSI6ICJPcGVuQmFkZ2VzIn1dfX0sICJyZXF1ZXN0ZWRfcHJlZGljYXRlcyI6IHsicHJlZGljYXRlXzEiOiB7Im5hbWUiOiAiaW5kZXgiLCAicF90eXBlIjogIj49IiwgInBfdmFsdWUiOiAwLCAibm9uX3Jldm9rZWQiOiB7InRvIjogMTYwMTk3NDkwMCwgImZyb20iOiAxNjAxOTc0OTAwfSwgInJlc3RyaWN0aW9ucyI6IFt7InNjaGVtYV92ZXJzaW9uIjogIjEuMCIsICJzY2hlbWFfaWQiOiAiNDlpV3hwR3RXOFJ4RHZqNHh5OHBKMjoyOk9wZW5CYWRnZXM6MS4wIiwgImNyZWRfZGVmX2lkIjogIjQ5aVd4cEd0VzhSeER2ajR4eThwSjI6MzpDTDoyMjQxMjI6ZGVmYXVsdCIsICJzY2hlbWFfaXNzdWVyX2RpZCI6ICI0OWlXeHBHdFc4UnhEdmo0eHk4cEoyIiwgImlzc3Vlcl9kaWQiOiAiNDlpV3hwR3RXOFJ4RHZqNHh5OHBKMiIsICJzY2hlbWFfbmFtZSI6ICJPcGVuQmFkZ2VzIn1dfX0sICJ2ZXJzaW9uIjogIjEuMCIsICJuYW1lIjogIlByb29mIHJlcXVlc3QiLCAibm9uY2UiOiAiMTIzNDU2Nzg5MCIsICJub25fcmV2b2tlZCI6IHsidG8iOiAxNjAxOTc0OTAwLCAiZnJvbSI6IDE2MDE5NzQ5MDB9fQ=="
+          "base64": "eyJuYW1lIjogIlByb29mIGZvciBFbmdsaXNoIEExIiwgIm5vbl9yZXZva2VkIjogeyJ0byI6IDE2OTUwNDM4OTZ9LCAibm9uY2UiOiAiMTIzNDU2Nzg5MCIsICJyZXF1ZXN0ZWRfYXR0cmlidXRlcyI6IHsiMF9jcmVkZW50aWFsU3ViamVjdC5hY2hpZXZlbWVudC5pZCI6IHsibmFtZSI6ICJjcmVkZW50aWFsU3ViamVjdC5hY2hpZXZlbWVudC5pZCIsICJyZXN0cmljdGlvbnMiOiBbeyJjcmVkX2RlZl9pZCI6ICJIZ0NnWlZIUDlyN3BWTUFnWHdkWURMOjM6Q0w6MjI0MjUxOmRlZmF1bHQifV19LCAiMV9pZCI6IHsibmFtZSI6ICJpZCIsICJyZXN0cmljdGlvbnMiOiBbeyJjcmVkX2RlZl9pZCI6ICJIZ0NnWlZIUDlyN3BWTUFnWHdkWURMOjM6Q0w6MjI0MjUxOmRlZmF1bHQifV19LCAiMl9jcmVkZW50aWFsU3ViamVjdC5hY2hpZXZlbWVudC5uYW1lIjogeyJuYW1lIjogImNyZWRlbnRpYWxTdWJqZWN0LmFjaGlldmVtZW50Lm5hbWUiLCAicmVzdHJpY3Rpb25zIjogW3siY3JlZF9kZWZfaWQiOiAiSGdDZ1pWSFA5cjdwVk1BZ1h3ZFlETDozOkNMOjIyNDI1MTpkZWZhdWx0In1dfX0sICJyZXF1ZXN0ZWRfcHJlZGljYXRlcyI6IHt9LCAidmVyc2lvbiI6ICIxLjAifQ=="
         }
       }
-    ],
-    "comment": "string"
+    ]
   },
-  "thread_id": "c464f768-a609-44f6-a63f-85fb337f4841",
-  "state": "verified",
-  "updated_at": "2023-09-15 14:32:00.393733Z",
-  "trace": false,
-  "role": "verifier",
+  "presentation_request": {
+    "name": "Proof for English A1",
+    "nonce": "1234567890",
+    "requested_attributes": {
+      "0_credentialSubject.achievement.id": {
+        "name": "credentialSubject.achievement.id",
+        "restrictions": [
+          {
+            "cred_def_id": "HgCgZVHP9r7pVMAgXwdYDL:3:CL:224251:default"
+          }
+        ]
+      },
+      "1_id": {
+        "name": "id",
+        "restrictions": [
+          {
+            "cred_def_id": "HgCgZVHP9r7pVMAgXwdYDL:3:CL:224251:default"
+          }
+        ]
+      },
+      "2_credentialSubject.achievement.name": {
+        "name": "credentialSubject.achievement.name",
+        "restrictions": [
+          {
+            "cred_def_id": "HgCgZVHP9r7pVMAgXwdYDL:3:CL:224251:default"
+          }
+        ]
+      }
+    },
+    "requested_predicates": {},
+    "version": "1.0"
+  },
   "presentation": {
     "proof": {
-      "proofs": [],
+      "proofs": [
+        {
+          "primary_proof": {
+            "eq_proof": {
+              "revealed_attrs": {
+                "credentialsubject.achievement.id": "53713088300126376405861720883997076173219984934932109934767992436199413714666",
+                "credentialsubject.achievement.name": "37264191432503398892176568459941460831331589394488046121219379957218221251425",
+                "id": "53713088300126376405861720883997076173219984934932109934767992436199413714666"
+              },
+              "a_prime": "61083206422932035062522111117723760064187218389342363825999898262140016420260574054886909296452798498060462948087621935527744387003838708741242884228546260769235175053334645166514189170290660175983056875844511836306015317456241063461223238853245628721646076745670007277208008045692257353746150497214722596096958004325614549867153078203944157709964520674575985329400299923445347568827792422227556504829248129376996157026516664506516846481682096898513008685114568147786236828350304720819544110645791826137761765028075977773324809519137182564284885357359133408147235430232709132408520859390312600141305962342729162141392",
+              "e": "158545434997463120760940712519372728675062443155021316239847942081392012270660659929146415024609568451022196148032550765664831154038806956",
+              "v": "826757250090914043881883745332577815105311157546223503860077804050779466540989467890391572679548510467669560339893849249738518006193742775522900072219853391151891853003480353910064929072512735636808257913272176725840541595648239060500212110619858453882179404206937377356045661907920296570135091796260416017589812115697413611855329371196599229618168027203950136713312907442069936481829772458691229343381890412318167982959503188244629235592179088941056352926608681913891274607182545925407652381745992704903095502465044909210612454912410451694345725274842657947487712726297108626958767593556613080802430453978335961112503314546369796522912838951837910808790669245495394943234726572531718968522913855920259183631744982208970883805683208055946079936927072483343771237562775712181699505607890484232226276795773708463501247127946225165719833895141464980234522623180953449569345420493869180193214490011014735774903606748532921717",
+              "m": {
+                "credentialsubject.achievement.criteria.narrative": "9270542764667279785143415198346265695153973131705782436581903829626425761924196115751696995284728196462108447668014060132674732044175002768634619056473603151210025585025419028955",
+                "credentialsubject.id": "2685398602489982524727203090671712611895585486012909947958436850619350954813563428379400780876859469619582003776897683001662785172461505158701844176479141229512946384313751444522",
+                "type": "8633087458463042242294557855326330843630581175654426669848899380597113388937026081974896174744160855417501484047773076036835219484989622586258014472483049697366469283421494716440",
+                "issuer.issuancedate": "788196815210095266891545460721545760568662843312568023569856620051244769607731626064701713461675957231355745105666522241465811323731531815138712223296680900584978963790877675067",
+                "name": "10051432549045801262914352489352712542373562696113794204471494456155854257819700801212299162833218922318679366728880669102072792688631556935195936304483386503892870181368079637444",
+                "@context": "2069582905565185816633016018531535037682520419782044468960988308597225648954035058035653350883308142809668447213553820599622190916338688263641918452022467845788260575344714631976",
+                "credentialsubject.name": "15567259466099549276516600994631669241835215239263132112296755543793593476148540739071599173227332717996929269223829085607596483959085839686321110253904270966295581876963459071502",
+                "credentialsubject.achievement.description": "11437724651556344847108244686552377847319281575965048533876865141246413293558498882190605615684840775579860089851533957029370664383702031313659817967832979212801519934907105073142",
+                "credentialsubject.achievement.criteria.id": "5437046144706524198454150951772938131142031442791799842827570881267476331974975311922241127918356309545218168758041636016042467353949962977858533107301997743153036809770230935099",
+                "issuer.name": "5439604768595584458676399205346938886658968842258804208595802764268066529943090182342005160688383514027019337709245141123186321702207558911282068707085348830158092757498011420195",
+                "issuer.id": "1049239366033050360657716648166525165102930962661070495336003896923355538842697587146003886988057974124270445290524261151967138445541440064864293780627438008723132415658044888133",
+                "master_secret": "964740508256724946861902942283779634186896846504657864886430155884827047080786180364759590846843280162583610976127840958263994750667580471273776504355111538904459726787547321745"
+              },
+              "m2": "3987661165127410581177604125286396212668136156588772194148769739966256918248014080420752378231428087356613939757269324595083349374982176808649103612854940796260236456710087956166"
+            },
+            "ge_proofs": []
+          },
+          "non_revoc_proof": null
+        }
+      ],
       "aggregated_proof": {
-        "c_hash": "10639816310985837783199378615488296256229070620850680453677115602812438341389",
-        "c_list": []
+        "c_hash": "95439789249829790319007536690318491958598935843515596260731296556200843894297",
+        "c_list": [
+          [
+            1,
+            227,
+            223,
+            72,
+            137,
+            186,
+            59,
+            250,
+            62,
+            211,
+            58,
+            65,
+            187,
+            255,
+            141,
+            104,
+            171,
+            210,
+            120,
+            73,
+            208,
+            181,
+            240,
+            120,
+            111,
+            160,
+            84,
+            71,
+            129,
+            124,
+            30,
+            78,
+            9,
+            168,
+            182,
+            241,
+            121,
+            185,
+            152,
+            65,
+            152,
+            70,
+            18,
+            196,
+            142,
+            101,
+            187,
+            224,
+            82,
+            81,
+            200,
+            158,
+            134,
+            58,
+            196,
+            56,
+            170,
+            144,
+            228,
+            46,
+            99,
+            1,
+            108,
+            24,
+            89,
+            103,
+            120,
+            90,
+            169,
+            192,
+            140,
+            13,
+            45,
+            93,
+            177,
+            150,
+            194,
+            98,
+            85,
+            106,
+            230,
+            15,
+            156,
+            58,
+            49,
+            228,
+            182,
+            215,
+            29,
+            241,
+            8,
+            22,
+            82,
+            207,
+            150,
+            127,
+            101,
+            156,
+            170,
+            59,
+            232,
+            163,
+            111,
+            116,
+            16,
+            35,
+            239,
+            46,
+            33,
+            180,
+            33,
+            114,
+            199,
+            231,
+            171,
+            111,
+            240,
+            229,
+            164,
+            229,
+            222,
+            85,
+            140,
+            248,
+            103,
+            156,
+            177,
+            30,
+            198,
+            242,
+            225,
+            220,
+            242,
+            143,
+            219,
+            173,
+            79,
+            51,
+            49,
+            229,
+            95,
+            102,
+            14,
+            26,
+            249,
+            55,
+            177,
+            94,
+            234,
+            5,
+            88,
+            4,
+            194,
+            187,
+            81,
+            166,
+            77,
+            254,
+            43,
+            26,
+            25,
+            130,
+            10,
+            144,
+            63,
+            206,
+            106,
+            162,
+            131,
+            135,
+            51,
+            34,
+            252,
+            51,
+            54,
+            91,
+            33,
+            164,
+            103,
+            106,
+            128,
+            69,
+            195,
+            219,
+            170,
+            148,
+            184,
+            219,
+            48,
+            178,
+            170,
+            238,
+            156,
+            202,
+            45,
+            124,
+            64,
+            210,
+            15,
+            136,
+            200,
+            56,
+            4,
+            94,
+            181,
+            102,
+            97,
+            8,
+            10,
+            173,
+            21,
+            211,
+            79,
+            4,
+            235,
+            249,
+            207,
+            239,
+            109,
+            114,
+            46,
+            166,
+            79,
+            68,
+            118,
+            184,
+            178,
+            161,
+            41,
+            112,
+            52,
+            47,
+            81,
+            72,
+            235,
+            241,
+            142,
+            100,
+            48,
+            214,
+            238,
+            150,
+            166,
+            196,
+            189,
+            238,
+            235,
+            34,
+            159,
+            91,
+            152,
+            120,
+            186,
+            176,
+            39,
+            174,
+            208
+          ]
+        ]
       }
     },
     "requested_proof": {
-      "revealed_attrs": {},
-      "self_attested_attrs": {
-        "attribute_1": "my self-attested value"
+      "revealed_attrs": {
+        "0_credentialSubject.achievement.id": {
+          "sub_proof_index": 0,
+          "raw": "http://localhost/moodle4/badges/badge_json.php?id=1",
+          "encoded": "53713088300126376405861720883997076173219984934932109934767992436199413714666"
+        },
+        "1_id": {
+          "sub_proof_index": 0,
+          "raw": "http://localhost/moodle4/badges/badge_json.php?id=1",
+          "encoded": "53713088300126376405861720883997076173219984934932109934767992436199413714666"
+        },
+        "2_credentialSubject.achievement.name": {
+          "sub_proof_index": 0,
+          "raw": "English A1",
+          "encoded": "37264191432503398892176568459941460831331589394488046121219379957218221251425"
+        }
       },
+      "self_attested_attrs": {},
       "unrevealed_attrs": {},
       "predicates": {}
     },
-    "identifiers": []
-  },
-  "verified": "false",
-  "created_at": "2023-09-15 14:31:58.637278Z",
-  "initiator": "self",
-  "presentation_request": {
-    "requested_attributes": {
-      "attribute_1": {
-        "name": "favouriteDrink",
-        "non_revoked": {
-          "to": 1601974900,
-          "from": 0
-        },
-        "restrictions": [
-          {
-            "schema_version": "1.0",
-            "schema_id": "49iWxpGtW8RxDvj4xy8pJ2:2:OpenBadges:1.0",
-            "cred_def_id": "49iWxpGtW8RxDvj4xy8pJ2:3:CL:224122:default",
-            "schema_issuer_did": "49iWxpGtW8RxDvj4xy8pJ2",
-            "issuer_did": "49iWxpGtW8RxDvj4xy8pJ2",
-            "schema_name": "OpenBadges"
-          }
-        ]
+    "identifiers": [
+      {
+        "schema_id": "HgCgZVHP9r7pVMAgXwdYDL:2:OpenBadges:1.0",
+        "cred_def_id": "HgCgZVHP9r7pVMAgXwdYDL:3:CL:224251:default",
+        "rev_reg_id": null,
+        "timestamp": null
       }
-    },
-    "requested_predicates": {
-      "predicate_1": {
-        "name": "index",
-        "p_type": ">=",
-        "p_value": 0,
-        "non_revoked": {
-          "to": 1601974900,
-          "from": 0
-        },
-        "restrictions": [
-          {
-            "schema_version": "1.0",
-            "schema_id": "49iWxpGtW8RxDvj4xy8pJ2:2:OpenBadges:1.0",
-            "cred_def_id": "49iWxpGtW8RxDvj4xy8pJ2:3:CL:224122:default",
-            "schema_issuer_did": "49iWxpGtW8RxDvj4xy8pJ2",
-            "issuer_did": "49iWxpGtW8RxDvj4xy8pJ2",
-            "schema_name": "OpenBadges"
-          }
-        ]
-      }
-    },
-    "version": "1.0",
-    "name": "Proof request",
-    "nonce": "1234567890"
+    ]
   },
-  "auto_present": false,
-  "connection_id": "3f5c47d1-e6a2-4295-8a6a-1fa251cad89c"
+  "state": "verified"
 }
 
