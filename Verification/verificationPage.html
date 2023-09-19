@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Credential Verifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 40px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Open Badge Language Credential Verifier</h1>
+        <div class="input-group">
+            <label for="credential-id">Credential Definition ID:</label>
+            <input type="text" id="credential-id">
+            <button id="submit-button">Senden</button>
+        </div>
+        <div id="response"></div>
+    </div>
+
+    <script>
+    document.getElementById('submit-button').addEventListener('click', function() {
+        const credentialDefId = document.getElementById('credential-id').value;
+
+        fetch("http://192.168.224.1:8021/connections", {
+            method: "GET",
+            headers: {
+                "Accept": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const connection = data.results[0];
+            
+            if (connection) {
+                return fetch("http://192.168.224.1:8021/present-proof/send-request", {
+                    method: "POST",
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        "comment": "Proof Request for Language Certificate",
+                        "connection_id": connection.connection_id,
+                        "proof_request": {
+                            "name": "Proof for Language Certificate",
+                            "non_revoked": { "to": 1695043896 },
+                            "nonce": "1234567890",
+                            "requested_attributes": {
+                                "0_credentialSubject.achievement.id": {
+                                    "name": "credentialSubject.achievement.id",
+                                    "restrictions": [{ "cred_def_id": credentialDefId }]
+                                },
+                                "1_id": {
+                                    "name": "id",
+                                    "restrictions": [{ "cred_def_id": credentialDefId }]
+                                },
+                                "2_credentialSubject.achievement.name": {
+                                    "name": "credentialSubject.achievement.name",
+                                    "restrictions": [{ "cred_def_id": credentialDefId }]
+                                }
+                            },
+                            "requested_predicates": {},
+                            "version": "1.0"
+                        },
+                        "trace": false
+                    })
+                });
+            } else {
+                throw new Error("Keine Verbindungen gefunden.");
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const presentationExchangeId = data.presentation_exchange_id;
+            
+            // Neuer fetch Befehl, um die Daten von present-proof/records/{presentation_exchange_id} zu holen
+            return fetch(`http://192.168.224.1:8021/present-proof/records/${presentationExchangeId}`, {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json"
+                }
+            });
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            document.getElementById('response').innerText = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+            console.error("Fehler bei der Anfrage:", error);
+        });
+        
+    });
+
+
+    </script>
+</body>
+
+</html>
