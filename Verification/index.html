@@ -133,7 +133,7 @@
                     fetch(linkUrl)
                         .then(response => response.json())
                         .then(presentationData => {
-                            const verifiedStatus = presentationData.verified ? 'Verified' : 'Not Verified';
+                            const verifiedStatus = presentationData.verified ? 'Verificaion Done' : 'Verification Error';
                             document.getElementById('finalResponse').innerText = verifiedStatus;
                         })
                         .catch(error => {
