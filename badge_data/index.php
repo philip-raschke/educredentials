@@ -188,7 +188,7 @@ foreach ($badges_detail as $badge_id => $badge) {
 
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
     var schemaId = '8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0'; // Statische Schema-ID
-    var credentialDefinitionId = ''; // Variable zum Speichern der Credential-Definition-ID
+    var credentialDefinitionId = 'VcqXivHJy9WTecoiL2mJCL:3:CL:226299:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
     var connectionId = ''; // Variable zum Speichern der Connection-ID
 
     function fillTextarea(badgeId, liElem) {
@@ -221,78 +221,59 @@ foreach ($badges_detail as $badge_id => $badge) {
     }
 
     function issueCredential() {
-        var credentialData = {
-            "schema_id": schemaId,
-            "support_revocation": false,
-            "tag": "default"
-        };
+    
 
-        var xhr2 = new XMLHttpRequest();
-        xhr2.open("POST", "http://192.168.224.1:8021/credential-definitions", true);
-        xhr2.setRequestHeader("accept", "application/json");
-        xhr2.setRequestHeader("Content-Type", "application/json");
-        xhr2.onreadystatechange = function () {
-            if (xhr2.readyState === XMLHttpRequest.DONE) {
-                if (xhr2.status === 200) {
-                    var response = JSON.parse(xhr2.responseText);
-                    credentialDefinitionId = response.credential_definition_id;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://192.168.224.1:8021/connections", true);
+    xhr.setRequestHeader("accept", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.results && response.results.length > 0) {
+                    connectionId = response.results[0].connection_id;
 
-                    var xhr3 = new XMLHttpRequest();
-                    xhr3.open("GET", "http://192.168.224.1:8021/connections", true);
-                    xhr3.setRequestHeader("accept", "application/json");
-                    xhr3.onreadystatechange = function () {
-                        if (xhr3.readyState === XMLHttpRequest.DONE) {
-                            if (xhr3.status === 200) {
-                                var response = JSON.parse(xhr3.responseText);
-                                if (response.results && response.results.length > 0) {
-                                    connectionId = response.results[0].connection_id;
-
-                                    var xhr4 = new XMLHttpRequest();
-                                    xhr4.open("POST", "http://192.168.224.1:8021/issue-credential-2.0/send", true);
-                                    xhr4.setRequestHeader("accept", "application/json");
-                                    xhr4.setRequestHeader("Content-Type", "application/json");
-                                    xhr4.onreadystatechange = function () {
-                                        if (xhr4.readyState === XMLHttpRequest.DONE) {
-                                            if (xhr4.status === 200) {
-                                                alert("Badge Issued!");
-                                            } else {
-                                                alert("Error: Unable to execute the 4th cURL command.");
-                                            }
-                                        }
-                                    };
-                                    var dataToSend = {
-                                        "auto_remove": true,
-                                        "comment": "Ausstellung des OpenBadge für French A1",
-                                        "connection_id": connectionId,
-                                        "credential_preview": {
-                                            "@type": "issue-credential/2.0/credential-preview",
-                                            "attributes": badgesData[Object.keys(badgesData)[0]]
-                                        },
-                                        "filter": {
-                                            "indy": {
-                                                "cred_def_id": credentialDefinitionId,
-                                                "schema_id": schemaId
-                                            }
-                                        },
-                                        "trace": false
-                                    };
-                                    xhr4.send(JSON.stringify(dataToSend));
-                                } else {
-                                    alert("Error: No connections found.");
-                                }
+                    var xhr2 = new XMLHttpRequest();
+                    xhr2.open("POST", "http://192.168.224.1:8021/issue-credential-2.0/send", true);
+                    xhr2.setRequestHeader("accept", "application/json");
+                    xhr2.setRequestHeader("Content-Type", "application/json");
+                    xhr2.onreadystatechange = function () {
+                        if (xhr2.readyState === XMLHttpRequest.DONE) {
+                            if (xhr2.status === 200) {
+                                alert("Badge Issued!");
                             } else {
-                                alert("Error: Unable to execute the 3rd cURL command.");
+                                alert("Error: Unable to issue the badge.");
                             }
                         }
                     };
-                    xhr3.send();
+                    var dataToSend = {
+                        "auto_remove": true,
+                        "comment": "Ausstellung des OpenBadge für French A1",
+                        "connection_id": connectionId,
+                        "credential_preview": {
+                            "@type": "issue-credential/2.0/credential-preview",
+                            "attributes": badgesData[Object.keys(badgesData)[0]]
+                        },
+                        "filter": {
+                            "indy": {
+                                "cred_def_id": credentialDefinitionId,
+                                "schema_id": schemaId
+                            }
+                        },
+                        "trace": false
+                    };
+                    xhr2.send(JSON.stringify(dataToSend));
                 } else {
-                    alert("Error: Unable to create credential definition.");
+                    alert("Error: No connections found.");
                 }
+            } else {
+                alert("Error: Unable to get connections.");
             }
-        };
-        xhr2.send(JSON.stringify(credentialData, null, 2));
-    }
+        }
+    };
+    xhr.send();
+}
+
 
 </script>
 
