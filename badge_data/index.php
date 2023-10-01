@@ -186,9 +186,8 @@ foreach ($badges_detail as $badge_id => $badge) {
     var badgesData = <?php echo json_encode($JSON_badges); ?>;
     document.getElementById('JSON').value = '';
 
-
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
-    var schemaId = ''; // Variable zum Speichern der Schema-ID
+    var schemaId = '8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0'; // Statische Schema-ID
     var credentialDefinitionId = ''; // Variable zum Speichern der Credential-Definition-ID
     var connectionId = ''; // Variable zum Speichern der Connection-ID
 
@@ -212,7 +211,7 @@ foreach ($badges_detail as $badge_id => $badge) {
                     var invitationData = response.invitation;
                     var resultDiv = document.getElementById("curl-result");
                     resultDiv.innerHTML = "<pre>" + JSON.stringify(invitationData, null, 2) + "</pre>";
-                    resultDiv.style.display = "block"; // Zeige das Ergebnisfeld an
+                    resultDiv.style.display = "block";
                 } else {
                     alert("Error: Unable to execute cURL command.");
                 }
@@ -222,82 +221,78 @@ foreach ($badges_detail as $badge_id => $badge) {
     }
 
     function issueCredential() {
-    schemaId = "8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0"; // Setze die Schema-ID statisch
-    var credentialData = {
-        "schema_id": schemaId,
-        "support_revocation": false,
-        "tag": "default"
-    };
+        var credentialData = {
+            "schema_id": schemaId,
+            "support_revocation": false,
+            "tag": "default"
+        };
 
-    // Führe nur den zweiten cURL-Befehl aus
-    var xhr2 = new XMLHttpRequest();
-    xhr2.open("POST", "http://192.168.224.1:8021/credential-definitions", true);
-    xhr2.setRequestHeader("accept", "application/json");
-    xhr2.setRequestHeader("Content-Type", "application/json");
-    xhr2.onreadystatechange = function () {
-        if (xhr2.readyState === XMLHttpRequest.DONE) {
-            if (xhr2.status === 200) {
-                var response = JSON.parse(xhr2.responseText);
-                credentialDefinitionId = response.credential_definition_id; // Speichere die Credential-Definition-ID
+        var xhr2 = new XMLHttpRequest();
+        xhr2.open("POST", "http://192.168.224.1:8021/credential-definitions", true);
+        xhr2.setRequestHeader("accept", "application/json");
+        xhr2.setRequestHeader("Content-Type", "application/json");
+        xhr2.onreadystatechange = function () {
+            if (xhr2.readyState === XMLHttpRequest.DONE) {
+                if (xhr2.status === 200) {
+                    var response = JSON.parse(xhr2.responseText);
+                    credentialDefinitionId = response.credential_definition_id;
 
-                // Führe den dritten cURL-Befehl aus und speichere die Connection-ID
-                var xhr3 = new XMLHttpRequest();
-                xhr3.open("GET", "http://192.168.224.1:8021/connections", true);
-                xhr3.setRequestHeader("accept", "application/json");
-                xhr3.onreadystatechange = function () {
-                    if (xhr3.readyState === XMLHttpRequest.DONE) {
-                        if (xhr3.status === 200) {
-                            var response = JSON.parse(xhr3.responseText);
-                            if (response.results && response.results.length > 0) {
-                                connectionId = response.results[0].connection_id; // Speichere die Connection-ID
+                    var xhr3 = new XMLHttpRequest();
+                    xhr3.open("GET", "http://192.168.224.1:8021/connections", true);
+                    xhr3.setRequestHeader("accept", "application/json");
+                    xhr3.onreadystatechange = function () {
+                        if (xhr3.readyState === XMLHttpRequest.DONE) {
+                            if (xhr3.status === 200) {
+                                var response = JSON.parse(xhr3.responseText);
+                                if (response.results && response.results.length > 0) {
+                                    connectionId = response.results[0].connection_id;
 
-                                // Führe den 4. cURL-Befehl aus
-                                var xhr4 = new XMLHttpRequest();
-                                xhr4.open("POST", "http://192.168.224.1:8021/issue-credential-2.0/send", true);
-                                xhr4.setRequestHeader("accept", "application/json");
-                                xhr4.setRequestHeader("Content-Type", "application/json");
-                                xhr4.onreadystatechange = function () {
-                                    if (xhr4.readyState === XMLHttpRequest.DONE) {
-                                        if (xhr4.status === 200) {
-                                            alert("Badge Issued!");
-                                        } else {
-                                            alert("Error: Unable to execute the 4th cURL command.");
+                                    var xhr4 = new XMLHttpRequest();
+                                    xhr4.open("POST", "http://192.168.224.1:8021/issue-credential-2.0/send", true);
+                                    xhr4.setRequestHeader("accept", "application/json");
+                                    xhr4.setRequestHeader("Content-Type", "application/json");
+                                    xhr4.onreadystatechange = function () {
+                                        if (xhr4.readyState === XMLHttpRequest.DONE) {
+                                            if (xhr4.status === 200) {
+                                                alert("Badge Issued!");
+                                            } else {
+                                                alert("Error: Unable to execute the 4th cURL command.");
+                                            }
                                         }
-                                    }
-                                };
-                                var dataToSend = {
-                                    "auto_remove": true,
-                                    "comment": "Ausstellung des OpenBadge für French A1",
-                                    "connection_id": connectionId,
-                                    "credential_preview": {
-                                        "@type": "issue-credential/2.0/credential-preview",
-                                        "attributes": badgesData[Object.keys(badgesData)[0]]
-                                    },
-                                    "filter": {
-                                        "indy": {
-                                            "cred_def_id": credentialDefinitionId,
-                                            "schema_id": schemaId
-                                        }
-                                    },
-                                    "trace": false
-                                };
-                                xhr4.send(JSON.stringify(dataToSend));
+                                    };
+                                    var dataToSend = {
+                                        "auto_remove": true,
+                                        "comment": "Ausstellung des OpenBadge für French A1",
+                                        "connection_id": connectionId,
+                                        "credential_preview": {
+                                            "@type": "issue-credential/2.0/credential-preview",
+                                            "attributes": badgesData[Object.keys(badgesData)[0]]
+                                        },
+                                        "filter": {
+                                            "indy": {
+                                                "cred_def_id": credentialDefinitionId,
+                                                "schema_id": schemaId
+                                            }
+                                        },
+                                        "trace": false
+                                    };
+                                    xhr4.send(JSON.stringify(dataToSend));
+                                } else {
+                                    alert("Error: No connections found.");
+                                }
                             } else {
-                                alert("Error: No connections found.");
+                                alert("Error: Unable to execute the 3rd cURL command.");
                             }
-                        } else {
-                            alert("Error: Unable to execute the 3rd cURL command.");
                         }
-                    }
-                };
-                xhr3.send();
-            } else {
-                alert("Error: Unable to create credential definition.");
+                    };
+                    xhr3.send();
+                } else {
+                    alert("Error: Unable to create credential definition.");
+                }
             }
-        }
-    };
-    xhr2.send(JSON.stringify(credentialData, null, 2));
-}
+        };
+        xhr2.send(JSON.stringify(credentialData, null, 2));
+    }
 
 </script>
 
