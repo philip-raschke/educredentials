@@ -188,8 +188,10 @@ foreach ($badges_detail as $badge_id => $badge) {
 
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
     var schemaId = '8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0'; // Statische Schema-ID
-    var credentialDefinitionId = 'VcqXivHJy9WTecoiL2mJCL:3:CL:226299:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
+    var credentialDefinitionId = 'P4ohtfpDvBfZ3zq27j5qcB:3:CL:226299:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
     var connectionId = ''; // Variable zum Speichern der Connection-ID
+
+    var selectedBadgeId; // Variable zum Speichern der ausgewählten Badge-ID
 
     function fillTextarea(badgeId, liElem) {
         document.getElementById('JSON').value = JSON.stringify(JSONBadge[badgeId], null, "\t");
@@ -197,6 +199,7 @@ foreach ($badges_detail as $badge_id => $badge) {
             elem.classList.remove('selected');
         });
         liElem.classList.add('selected');
+        selectedBadgeId = badgeId; // Setzen Sie die ausgewählte Badge-ID
     }
 
     function runCurl() {
@@ -221,58 +224,64 @@ foreach ($badges_detail as $badge_id => $badge) {
     }
 
     function issueCredential() {
-    
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://192.168.224.1:8021/connections", true);
-    xhr.setRequestHeader("accept", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                if (response.results && response.results.length > 0) {
-                    connectionId = response.results[0].connection_id;
-
-                    var xhr2 = new XMLHttpRequest();
-                    xhr2.open("POST", "http://192.168.224.1:8021/issue-credential-2.0/send", true);
-                    xhr2.setRequestHeader("accept", "application/json");
-                    xhr2.setRequestHeader("Content-Type", "application/json");
-                    xhr2.onreadystatechange = function () {
-                        if (xhr2.readyState === XMLHttpRequest.DONE) {
-                            if (xhr2.status === 200) {
-                                alert("Badge Issued!");
-                            } else {
-                                alert("Error: Unable to issue the badge.");
-                            }
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://192.168.224.1:8021/connections", true);
+        xhr.setRequestHeader("accept", "application/json");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.results && response.results.length > 0) {
+                        connectionId = response.results[0].connection_id;
+                        
+                        var selectedBadgeData = JSONBadge[selectedBadgeId]; // Wir holen das ausgewählte Badge durch die zuvor festgelegte selectedBadgeId
+                        if (!selectedBadgeData) {
+                            alert("Error: No badge selected.");
+                            return;
                         }
-                    };
-                    var dataToSend = {
-                        "auto_remove": true,
-                        "comment": "Ausstellung des OpenBadge für French A1",
-                        "connection_id": connectionId,
-                        "credential_preview": {
-                            "@type": "issue-credential/2.0/credential-preview",
-                            "attributes": badgesData[Object.keys(badgesData)[0]]
-                        },
-                        "filter": {
-                            "indy": {
-                                "cred_def_id": credentialDefinitionId,
-                                "schema_id": schemaId
+
+                        var xhr2 = new XMLHttpRequest();
+                        xhr2.open("POST", "http://192.168.224.1:8021/issue-credential-2.0/send", true);
+                        xhr2.setRequestHeader("accept", "application/json");
+                        xhr2.setRequestHeader("Content-Type", "application/json");
+                        xhr2.onreadystatechange = function () {
+                            if (xhr2.readyState === XMLHttpRequest.DONE) {
+                                if (xhr2.status === 200) {
+                                    alert("Badge Issued!");
+                                } else {
+                                    alert("Error: Unable to issue the badge.");
+                                }
                             }
-                        },
-                        "trace": false
-                    };
-                    xhr2.send(JSON.stringify(dataToSend));
+                        };
+                        
+                        var dataToSend = {
+                            "auto_remove": true,
+                            "comment": "Ausstellung des OpenBadge für French A1",
+                            "connection_id": connectionId,
+                            "credential_preview": {
+                                "@type": "issue-credential/2.0/credential-preview",
+                                "attributes": selectedBadgeData // Wir senden das ausgewählte Badge als Attribut
+                            },
+                            "filter": {
+                                "indy": {
+                                    "cred_def_id": credentialDefinitionId,
+                                    "schema_id": schemaId
+                                }
+                            },
+                            "trace": false
+                        };
+                        xhr2.send(JSON.stringify(dataToSend));
+                    } else {
+                        alert("Error: No connections found.");
+                    }
                 } else {
-                    alert("Error: No connections found.");
+                    alert("Error: Unable to get connections.");
                 }
-            } else {
-                alert("Error: Unable to get connections.");
             }
-        }
-    };
-    xhr.send();
+        };
+        xhr.send();
 }
+
 
 
 </script>
