@@ -1,0 +1,46 @@
+Schema was created via swagger and can be used from each agent:
+
+
+{
+  "schema_version": "1.0",
+  "schema_name": "OpenBadge",
+  "attributes": [
+    "@context",
+    "id",
+    "type",
+    "name",
+    "issuer.id",
+    "issuer.name",
+    "issuer.issuanceDate",
+    "credentialSubject.id",
+    "credentialSubject.name",
+    "credentialSubject.achievement.id",
+    "credentialSubject.achievement.name",
+    "credentialSubject.achievement.description",
+    "credentialSubject.achievement.criteria.id",
+    "credentialSubject.achievement.criteria.narrative"
+  ]
+}
+
+
+----------------------------------->schema id: 8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0
+
+
+
+
+
+Steps that the moodle/faber/zems issuer agent should follow in the beginning:
+
+1. Create credential definition one time manually via swagger
+
+{
+  "schema_id": "8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0",
+  "support_revocation": false,
+  "tag": "default"
+}
+
+
+----------------------------------->credential definition: !!!!
+
+
+
