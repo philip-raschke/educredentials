@@ -110,7 +110,7 @@
         document.getElementById('submit-button').addEventListener('click', function() {
             const credDefId = document.getElementById('cred_def_id').value; // Hier wurde 'credential-id' zu 'cred_def_id' geändert.
     
-            fetch("http://192.168.224.1:8021/connections", {
+            fetch("http://localhost:8021/connections", {
                 method: "GET",
                 headers: {
                     "Accept": "application/json"
@@ -126,7 +126,7 @@
                 const connection = data.results[0];
     
                 if (connection) {
-                    return fetch("http://192.168.224.1:8021/present-proof/send-request", {
+                    return fetch("http://localhost:8021/present-proof/send-request", {
                         method: "POST",
                         headers: {
                             "Accept": "application/json",
@@ -173,7 +173,7 @@
                 var presentationExchangeId = data.presentation_exchange_id;
                 console.log(presentationExchangeId);
                 setTimeout(() => {
-                    fetch("http://192.168.224.1:8021/present-proof/records/" + presentationExchangeId)
+                    fetch("http://localhost:8021/present-proof/records/" + presentationExchangeId)
                         .then(response => response.json())
                         .then(presentationData => {
                             const verifiedStatus = presentationData.verified ? 'Verification Process Done' : 'Verification Process Error';
@@ -194,7 +194,7 @@
                             document.getElementById('presentationExchangeLabel').style.display = 'block';
 
                             if (presentationData.verified) {
-                                fetch("http://192.168.224.1:8021/present-proof/records/" + presentationExchangeId, {
+                                fetch("http://localhost:8021/present-proof/records/" + presentationExchangeId, {
                                     method: "GET",
                                     headers: {
                                         "Accept": "application/json"
