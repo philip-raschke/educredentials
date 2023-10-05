@@ -188,7 +188,7 @@ foreach ($badges_detail as $badge_id => $badge) {
 
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
     var schemaId = '8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0'; // Statische Schema-ID
-    var credentialDefinitionId = 'P4ohtfpDvBfZ3zq27j5qcB:3:CL:226299:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
+    var credentialDefinitionId = '3zGzuhRELjGtPZ2yDq1832:3:CL:226299:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
     var connectionId = ''; // Variable zum Speichern der Connection-ID
 
     var selectedBadgeId; // Variable zum Speichern der ausgewählten Badge-ID
@@ -204,7 +204,7 @@ foreach ($badges_detail as $badge_id => $badge) {
 
     function runCurl() {
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://192.168.224.1:8021/connections/create-invitation?alias=Alice", true);
+        xhr.open("POST", "http://localhost:8021/connections/create-invitation?alias=Alice", true);
         xhr.setRequestHeader("accept", "application/json");
         xhr.setRequestHeader("Content-Type", "application/json");
         xhr.onreadystatechange = function () {
@@ -225,7 +225,7 @@ foreach ($badges_detail as $badge_id => $badge) {
 
     function issueCredential() {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://192.168.224.1:8021/connections", true);
+        xhr.open("GET", "http://localhost:8021/connections", true);
         xhr.setRequestHeader("accept", "application/json");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -241,7 +241,7 @@ foreach ($badges_detail as $badge_id => $badge) {
                         }
 
                         var xhr2 = new XMLHttpRequest();
-                        xhr2.open("POST", "http://192.168.224.1:8021/issue-credential-2.0/send", true);
+                        xhr2.open("POST", "http://localhost:8021/issue-credential-2.0/send", true);
                         xhr2.setRequestHeader("accept", "application/json");
                         xhr2.setRequestHeader("Content-Type", "application/json");
                         xhr2.onreadystatechange = function () {
