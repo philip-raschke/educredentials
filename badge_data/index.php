@@ -35,8 +35,58 @@ echo $OUTPUT->header();
 
 $JSON_badges = [];
 
+function getIssuerIdFromCurl() {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "http://localhost:8021/wallet/did");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array("accept: application/json"));
+
+    $response = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        echo 'cURL-Anfrage fehlgeschlagen: ' . curl_error($ch);
+        curl_close($ch);
+        return null;
+    }
+
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($httpCode != 200) {
+        echo 'Unerwarteter HTTP-Statuscode: ' . $httpCode;
+        return null;
+    }
+
+    $responseDecoded = json_decode($response, true);
+
+    if (!isset($responseDecoded['results'][0]['did'])) {
+        echo 'Did not find expected "did" in response: ';
+        var_dump($responseDecoded);
+        return null;
+    }
+
+    return $responseDecoded['results'][0]['did'];
+}
+
+function extractBadgeId($url) {
+    $queryParams = [];
+    parse_str(parse_url($url, PHP_URL_QUERY), $queryParams);
+    // Rückgabe der 'id' aus den Query-Parametern, wenn verfügbar.
+    return isset($queryParams['id']) ? $queryParams['id'] : null;
+}
+
+
 #Openbadges without shading
 foreach ($badges_detail as $badge_id => $badge) {
+    $issuerId = getIssuerIdFromCurl(); // Rufe die cURL-Funktion auf, um die Issuer-ID zu erhalten
+
+    // Überprüfen Sie, ob die Issuer-ID erfolgreich abgerufen wurde
+    if ($issuerId === null) {
+        // Fehlerbehandlung, wenn der Abruf der Issuer-ID fehlschlägt, z.B.:
+        echo 'Konnte Issuer-ID nicht abrufen!';
+        $issuerId = "Unbekannt";
+    }
     $JSON_badges[$badge_id] = [
         [
             "name" => "@context",
@@ -44,11 +94,11 @@ foreach ($badges_detail as $badge_id => $badge) {
         ],
         [
             "name" => "id",
-            "value" => $badge->issued['badge']['id'],
-        ],
+            "value" => extractBadgeId($badge->issued['badge']['id']),
+        ],                
         [
             "name" => "type",
-            "value" => "VerifiableCredential,OpenBadgeCredential",
+            "value" => "VerifiableCredential, OpenBadgeCredential",
         ],
         [
             "name" => "name",
@@ -56,7 +106,8 @@ foreach ($badges_detail as $badge_id => $badge) {
         ],
         [
             "name" => "issuer.id",
-            "value" => $badge->issued['badge']['issuer']['id'],
+            "value" => $issuerId, 
+            //"value" => $badge->issued['badge']['issuer']['id'],
         ],
         [
             "name" => "issuer.name",
@@ -76,8 +127,8 @@ foreach ($badges_detail as $badge_id => $badge) {
         ],
         [
             "name" => "credentialSubject.achievement.id",
-            "value" => $badge->issued['badge']['id'],
-        ],
+            "value" => extractBadgeId($badge->issued['badge']['id']),
+        ],        
         [
             "name" => "credentialSubject.achievement.name",
             "value" => $badge->issued['badge']['name'],
@@ -88,7 +139,7 @@ foreach ($badges_detail as $badge_id => $badge) {
         ],
         [
             "name" => "credentialSubject.achievement.criteria.id",
-            "value" => $badge->issued['badge']['criteria']['id'],
+            "value" => extractBadgeId($badge->issued['badge']['id']),
         ],
         [
             "name" => "credentialSubject.achievement.criteria.narrative",
@@ -188,7 +239,7 @@ foreach ($badges_detail as $badge_id => $badge) {
 
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
     var schemaId = '8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0'; // Statische Schema-ID
-    var credentialDefinitionId = '3zGzuhRELjGtPZ2yDq1832:3:CL:226299:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
+    var credentialDefinitionId = '6vWARVPujffkuF4DTamgFt:3:CL:226299:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
     var connectionId = ''; // Variable zum Speichern der Connection-ID
 
     var selectedBadgeId; // Variable zum Speichern der ausgewählten Badge-ID
