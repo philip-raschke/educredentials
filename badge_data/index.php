@@ -76,6 +76,17 @@ function extractBadgeId($url) {
     return isset($queryParams['id']) ? $queryParams['id'] : null;
 }
 
+function generateUUID() {
+    return sprintf(
+        'urn:uuid:%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
+        mt_rand(0, 0xffff), mt_rand(0, 0xffff),
+        mt_rand(0, 0xffff),
+        mt_rand(0, 0x0fff) | 0x4000,
+        mt_rand(0, 0x3fff) | 0x8000,
+        mt_rand(0, 0xffff), mt_rand(0, 0xffff), mt_rand(0, 0xffff)
+    );
+}
+
 
 #Openbadges without shading
 foreach ($badges_detail as $badge_id => $badge) {
@@ -87,6 +98,10 @@ foreach ($badges_detail as $badge_id => $badge) {
         echo 'Konnte Issuer-ID nicht abrufen!';
         $issuerId = "Unbekannt";
     }
+    
+    $issuanceDatetime = new DateTime($badge->issued['badge']['issuedOn']);
+    $issuanceDate = $issuanceDatetime->format('Y-m-d\TH:i:s\Z');
+    
     $JSON_badges[$badge_id] = [
         [
             "name" => "@context",
@@ -94,7 +109,7 @@ foreach ($badges_detail as $badge_id => $badge) {
         ],
         [
             "name" => "id",
-            "value" => extractBadgeId($badge->issued['badge']['id']),
+            "value" => generateUUID(),
         ],                
         [
             "name" => "type",
@@ -106,8 +121,7 @@ foreach ($badges_detail as $badge_id => $badge) {
         ],
         [
             "name" => "issuer.id",
-            "value" => $issuerId, 
-            //"value" => $badge->issued['badge']['issuer']['id'],
+            "value" => "did:key:" . $issuerId, 
         ],
         [
             "name" => "issuer.name",
@@ -115,11 +129,11 @@ foreach ($badges_detail as $badge_id => $badge) {
         ],
         [
             "name" => "issuer.issuanceDate",
-            "value" => date('c', $badge->issued['badge']['issuedOn']),
+            "value" => $issuanceDate,
         ],
         [
             "name" => "credentialSubject.id",
-            "value" => $badge->recipient->id,
+            "value" => "did:key:<DID of your Wallet>",
         ],
         [
             "name" => "credentialSubject.name",
@@ -127,7 +141,7 @@ foreach ($badges_detail as $badge_id => $badge) {
         ],
         [
             "name" => "credentialSubject.achievement.id",
-            "value" => extractBadgeId($badge->issued['badge']['id']),
+            "value" => generateUUID(),
         ],        
         [
             "name" => "credentialSubject.achievement.name",
@@ -136,10 +150,6 @@ foreach ($badges_detail as $badge_id => $badge) {
         [
             "name" => "credentialSubject.achievement.description",
             "value" => $badge->issued['badge']['description'],
-        ],
-        [
-            "name" => "credentialSubject.achievement.criteria.id",
-            "value" => extractBadgeId($badge->issued['badge']['id']),
         ],
         [
             "name" => "credentialSubject.achievement.criteria.narrative",
@@ -238,8 +248,8 @@ foreach ($badges_detail as $badge_id => $badge) {
     document.getElementById('JSON').value = '';
 
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
-    var schemaId = '8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0'; // Statische Schema-ID
-    var credentialDefinitionId = '6vWARVPujffkuF4DTamgFt:3:CL:226299:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
+    var schemaId = 'JLXngoc4ahRhFhjZcMzvNs:2:OpenBadge:1.0'; // Statische Schema-ID
+    var credentialDefinitionId = 'NTcMtBxw4LN326YrNwpZX7:3:CL:227059:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
     var connectionId = ''; // Variable zum Speichern der Connection-ID
 
     var selectedBadgeId; // Variable zum Speichern der ausgewählten Badge-ID
