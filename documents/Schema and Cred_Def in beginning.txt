@@ -17,13 +17,12 @@ Schema was created via swagger and can be used from each agent:
     "credentialSubject.achievement.id",
     "credentialSubject.achievement.name",
     "credentialSubject.achievement.description",
-    "credentialSubject.achievement.criteria.id",
     "credentialSubject.achievement.criteria.narrative"
   ]
 }
 
 
------------------------------------>schema id: 8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0
+----------------------------------->schema id: JLXngoc4ahRhFhjZcMzvNs:2:OpenBadge:1.0
 
 
 
@@ -34,7 +33,7 @@ Steps that the moodle/faber/zems issuer agent should follow in the beginning:
 1. Create credential definition one time manually via swagger
 
 {
-  "schema_id": "8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0",
+  "schema_id": "JLXngoc4ahRhFhjZcMzvNs:2:OpenBadge:1.0",
   "support_revocation": false,
   "tag": "default"
 }
