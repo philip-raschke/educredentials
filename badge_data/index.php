@@ -57,7 +57,7 @@ function getIssuerIdFromCurl() {
 
     if (!isset($responseDecoded['results'][0]['did'])) {
         global $errorMessages;
-        $errorMessages['issuer_not_connected'] = 'Issuer Server is not connected';
+        $errorMessages['issuer_not_connected'] = 'Issuer Server is not running';
         return 'Unbekannt';
     }
 
