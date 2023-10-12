@@ -1,7 +1,7 @@
 ## eq_proof ##
 - proof of equality or the presence of certain attributes
 
-  Ex:
+  Ex: <br>
   "eq_proof": {
               "revealed_attrs": {
                 "credentialsubject.achievement.name": "102809581340651767048450023577215203800032978732407776553078962252139684308531",
