@@ -1,3 +1,8 @@
+# Zero-Knowledge Proof #
+- allows one party to prove to another they know a secret, without revealing the secret itself
+- verifier can verify the secret but gains no additional knowledge about the secret
+- Ensures security and protects sensitive information during the proof process
+  
 ## eq_proof ##
 - proof of equality or the presence of certain attributes
 
