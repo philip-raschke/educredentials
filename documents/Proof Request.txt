@@ -1,6 +1,6 @@
 1. POST/present-proof/send-request
 
-
+(1)
 {
   "comment": "Proof Request for English A1",
   "connection_id": "e89b39f6-3a99-499f-a819-59d32f44c01b",
@@ -106,7 +106,6 @@
   },
   "state": "request_sent"
 }
-
 
 
 
@@ -508,3 +507,28 @@
   "state": "verified"
 }
 
+
+
+
+(2)
+
+{
+  "comment": "Proof Request for Language Badge",
+  "connection_id": "f4bafe92-c8a5-405f-8c27-136370bbba27",
+  "proof_request": {
+    "name": "Proof for English A1",
+    "nonce": "1234567890",
+    "version": "1.0",
+    "requested_attributes": {
+      "0_name": {
+        "name": "name",
+        "restrictions": [{
+          "attr::name::value": "English A1 Badge"
+        }]
+      }
+      
+    },
+    "requested_predicates": {}
+  },
+  "trace": false
+}
