@@ -58,7 +58,7 @@ function getIssuerIdFromCurl() {
     if (!isset($responseDecoded['results'][0]['did'])) {
         global $errorMessages;
         $errorMessages['issuer_not_connected'] = 'Issuer Server is not running';
-        return 'Unbekannt';
+        return 'Unknown';
     }
 
     return $responseDecoded['results'][0]['did'];
@@ -84,7 +84,7 @@ function getTheirDid() {
     if (!isset($responseDecoded['results'][0]['their_did'])) {
         global $errorMessages;
         $errorMessages['no_wallet_connected'] = 'No Holder Wallet is connected';
-        return 'Unbekannt';
+        return 'Unknown';
     }
 
     return $responseDecoded['results'][0]['their_did'];
@@ -264,7 +264,7 @@ foreach ($errorMessages as $message) {
 
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
     var schemaId = 'JLXngoc4ahRhFhjZcMzvNs:2:OpenBadge:1.0'; // Statische Schema-ID
-    var credentialDefinitionId = '3mTVLoCjA4QUE1dzxJ3S2A:3:CL:227059:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
+    var credentialDefinitionId = 'BhR778Ma9tT2gp8TQGLAz9:3:CL:227059:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
     var connectionId = ''; // Variable zum Speichern der Connection-ID
 
     var selectedBadgeId; // Variable zum Speichern der ausgewählten Badge-ID
