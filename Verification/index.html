@@ -87,13 +87,11 @@
             </label>
             <label for="credential-id" class="block">
                 <b>Claims to be verified:</b>
-                <br>Credential Subject Name
-                <br>Credential Subject Achievement Name
-                <br>Issuer Name
+                <br>Achievement Name/Badge Name
             </label>
-            <input type="text" id="cred_def_id" placeholder="Enter Credential Definition ID of corresponding Badge">
+            <input type="text" id="badge_name" placeholder="Enter Achievement Name/Badge Name">
             <label for="description">
-                <b>By pressing the button, the verifier sends a proof request to the credentials in your wallet, based on the entered credential definition ID, requesting the listed claims above.</b>
+                <b>By pressing the button, you (verifier) send a proof request to the credentials in the holder wallet, based on the entered Achievement Name.</b>
             </label>
             <button id="submit-button">Verify Proof!</button>
         </div>
@@ -108,7 +106,7 @@
 
     <script>
         document.getElementById('submit-button').addEventListener('click', function() {
-            const credDefId = document.getElementById('cred_def_id').value; // Hier wurde 'credential-id' zu 'cred_def_id' geändert.
+            const badgeName = document.getElementById('badge_name').value; 
     
             fetch("http://localhost:8021/connections", {
                 method: "GET",
@@ -124,7 +122,7 @@
             })
             .then(data => {
                 const connection = data.results[0];
-    
+
                 if (connection) {
                     return fetch("http://localhost:8021/present-proof/send-request", {
                         method: "POST",
@@ -133,28 +131,21 @@
                             "Content-Type": "application/json"
                         },
                         body: JSON.stringify({
-                            "comment": "Proof Request for English A1",
+                            "comment": "Proof Request for Language Badge",
                             "connection_id": connection.connection_id,
                             "proof_request": {
-                                "name": "Proof for Language Badge",
-                                "non_revoked": { "to": 1695043896 },
+                                "name": "Proof for Language",
                                 "nonce": "1234567890",
+                                "version": "1.0",
                                 "requested_attributes": {
-                                    "0_credentialSubject.name": {
-                                        "name": "credentialSubject.name",
-                                        "restrictions": [{ "cred_def_id": credDefId }]
-                                    },
-                                    "1_credentialSubject.achievement.name": {
-                                        "name": "credentialSubject.achievement.name",
-                                        "restrictions": [{ "cred_def_id": credDefId }]
-                                    },
-                                    "2_issuer.name": {
-                                        "name": "issuer.name",
-                                        "restrictions": [{ "cred_def_id": credDefId }]
+                                    "0_name": {
+                                        "name": "name",
+                                        "restrictions": [{
+                                            "attr::name::value": badgeName // Hier wird <BadgeName> durch die zuvor gesammelte Variable ersetzt.
+                                        }]
                                     }
                                 },
                                 "requested_predicates": {},
-                                "version": "1.0"
                             },
                             "trace": false
                         })
