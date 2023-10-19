@@ -1,6 +1,7 @@
 # Claims to be verified
 
 ### Achievement Name/ Badge Name (done)
+- Verifier checks if the value in Achievement Name/Badge Name is equal to the entered ones   
 
 ### DID of issuer
 - Verifier has a register with all issuer DIDs, which are known and trusted
