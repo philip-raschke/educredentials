@@ -25,6 +25,7 @@
   "rev_reg_id": null,
   "cred_rev_id": null
 }
+```
 
 ### Achievement Name/ Badge Name (done)
 - Verifier checks if the value in Achievement Name/Badge Name is equal to the entered ones   
