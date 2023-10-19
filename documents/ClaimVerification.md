@@ -35,4 +35,4 @@
 - Verifier checks whether the DID value in issuer.id is equal to one of the DIDs stored in the register of the verifier
 
 ### DID of holder
-- Verifier checks whether the DID value in credential.Subject.id is equal to the DID that presented the corresponding proof 
+- Verifier checks whether the DID value in credentialSubject.id is equal to the DID that presented the corresponding proof 
