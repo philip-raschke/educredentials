@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Language Badge Verifier</title>
+    <title>HU Berlin - Language Badge Verifier</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -74,13 +74,34 @@
         #presentationExchangeLabel {
             text-align: left; /* Stellt sicher, dass dieses Label immer linksbündig ist */
         }
+
+        a#trusted_issuer_DIDs {
+            display: inline-block;
+            font-size: 0.9em;
+            margin-top: 20px;
+            margin-left: 0%;
+            margin-right: 20%;
+            color: #007BFF; /* Eine typische Linkfarbe */
+            text-decoration: underline; /* Unterstreichung hinzufügen */
+            padding: 5px; 
+            border: none; 
+            background-color: transparent; /* Entfernt den Hintergrund */
+        }
+
+        a#trusted_issuer_DIDs:hover {
+            color: #0056b3; /* Eine dunklere Blauton für den Hover-Zustand */
+            cursor: pointer; /* Zeigt einen Handzeiger an, wenn Sie darüber schweben */
+            text-decoration: none; /* Entfernt die Unterstreichung beim Überfahren mit der Maus für einen sauberen Effekt */
+        }
+
+
         
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Language Badge Verifier</h1>
+        <h1>HU Berlin - Language Badge Verifier</h1>
         <div class="input-group">
             <label for="schema-id" class="block">
                 <b>Schema ID: 8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0</b>
@@ -88,12 +109,14 @@
             <label for="credential-id" class="block">
                 <b>Claims to be verified:</b>
                 <br>Achievement Name/Badge Name
+                <br>Issuer DID
             </label>
             <input type="text" id="badge_name" placeholder="Enter Achievement Name/Badge Name">
             <label for="description">
                 <b>By pressing the button, you (verifier) send a proof request to the credentials in the holder wallet, based on the entered Achievement Name.</b>
             </label>
             <button id="submit-button">Verify Proof!</button>
+            <a href="trusted_issuer_dids.html" id="trusted_issuer_DIDs">Trusted Issuer DIDs</a>
         </div>
         <pre id="finalResponse"></pre>
         <div id="verifiedStatus"></div>
@@ -105,116 +128,134 @@
     
 
     <script>
+        function loadTrustedDIDs() {
+            return fetch('trusted_dids.json')
+                .then(response => response.json())
+                .catch(error => {
+                    console.error('Fehler beim Laden der DIDs:', error);
+                    return [];
+                });
+        }
+        
         document.getElementById('submit-button').addEventListener('click', function() {
-            const badgeName = document.getElementById('badge_name').value; 
+            const badgeName = document.getElementById('badge_name').value;
     
-            fetch("http://localhost:8021/connections", {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json"
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Fehlerhafte Antwort vom Server");
-                }
-                return response.json();
-            })
-            .then(data => {
-                const connection = data.results[0];
-
-                if (connection) {
-                    return fetch("http://localhost:8021/present-proof/send-request", {
-                        method: "POST",
-                        headers: {
-                            "Accept": "application/json",
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify({
-                            "comment": "Proof Request for Language Badge",
-                            "connection_id": connection.connection_id,
-                            "proof_request": {
-                                "name": "Proof for Language",
-                                "nonce": "1234567890",
-                                "version": "1.0",
-                                "requested_attributes": {
-                                    "0_name": {
-                                        "name": "name",
-                                        "restrictions": [{
-                                            "attr::name::value": badgeName // Hier wird <BadgeName> durch die zuvor gesammelte Variable ersetzt.
-                                        }]
-                                    }
-                                },
-                                "requested_predicates": {},
+            // Zuerst die vertrauenswürdigen DIDs laden
+            loadTrustedDIDs().then(trustedDIDs => {
+                const restrictions = trustedDIDs.map(did => {
+                    return { "attr::issuer.id::value": did };
+                });
+        
+                fetch("http://localhost:8021/connections", {
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json"
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Fehlerhafte Antwort vom Server");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const connection = data.results[0];
+    
+                    if (connection) {
+                        return fetch("http://localhost:8021/present-proof/send-request", {
+                            method: "POST",
+                            headers: {
+                                "Accept": "application/json",
+                                "Content-Type": "application/json"
                             },
-                            "trace": false
+                            body: JSON.stringify({
+                                "comment": "Proof Request for Language Badge",
+                                "connection_id": connection.connection_id,
+                                "proof_request": {
+                                    "name": "Proof for Language",
+                                    "nonce": "1234567890",
+                                    "version": "1.0",
+                                    "requested_attributes": {
+                                        "0_name": {
+                                            "name": "name",
+                                            "restrictions": [{
+                                                "attr::name::value": badgeName
+                                            }]
+                                        },
+                                        "0_issuer.id": {
+                                            "name": "issuer.id",
+                                            "restrictions":  restrictions
+                                        }
+                                    },
+                                    "requested_predicates": {},
+                                },
+                                "trace": false
+                            })
                         })
-                    })
-                } else {
-                    throw new Error("Keine Verbindungen gefunden.");
-                }
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Fehlerhafte Antwort vom Server");
-                }
-                return response.json();
-            })
-            .then(data => {
-                var presentationExchangeId = data.presentation_exchange_id;
-                console.log(presentationExchangeId);
-                setTimeout(() => {
-                    fetch("http://localhost:8021/present-proof/records/" + presentationExchangeId)
-                        .then(response => response.json())
-                        .then(presentationData => {
-                            const verifiedStatus = presentationData.verified ? 'Verification Process Done' : 'Verification Process Error';
-                            document.getElementById('finalResponse').innerText = verifiedStatus;
-                            
-                            // Verifizierungsstatus aktualisieren
-                            const verifiedStatusElement = document.getElementById('verifiedStatus');
-                            if (presentationData.verified === "true") {
-                                verifiedStatusElement.innerText = 'Verified: TRUE';
-                                verifiedStatusElement.style.color = 'green';
-                            } else {
-                                verifiedStatusElement.innerText = 'Verified: FALSE';
-                                verifiedStatusElement.style.color = 'red';
-                            }
-
-
-                            //Hier zeigen wir das Label an, wenn die Verifikation abgeschlossen ist
-                            document.getElementById('presentationExchangeLabel').style.display = 'block';
-
-                            if (presentationData.verified) {
-                                fetch("http://localhost:8021/present-proof/records/" + presentationExchangeId, {
-                                    method: "GET",
-                                    headers: {
-                                        "Accept": "application/json"
-                                    }
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    document.getElementById('presentationExchangeIdTextArea').style.display = 'block';
-                                    document.getElementById('presentationExchangeIdTextArea').value = JSON.stringify(data, null, 2);
-                                })
-                                .catch(error => {
-                                    console.error("Fehler bei der Anfrage:", error);
-                                    document.getElementById('response').innerText = "Fehler: " + error.message;
-                                });
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Fehler bei der Anfrage:", error);
-                            document.getElementById('response').innerText = "Fehler: " + error.message;
-                        });
-                }, 3000);
-            })
-            .catch(error => {
-                console.error("Fehler bei der Anfrage:", error);
-                document.getElementById('response').innerText = "Fehler: " + error.message;
-            });
-        });
-    </script>
+                    } else {
+                        throw new Error("Keine Verbindungen gefunden.");
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Fehlerhafte Antwort vom Server");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    var presentationExchangeId = data.presentation_exchange_id;
+                    console.log(presentationExchangeId);
+                    setTimeout(() => {
+                        fetch("http://localhost:8021/present-proof/records/" + presentationExchangeId)
+                            .then(response => response.json())
+                            .then(presentationData => {
+                                const verifiedStatus = presentationData.verified ? 'Verification Process Done' : 'Verification Process Error';
+                                document.getElementById('finalResponse').innerText = verifiedStatus;
+                                
+                                // Verifizierungsstatus aktualisieren
+                                const verifiedStatusElement = document.getElementById('verifiedStatus');
+                                if (presentationData.verified === "true") {
+                                    verifiedStatusElement.innerText = 'Verified: TRUE';
+                                    verifiedStatusElement.style.color = 'green';
+                                } else {
+                                    verifiedStatusElement.innerText = 'Verified: FALSE';
+                                    verifiedStatusElement.style.color = 'red';
+                                }
     
-</body>
-
-</html>
+                                //Hier zeigen wir das Label an, wenn die Verifikation abgeschlossen ist
+                                document.getElementById('presentationExchangeLabel').style.display = 'block';
+    
+                                if (presentationData.verified) {
+                                    fetch("http://localhost:8021/present-proof/records/" + presentationExchangeId, {
+                                        method: "GET",
+                                        headers: {
+                                            "Accept": "application/json"
+                                        }
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        document.getElementById('presentationExchangeIdTextArea').style.display = 'block';
+                                        document.getElementById('presentationExchangeIdTextArea').value = JSON.stringify(data, null, 2);
+                                    })
+                                    .catch(error => {
+                                        console.error("Fehler bei der Anfrage:", error);
+                                        document.getElementById('response').innerText = "Fehler: " + error.message;
+                                    });
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Fehler bei der Anfrage:", error);
+                                document.getElementById('response').innerText = "Fehler: " + error.message;
+                            });
+                    }, 5000);
+                })
+                .catch(error => {
+                    console.error("Fehler bei der Anfrage:", error);
+                    document.getElementById('response').innerText = "Fehler: " + error.message;
+                });
+            }); // Ende von loadTrustedDIDs().then
+        }); // Ende von addEventListener
+    </script>
+    </body>
+    </html>
+    
