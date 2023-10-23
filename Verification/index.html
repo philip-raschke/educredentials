@@ -95,6 +95,22 @@
         }
 
 
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: none;
+            margin: auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         
     </style>
 </head>
@@ -102,6 +118,7 @@
 <body>
     <div class="container">
         <h1>HU Berlin - Language Badge Verifier</h1>
+        <img src="HU.png" alt="HU Logo" style="max-width: 20%; height: auto; display: block; margin: auto;">
         <div class="input-group">
             <label for="schema-id" class="block">
                 <b>Schema ID: 8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0</b>
@@ -110,12 +127,14 @@
                 <b>Claims to be verified:</b>
                 <br>Achievement Name/Badge Name
                 <br>Issuer DID
+                <br>Credential Subject DID
             </label>
             <input type="text" id="badge_name" placeholder="Enter Achievement Name/Badge Name">
             <label for="description">
                 <b>By pressing the button, you (verifier) send a proof request to the credentials in the holder wallet, based on the entered Achievement Name.</b>
             </label>
             <button id="submit-button">Verify Proof!</button>
+            <div class="loader" id="loading-spinner"></div>
             <a href="trusted_issuer_dids.html" id="trusted_issuer_DIDs">Trusted Issuer DIDs</a>
         </div>
         <pre id="finalResponse"></pre>
@@ -136,8 +155,12 @@
                     return [];
                 });
         }
+
+        // Referenz zum Ladesymbol hinzufügen
+        const loadingSpinner = document.getElementById('loading-spinner')
         
         document.getElementById('submit-button').addEventListener('click', function() {
+            loadingSpinner.style.display = 'block';
             const badgeName = document.getElementById('badge_name').value;
     
             // Zuerst die vertrauenswürdigen DIDs laden
@@ -160,8 +183,15 @@
                 })
                 .then(data => {
                     const connection = data.results[0];
-    
+
                     if (connection) {
+                        
+                        const theirDidWithPrefix = "did:key:" + connection.their_did;
+                        
+                        console.log("theirDidWithPrefix:", theirDidWithPrefix);
+                        console.log("name:", badgeName);
+
+
                         return fetch("http://localhost:8021/present-proof/send-request", {
                             method: "POST",
                             headers: {
@@ -185,6 +215,12 @@
                                         "0_issuer.id": {
                                             "name": "issuer.id",
                                             "restrictions":  restrictions
+                                        },
+                                        "0_credentialSubject.id": {
+                                            "name": "credentialSubject.id",
+                                            "restrictions": [{
+                                                 "attr::credentialSubject.id::value": theirDidWithPrefix 
+                                        }]           
                                         }
                                     },
                                     "requested_predicates": {},
@@ -195,6 +231,7 @@
                     } else {
                         throw new Error("Keine Verbindungen gefunden.");
                     }
+                    loadingSpinner.style.display = 'none';
                 })
                 .then(response => {
                     if (!response.ok) {
@@ -209,9 +246,11 @@
                         fetch("http://localhost:8021/present-proof/records/" + presentationExchangeId)
                             .then(response => response.json())
                             .then(presentationData => {
+                                loadingSpinner.style.display = 'none';  // Stoppen und Ausblenden des Ladesymbols
+
                                 const verifiedStatus = presentationData.verified ? 'Verification Process Done' : 'Verification Process Error';
                                 document.getElementById('finalResponse').innerText = verifiedStatus;
-                                
+
                                 // Verifizierungsstatus aktualisieren
                                 const verifiedStatusElement = document.getElementById('verifiedStatus');
                                 if (presentationData.verified === "true") {
@@ -252,6 +291,7 @@
                 .catch(error => {
                     console.error("Fehler bei der Anfrage:", error);
                     document.getElementById('response').innerText = "Fehler: " + error.message;
+                    loadingSpinner.style.display = 'none';
                 });
             }); // Ende von loadTrustedDIDs().then
         }); // Ende von addEventListener
