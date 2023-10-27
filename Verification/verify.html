@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HU Berlin - Language Badge Verifier</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            padding: 40px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+            max-width: 800px; /* Reduzierte Maximalbreite für bessere Lesbarkeit */
+            margin: auto;
+            text-align: left; /* Geändert zu left für eine konventionellere Leserichtung */
+        }
+
+        h1, label {
+            text-align: center; /* Zentrierte Überschriften und Labels für eine bessere Ästhetik */
+        }
+
+        .input-group {
+            margin-top: 20px;
+        }
+
+        input, button, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            box-sizing: border-box; /* Damit Padding und Border nicht zusätzlich zur Breite hinzugefügt werden */
+        }
+
+        button {
+            background-color: #28a745;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none; /* Entfernte Border von Button */
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #verifiedStatus, #finalResponse {
+            margin-top: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        #verifiedStatus {
+            margin-bottom: 20px; /* Zusätzlicher unterer Rand für bessere Abgrenzung */
+        }
+
+        textarea {
+            resize: none; /* Verhindert, dass der Benutzer die Größe von textarea ändert */
+            height: 300px;
+        }
+
+        label.block {
+        display: block;
+        margin-top: 10px;
+        text-align: left;
+        }
+
+        #presentationExchangeLabel {
+            text-align: left; /* Stellt sicher, dass dieses Label immer linksbündig ist */
+        }
+
+
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: none;
+            margin: auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>HU Berlin - Language Badge Verifier</h1>
+        <img src="HU.png" alt="HU Logo" style="max-width: 20%; height: auto; display: block; margin: auto;">
+        <div class="input-group">
+            <label for="schema-id" class="block">
+                <b>Schema ID: 8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0</b>
+            </label>
+            <label for="credential-id" class="block">
+                <b>Claims to be verified:</b>
+                <br>Achievement Name/Badge Name
+                <br>Issuer DID
+                <br>Credential Subject DID
+            </label>
+            <input type="text" id="badge_name" placeholder="Enter Achievement Name/Badge Name">
+            <label for="description">
+                <b>By pressing the button, you (verifier) send a proof request to the credentials in the holder wallet, based on the entered Achievement Name.</b>
+            </label>
+            <button id="submit-button">Verify Proof!</button>
+            <div class="loader" id="loading-spinner"></div>
+        </div>
+        <pre id="finalResponse"></pre>
+        <div id="verifiedStatus"></div>
+        <label id="presentationExchangeLabel" for="presentationExchangeIdTextArea" style="display: none;">
+            <b>Presentation Exchange Record:</b>
+        </label>
+        <textarea id="presentationExchangeIdTextArea" readonly style="display: none;"></textarea>
+    </div>
+    
+
+    <script>
+        function loadTrustedIssuerDIDs() {
+            return fetch('trusted_issuer_dids.json')
+                .then(response => response.json())
+                .catch(error => {
+                    console.error('Fehler beim Laden der DIDs:', error);
+                    return [];
+                });
+        }
+    
+        function loadTrustedHolderDIDs() {
+            return fetch('trusted_holder_dids.json')
+                .then(response => response.json())
+                .catch(error => {
+                    console.error('Fehler beim Laden der DIDs:', error);
+                    return [];
+                });
+        }
+    
+        // Referenz zum Ladesymbol hinzufügen
+        const loadingSpinner = document.getElementById('loading-spinner');
+        
+        document.getElementById('submit-button').addEventListener('click', function() {
+            const loadingSpinner = document.getElementById('loading-spinner');
+            loadingSpinner.style.display = 'block';
+            const badgeName = document.getElementById('badge_name').value;
+    
+            loadTrustedIssuerDIDs().then(trustedIssuerDIDs => {
+                console.log("Geladene Issuer DIDs:", trustedIssuerDIDs);
+                const issuerRestrictions = trustedIssuerDIDs.map(did => {
+                    return { "attr::issuer.id::value": did };
+                });
+    
+                loadTrustedHolderDIDs().then(trustedHolderDIDs => {
+                    console.log("Geladene Holder DIDs:", trustedHolderDIDs);
+                    const holderRestrictions = trustedHolderDIDs.map(did => {
+                        return { "attr::credentialSubject.id::value": did };
+                    });
+    
+                    fetch("http://localhost:8021/connections", {
+                        method: "GET",
+                        headers: {
+                            "Accept": "application/json"
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Fehlerhafte Antwort vom Server");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const connection = data.results[0];
+    
+                        if (connection) {
+                            return fetch("http://localhost:8021/present-proof/send-request", {
+                                method: "POST",
+                                headers: {
+                                    "Accept": "application/json",
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify({
+                                    "comment": "Proof Request for Language Badge",
+                                    "connection_id": connection.connection_id,
+                                    "proof_request": {
+                                        "name": "Proof for Language",
+                                        "nonce": "123456789",
+                                        "version": "1.0",
+                                        "requested_attributes": {
+                                            "0_name": {
+                                                "name": "name",
+                                                "restrictions": [{
+                                                    "attr::name::value": badgeName
+                                                }]
+                                            },
+                                            "0_issuer.id": {
+                                                "name": "issuer.id",
+                                                "restrictions":  issuerRestrictions
+                                            },
+                                            "0_credentialSubject.id": {
+                                                "name": "credentialSubject.id",
+                                                "restrictions": holderRestrictions         
+                                            }
+                                        
+                                            /* #even for a specific value self not working
+                                            "0_credentialSubject.id": {
+                                                "name": "credentialSubject.id",
+                                                "restrictions": [{
+                                                    "attr::credentialSubject.id::value": "did:key:I4c9nMZWgG7vpS0w8ps26C"
+                                                }]
+                                            }
+                                            */
+                                        
+                                        },
+                                        "requested_predicates": {},
+                                    },
+                                    "trace": false
+                                })
+                            })
+                        } else {
+                            throw new Error("Keine Verbindungen gefunden.");
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Fehlerhafte Antwort vom Server");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        var presentationExchangeId = data.presentation_exchange_id;
+                        console.log(presentationExchangeId);
+                        setTimeout(() => {
+                            fetch("http://localhost:8021/present-proof/records/" + presentationExchangeId)
+                                .then(response => response.json())
+                                .then(presentationData => {
+                                    loadingSpinner.style.display = 'none';  // Stoppen und Ausblenden des Ladesymbols
+    
+                                    const verifiedStatus = presentationData.verified ? 'Verification Process Done' : 'Verification Process Error';
+                                    document.getElementById('finalResponse').innerText = verifiedStatus;
+    
+                                    // Verifizierungsstatus aktualisieren
+                                    const verifiedStatusElement = document.getElementById('verifiedStatus');
+                                    if (presentationData.verified === "true") {
+                                        verifiedStatusElement.innerText = 'Verified: TRUE';
+                                        verifiedStatusElement.style.color = 'green';
+                                    } else {
+                                        verifiedStatusElement.innerText = 'Verified: FALSE';
+                                        verifiedStatusElement.style.color = 'red';
+                                    }
+    
+                                    //Hier zeigen wir das Label an, wenn die Verifikation abgeschlossen ist
+                                    document.getElementById('presentationExchangeLabel').style.display = 'block';
+    
+                                    if (presentationData.verified) {
+                                        fetch("http://localhost:8021/present-proof/records/" + presentationExchangeId, {
+                                            method: "GET",
+                                            headers: {
+                                                "Accept": "application/json"
+                                            }
+                                        })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            document.getElementById('presentationExchangeIdTextArea').style.display = 'block';
+                                            document.getElementById('presentationExchangeIdTextArea').value = JSON.stringify(data, null, 2);
+                                        })
+                                        .catch(error => {
+                                            console.error("Fehler bei der Anfrage:", error);
+                                            document.getElementById('response').innerText = "Fehler: " + error.message;
+                                        });
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error("Fehler bei der Anfrage:", error);
+                                    document.getElementById('response').innerText = "Fehler: " + error.message;
+                                });
+                        }, 5000);
+                    })
+                    .catch(error => {
+                        console.error("Fehler bei der Anfrage:", error);
+                        document.getElementById('response').innerText = "Fehler: " + error.message;
+                        loadingSpinner.style.display = 'none';
+                    });
+                });
+            }); // Ende von loadTrustedIssuerDIDs().then
+        }); // Ende von addEventListener
+    </script>
+    </body>
+    </html>
+    
