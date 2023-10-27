@@ -114,6 +114,8 @@ function generateUUID() {
 #Openbadges without shading
 foreach ($badges_detail as $badge_id => $badge) {
     $issuerId = getIssuerIdFromCurl(); 
+    
+    #local DID of holder agent:
     $theirDid = getTheirDid(); 
 
     
@@ -152,7 +154,11 @@ foreach ($badges_detail as $badge_id => $badge) {
         ],
         [
             "name" => "credentialSubject.id",
-            "value" => "did:key:" . $theirDid,
+            #Set global DID for Holder which is stored in a register such as a matriculation number
+            "value" => "did:key:" . "I4c9nMZWgG7vpS0w8ps26C",
+            
+            #local DID of holder:
+            #"value" => "did:key:" . $theirDid,
         ],
         [
             "name" => "credentialSubject.name",
@@ -264,7 +270,7 @@ foreach ($errorMessages as $message) {
 
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
     var schemaId = 'JLXngoc4ahRhFhjZcMzvNs:2:OpenBadge:1.0'; // Statische Schema-ID
-    var credentialDefinitionId = 'BhR778Ma9tT2gp8TQGLAz9:3:CL:227059:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
+    var credentialDefinitionId = 'NZ7u1NJjMZebox7NSign9v:3:CL:227059:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
     var connectionId = ''; // Variable zum Speichern der Connection-ID
 
     var selectedBadgeId; // Variable zum Speichern der ausgewählten Badge-ID
