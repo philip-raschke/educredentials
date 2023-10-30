@@ -219,7 +219,7 @@ foreach ($errorMessages as $message) {
 }
 
 ?>
-
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.min.js"></script>
 <div class="container-fluid">
     <div class="row">
         <div class="col">
@@ -242,6 +242,7 @@ foreach ($errorMessages as $message) {
             <button id="issue-credential-button" class="btn btn-secondary mt-3 p-3" onclick="issueCredential();">
                 Issue Credential to Holder Wallet
             </button>
+            <div id="qr-code"></div>
             <div id="curl-result" style="margin-top: 20px;"></div>
         </div>
     </div>
@@ -285,25 +286,33 @@ foreach ($errorMessages as $message) {
     }
 
     function runCurl() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8021/connections/create-invitation?alias=Alice", true);
-        xhr.setRequestHeader("accept", "application/json");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    var invitationData = response.invitation;
-                    var resultDiv = document.getElementById("curl-result");
-                    resultDiv.innerHTML = "<pre>" + JSON.stringify(invitationData, null, 2) + "</pre>";
-                    resultDiv.style.display = "block";
-                } else {
-                    alert("Error: Unable to execute cURL command.");
-                }
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://localhost:8021/connections/create-invitation?alias=Alice", true);
+    xhr.setRequestHeader("accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                var invitationData = response.invitation;
+                var resultDiv = document.getElementById("curl-result");
+                resultDiv.innerHTML = "<pre>" + JSON.stringify(invitationData, null, 2) + "</pre>";
+                resultDiv.style.display = "block";
+
+                // QR-Code-Erzeugung
+                var qrCodeElement = document.getElementById('qr-code');
+                var qr = qrcode(0, 'L');
+                qr.addData(JSON.stringify(invitationData));
+                qr.make();
+                qrCodeElement.innerHTML = qr.createImgTag(6);
+            } else {
+                alert("Error: Unable to execute cURL command.");
             }
-        };
-        xhr.send("{}");
-    }
+        }
+    };
+    xhr.send("{}");
+}
+
 
     function issueCredential() {
         var xhr = new XMLHttpRequest();
