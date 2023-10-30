@@ -57,7 +57,7 @@ function getIssuerIdFromCurl() {
 
     if (!isset($responseDecoded['results'][0]['did'])) {
         global $errorMessages;
-        $errorMessages['issuer_not_connected'] = 'Issuer Server is not running';
+        $errorMessages['issuer_not_connected'] = 'Issuer Agent is not running';
         return 'Unknown';
     }
 
@@ -270,7 +270,7 @@ foreach ($errorMessages as $message) {
 
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
     var schemaId = 'JLXngoc4ahRhFhjZcMzvNs:2:OpenBadge:1.0'; // Statische Schema-ID
-    var credentialDefinitionId = 'NZ7u1NJjMZebox7NSign9v:3:CL:227059:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
+    var credentialDefinitionId = 'H2qskqoiZfj2mWffBc3dNo:3:CL:227059:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
     var connectionId = ''; // Variable zum Speichern der Connection-ID
 
     var selectedBadgeId; // Variable zum Speichern der ausgewählten Badge-ID
