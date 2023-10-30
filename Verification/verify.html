@@ -196,7 +196,7 @@
                     if (xhr.status === 200) {
                         var response = JSON.parse(xhr.responseText);
                         if (response.results && response.results.length > 0 && response.results[0].their_did) {
-                            holderDiv.innerHTML = "<p>Wallet is connected";
+                            holderDiv.innerHTML = "<p>Success: Wallet is connected";
                             holderDiv.style.display = "block";
                         } else {
                             holderDiv.innerHTML = "<p>No Holder Wallet is connected: Go back and connect your Wallet!</p>";

@@ -104,7 +104,7 @@
                     if (xhr.status === 200) {
                         var response = JSON.parse(xhr.responseText);
                         if (response.results && response.results.length > 0 && response.results[0].their_did) {
-                            holderDiv.innerHTML = "<p>Wallet is connected";
+                            holderDiv.innerHTML = "<p>Success: Wallet is connected";
                             holderDiv.style.display = "block";
                         } else {
                             holderDiv.innerHTML = "<p>No Holder Wallet is connected</p>";
@@ -139,24 +139,34 @@
                         var resultDiv = document.getElementById("curl-result");
                         resultDiv.innerHTML = "<pre>" + JSON.stringify(invitationData, null, 2) + "</pre>";
                         resultDiv.style.display = "block";
+
+                        // QR-Code-Erzeugung
+                        var qrCodeElement = document.getElementById('qr-code');
+                        var qr = qrcode(0, 'L');
+                        qr.addData(JSON.stringify(invitationData));
+                        qr.make();
+                        qrCodeElement.innerHTML = qr.createImgTag(6);
                     } else {
-                        alert("Error: Unable to execute cURL command.");
+                        alert("Error: Verifier Agent is down.");
                     }
                 }
             };
             xhr.send("{}");
         }
+
     </script>
 
 </head>
 
 <body>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.min.js"></script>
     <div class="container">
         <div id="verifier-did"></div>
         <div id="holder-did"></div>
         <h1>HU Berlin - Language Badge Verifier</h1>
         <img src="HU.png" alt="HU Logo"><br>
         <button id="connect-button" onclick="runCurl()">Connect to Holder Wallet</button>
+        <div id="qr-code"></div>
         <div id="curl-result"></div>
         <p>If you have connected your Holder Wallet to the verifier agent (HU Berlin Agent), then click on <a href="verify.html">Next</a>.</p>
     </div>
