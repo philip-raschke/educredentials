@@ -42,46 +42,122 @@
 
         #curl-result {
             text-align: left; /* Stellt sicher, dass der Inhalt linksbündig ist */
+            color: black; /* Farbe der Einladungsdaten */
             margin-top: 20px;
+            display: none; /* Standardmäßig ausgeblendet */
         }
 
         .footer {
             margin-top: 30px;
             text-align: center;
         }
+
+        #verifier-did {
+            text-align: left;
+            color: red; /* Farbe der Fehlermeldung */
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        #holder-did {
+            text-align: left;
+            margin-top: 20px;
+            color: red; /* Farbe für die Fehlermeldung */
+            display: none;
+        }
+
     </style>
     
     
-<script>
-    function runCurl() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8021/connections/create-invitation?alias=Alice", true);
-        xhr.setRequestHeader("accept", "application/json");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    var invitationData = response.invitation;
-                    var resultDiv = document.getElementById("curl-result");
-                    resultDiv.innerHTML = "<pre>" + JSON.stringify(invitationData, null, 2) + "</pre>";
+    <script>
+        function checkIssuerAgent() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:8021/connections/create-invitation?alias=Alice", true);
+            xhr.setRequestHeader("accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+    
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
+                    var resultDiv = document.getElementById("verifier-did");
+                    resultDiv.innerHTML = "<p>Verifier Agent is not running</p>";
                     resultDiv.style.display = "block";
-                } else {
-                    alert("Error: Unable to execute cURL command.");
                 }
-            }
+            };
+    
+            xhr.onerror = function() {
+                var resultDiv = document.getElementById("verifier-did");
+                resultDiv.innerHTML = "<p>Verifier Agent is not running</p>";
+                resultDiv.style.display = "block";
+            };
+    
+            xhr.send("{}");
+        }
+    
+        function getTheirDid() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8021/connections", true);
+            xhr.setRequestHeader("accept", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    var holderDiv = document.getElementById("holder-did");
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.results && response.results.length > 0 && response.results[0].their_did) {
+                            holderDiv.innerHTML = "<p>Wallet is connected";
+                            holderDiv.style.display = "block";
+                        } else {
+                            holderDiv.innerHTML = "<p>No Holder Wallet is connected</p>";
+                            holderDiv.style.display = "block";
+                        }
+                    } else {
+                        holderDiv.innerHTML = "<p>No Holder Wallet is connected</p>";
+                        holderDiv.style.display = "block";
+                    }
+                }
+            };
+
+            xhr.send();
+        }
+
+        // Erweitern der window.onload Funktion
+        window.onload = function() {
+            checkIssuerAgent();
+            getTheirDid();
         };
-        xhr.send("{}");
-    }
-</script>
+
+        function runCurl() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:8021/connections/create-invitation?alias=Alice", true);
+            xhr.setRequestHeader("accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        var invitationData = response.invitation;
+                        var resultDiv = document.getElementById("curl-result");
+                        resultDiv.innerHTML = "<pre>" + JSON.stringify(invitationData, null, 2) + "</pre>";
+                        resultDiv.style.display = "block";
+                    } else {
+                        alert("Error: Unable to execute cURL command.");
+                    }
+                }
+            };
+            xhr.send("{}");
+        }
+    </script>
+
 </head>
 
 <body>
     <div class="container">
+        <div id="verifier-did"></div>
+        <div id="holder-did"></div>
         <h1>HU Berlin - Language Badge Verifier</h1>
         <img src="HU.png" alt="HU Logo"><br>
         <button id="connect-button" onclick="runCurl()">Connect to Holder Wallet</button>
-        <div id="curl-result" style="display: none;"></div>
+        <div id="curl-result"></div>
         <p>If you have connected your Holder Wallet to the verifier agent (HU Berlin Agent), then click on <a href="verify.html">Next</a>.</p>
     </div>
 </body>

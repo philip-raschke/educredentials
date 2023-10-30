@@ -93,6 +93,20 @@
             100% { transform: rotate(360deg); }
         }
 
+        #verifier-did {
+            text-align: left;
+            color: red; /* Farbe der Fehlermeldung */
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        #holder-did {
+            text-align: left;
+            margin-top: 20px;
+            color: red; /* Farbe für die Fehlermeldung */
+            display: none;
+        }
+
         
     </style>
 </head>
@@ -101,6 +115,8 @@
     <div class="container">
         <h1>HU Berlin - Language Badge Verifier</h1>
         <img src="HU.png" alt="HU Logo" style="max-width: 20%; height: auto; display: block; margin: auto;">
+        <div id="verifier-did"></div>
+        <div id="holder-did"></div>
         <div class="input-group">
             <label for="schema-id" class="block">
                 <b>Schema ID: 8d96MpQ4qHJATWfKcqruns:2:OpenBadge:1.0</b>
@@ -145,7 +161,70 @@
                     return [];
                 });
         }
+
+        function checkIssuerAgent() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://localhost:8021/connections/create-invitation?alias=Alice", true);
+            xhr.setRequestHeader("accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
     
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
+                    var resultDiv = document.getElementById("verifier-did");
+                    resultDiv.innerHTML = "<p>Verifier Agent is not running</p>";
+                    resultDiv.style.display = "block";
+                }
+            };
+    
+            xhr.onerror = function() {
+                var resultDiv = document.getElementById("verifier-did");
+                resultDiv.innerHTML = "<p>Verifier Agent is not running</p>";
+                resultDiv.style.display = "block";
+            };
+    
+            xhr.send("{}");
+        }
+    
+        function getTheirDid() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8021/connections", true);
+            xhr.setRequestHeader("accept", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    var holderDiv = document.getElementById("holder-did");
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.results && response.results.length > 0 && response.results[0].their_did) {
+                            holderDiv.innerHTML = "<p>Wallet is connected";
+                            holderDiv.style.display = "block";
+                        } else {
+                            holderDiv.innerHTML = "<p>No Holder Wallet is connected: Go back and connect your Wallet!</p>";
+                            holderDiv.style.display = "block";
+                        }
+                    } else {
+                        holderDiv.innerHTML = "<p>No Holder Wallet is connected</p>";
+                        holderDiv.style.display = "block";
+                    }
+                }
+            };
+
+            xhr.send();
+        }
+
+        var originalWindowOnload = window.onload;
+
+        window.onload = function() {
+            // Rufen Sie die ursprüngliche window.onload Funktion auf, falls vorhanden.
+            if (originalWindowOnload) {
+                originalWindowOnload();
+            }
+
+            // Rufen Sie Ihre neuen Funktionen auf.
+            checkIssuerAgent();
+            getTheirDid();
+        };
+        
         // Referenz zum Ladesymbol hinzufügen
         const loadingSpinner = document.getElementById('loading-spinner');
         
