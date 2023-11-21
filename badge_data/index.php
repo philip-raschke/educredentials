@@ -155,10 +155,10 @@ foreach ($badges_detail as $badge_id => $badge) {
         [
             "name" => "credentialSubject.id",
             #Set global DID for Holder which is stored in a register such as a matriculation number
-            "value" => "did:key:" . "I4c9nMZWgG7vpS0w8ps26C",
+            #"value" => "did:key:" . "I4c9nMZWgG7vpS0w8ps26C",
             
             #local DID of holder:
-            #"value" => "did:key:" . $theirDid,
+            "value" => "did:key:" . $theirDid,
         ],
         [
             "name" => "credentialSubject.name",
@@ -242,11 +242,12 @@ foreach ($errorMessages as $message) {
             <button id="issue-credential-button" class="btn btn-secondary mt-3 p-3" onclick="issueCredential();">
                 Issue Credential to Holder Wallet
             </button>
-            <div id="qr-code"></div>
-            <div id="curl-result" style="margin-top: 20px;"></div>
+            <div id="textarea-qr-code"></div> <!-- Leerer Container für den ersten QR-Code -->
+            <div id="qr-code"></div> <!-- Leerer Container für den zweiten QR-Code -->
         </div>
     </div>
 </div>
+
 
 <style>
     ul.badges li {
@@ -261,8 +262,27 @@ foreach ($errorMessages as $message) {
     }
 
     #curl-result {
-        text-align: left;
+        text-align: center;
     }
+
+    .qr-code-description {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .description-text {
+        font-weight: bold;
+        display: block; /* sorgt dafür, dass der Text über dem QR-Code steht */
+        margin-bottom: 10px;
+    }
+
+    .qr-code-box {
+        border: 1px solid #ccc;
+        padding: 10px;
+        background-color: #f9f9f9;
+        display: inline-block; /* passt die Größe des Containers an den Inhalt an */
+    }
+    
 </style>
 
 <script>
@@ -271,13 +291,41 @@ foreach ($errorMessages as $message) {
 
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
     var schemaId = 'JLXngoc4ahRhFhjZcMzvNs:2:OpenBadge:1.0'; // Statische Schema-ID
-    var credentialDefinitionId = 'PLuFtcZzTgQebWfnXN8gU8:3:CL:227059:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
+    var credentialDefinitionId = 'Pc3JREygwNK4stYcdxwij1:3:CL:227059:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
     var connectionId = ''; // Variable zum Speichern der Connection-ID
 
     var selectedBadgeId; // Variable zum Speichern der ausgewählten Badge-ID
 
+    // Funktion zum Erzeugen eines QR-Codes aus dem Textarea-Inhalt
+    function generateTextareaQRCode() {
+        var textareaContent = document.getElementById('JSON').value;
+        if (textareaContent) {
+            var qrCodeContainer = document.getElementById('textarea-qr-code');
+            qrCodeContainer.innerHTML = ''; // Alten Inhalt leeren
+
+            // Erstellen der Überschrift und des Rahmens
+            var label = document.createElement('span');
+            label.className = 'description-text';
+            label.textContent = 'Badge Data';
+            qrCodeContainer.appendChild(label);
+
+            var qrCodeBox = document.createElement('div');
+            qrCodeBox.className = 'qr-code-box';
+            qrCodeContainer.appendChild(qrCodeBox);
+
+            // QR-Code generieren
+            var qr = qrcode(0, 'L');
+            qr.addData(textareaContent);
+            qr.make();
+            qrCodeBox.innerHTML = qr.createImgTag(3);
+        } else {
+            alert('Textarea ist leer.');
+        }
+    }
+
     function fillTextarea(badgeId, liElem) {
         document.getElementById('JSON').value = JSON.stringify(JSONBadge[badgeId], null, "\t");
+        generateTextareaQRCode(); // QR-Code aus dem Inhalt der Textarea generieren
         liElem.parentElement.children.forEach(function (elem) {
             elem.classList.remove('selected');
         });
@@ -295,23 +343,44 @@ foreach ($errorMessages as $message) {
             if (xhr.status === 200) {
                 var response = JSON.parse(xhr.responseText);
                 var invitationData = response.invitation;
-                var resultDiv = document.getElementById("curl-result");
-                resultDiv.innerHTML = "<pre>" + JSON.stringify(invitationData, null, 2) + "</pre>";
-                resultDiv.style.display = "block";
 
-                // QR-Code-Erzeugung
-                var qrCodeElement = document.getElementById('qr-code');
+                // Container für den QR-Code vorbereiten
+                var qrCodeContainer = document.getElementById('qr-code');
+                qrCodeContainer.innerHTML = ''; // Vorherigen Inhalt löschen
+
+                // Erstellen und Einfügen der QR-Code-Beschreibung
+                var label = document.createElement('span');
+                label.className = 'description-text';
+                label.textContent = 'Invitation Data';
+                qrCodeContainer.appendChild(label);
+
+                // Erstellen und Einfügen des Containers für den QR-Code
+                var qrCodeBox = document.createElement('div');
+                qrCodeBox.className = 'qr-code-box';
+                qrCodeContainer.appendChild(qrCodeBox);
+
+                // QR-Code generieren
                 var qr = qrcode(0, 'L');
                 qr.addData(JSON.stringify(invitationData));
                 qr.make();
-                qrCodeElement.innerHTML = qr.createImgTag(6);
+                qrCodeBox.innerHTML = qr.createImgTag(6);
+
+                // Invitation Data direkt unter dem QR-Code anzeigen
+                var invitationDataDisplay = document.createElement('pre');
+                invitationDataDisplay.textContent = JSON.stringify(invitationData, null, 2);
+                qrCodeContainer.appendChild(invitationDataDisplay);
             } else {
+                // Fehlermeldung anzeigen, wenn die Anfrage nicht erfolgreich war
                 alert("Error: Unable to execute cURL command.");
             }
         }
     };
     xhr.send("{}");
 }
+
+
+
+
 
 
     function issueCredential() {
