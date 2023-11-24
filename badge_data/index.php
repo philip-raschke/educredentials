@@ -291,7 +291,7 @@ foreach ($errorMessages as $message) {
 
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
     var schemaId = 'JLXngoc4ahRhFhjZcMzvNs:2:OpenBadge:1.0'; // Statische Schema-ID
-    var credentialDefinitionId = 'Pc3JREygwNK4stYcdxwij1:3:CL:227059:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
+    var credentialDefinitionId = '87WY9tSFpk8gHfEziYFKGG:3:CL:227059:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
     var connectionId = ''; // Variable zum Speichern der Connection-ID
 
     var selectedBadgeId; // Variable zum Speichern der ausgewählten Badge-ID
@@ -317,7 +317,7 @@ foreach ($errorMessages as $message) {
             var qr = qrcode(0, 'L');
             qr.addData(textareaContent);
             qr.make();
-            qrCodeBox.innerHTML = qr.createImgTag(3);
+            qrCodeBox.innerHTML = qr.createImgTag(4);
         } else {
             alert('Textarea ist leer.');
         }
