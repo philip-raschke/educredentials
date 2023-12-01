@@ -23,7 +23,7 @@
 
   &rarr; functions and variables in lower camel case ("$jsonBadges = [];" instead of "$JSON_badges = [];")
 
-  &rarr; Correct Indentation
+  &rarr; Correct Indentation (4 spaces)
 
   &rarr; PHPDoc style for comments (in function is different to outside function) and write good documentation in the code
 
@@ -33,7 +33,13 @@
 
 - Input Validation
 
-  &rarr; Example: "optional_param", check data from curl requests, validate badge id in  from extractBadgeID() function, etc
+  &rarr; Example: Correct cleaning of "optional_param", validate curl responses, validate badge id in  from extractBadgeID() function, no error masseges that include secret data, maybe "require_login()" to only give access to authorized people
+
+- HTML code in Mustage template files instead of inserting directly into the PHP file
+  
+- Outsource Javascirpt code to AMD modules/files
+  
+- Outsource CSS code to files
   
    
 
