@@ -3,8 +3,12 @@
 ### TODO
 
 - change hardcoded paths in install.php (to: "/badges/renderer.php",...)
-- localhost muss angepasst werden: HTTPS Protokolle verwenden für url
+- localhost needs to be modified: use HTTPS protocol for url
 
   &rarr; Global variable ($CFG), to store URLs and use them
 
-  &rarr; define global variable in config.php)
+  &rarr; define global variable in config.php and load the urls there 
+
+- Better error handling for function for functions: getIssuerIdFromCurl() and getTheirDid()
+
+  &rarr; Check whether cURL requests are successful and handle HTTP error codes appropriately
