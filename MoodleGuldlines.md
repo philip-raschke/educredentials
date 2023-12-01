@@ -16,7 +16,8 @@
 - String APIs
 
   &rarr; lang/en Ordner erstellen. Aus
-  '''
-  $errorMessages['issuer_not_connected'] = 'Issuer Agent is not running';" wird 
 
-  '''
+<?php
+ $errorMessages['issuer_not_connected'] = 'Issuer Agent is not running';" wird
+?>
+  
