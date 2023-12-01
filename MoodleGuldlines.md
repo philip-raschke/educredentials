@@ -23,4 +23,18 @@
 
   &rarr; functions and variables in lower camel case ("$jsonBadges = [];" instead of "$JSON_badges = [];")
 
+  &rarr; Correct Indentation
+
+  &rarr; PHPDoc style for comments (in function is different to outside function) and write good documentation in the code
+
+  &rarr; less global variables (when used, then with clear documentation)
+
+  &rarr; string concartenation (spaces around the dot)
+
+- Input Validation
+
+  &rarr; Example: "optional_param", check data from curl requests, validate badge id in  from extractBadgeID() function, etc
+  
+   
+
   
