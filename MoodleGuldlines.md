@@ -13,10 +13,14 @@
 
   &rarr; Check whether cURL requests are successful and handle HTTP error codes appropriately
 
-- String APIs für internationalität
+- String APIs for internationality (Example in the following)
 
   &rarr; lang/en Ordner erstellen. Aus
 
   &rarr; $errorMessages['issuer_not_connected'] = 'Issuer Agent is not running';" wird zu "$string['issuer_not_connected'] = 'Issuer Agent is not running'; $errorMessages['issuer_not_connected'] = get_string('issuer_not_connected', 'local_badge_data');"
+
+- Coding Styles of moodle
+
+  &rarr; functions and variables in lower camel case ("$jsonBadges = [];" instead of "$JSON_badges = [];")
 
   
