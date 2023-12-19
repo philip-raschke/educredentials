@@ -2,7 +2,7 @@
 
 ### TODO for Plugin
 
-- change hardcoded paths in install.php (to: "/badges/renderer.php",...) -> DONE
+- change hardcoded paths in install.php (to: "/badges/renderer.php",...)
 
 - localhost needs to be modified: use HTTPS protocol for url
 
