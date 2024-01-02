@@ -2,6 +2,8 @@
 require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->libdir . '/badgeslib.php');
 require_once($CFG->libdir . '/filelib.php');
+require_once(__DIR__ . '/plugin_config.php');
+
 
 $page = optional_param('page', 0, PARAM_INT);
 $search = optional_param('search', '', PARAM_CLEAN);
@@ -37,54 +39,63 @@ $JSON_badges = [];
 
 // Globales Array zum Sammeln von Fehlermeldungen
 $errorMessages = [];
-
 function getIssuerIdFromCurl() {
+    global $CFG, $errorMessages;
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://localhost:8021/wallet/did");
+    curl_setopt($ch, CURLOPT_URL, $CFG->plugin_wallet_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
     curl_setopt($ch, CURLOPT_HTTPHEADER, array("accept: application/json"));
 
     $response = curl_exec($ch);
-
-    
-
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
+    if ($response === false || $httpCode != 200) {
+        $errorMessages['issuer_connection_error'] = 'Error: Failed to connect to Issuer Agent';
+        return false; 
+    }
 
     $responseDecoded = json_decode($response, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        $errorMessages['issuer_json_error'] = 'Error: Failed to decode JSON';
+        return false;
+    }
 
     if (!isset($responseDecoded['results'][0]['did'])) {
-        global $errorMessages;
-        $errorMessages['issuer_not_connected'] = 'Issuer Agent is not running';
-        return 'Unknown';
+        $errorMessages['issuer_did_error'] = 'Error: Issuer DID not found';
+        return false;
     }
 
     return $responseDecoded['results'][0]['did'];
 }
 
 function getTheirDid() {
+    global $CFG, $errorMessages;
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, "http://localhost:8021/connections");
+    curl_setopt($ch, CURLOPT_URL, $CFG->plugin_connections_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
     curl_setopt($ch, CURLOPT_HTTPHEADER, array("accept: application/json"));
 
     $response = curl_exec($ch);
-
-
     $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     curl_close($ch);
 
+    if ($response === false || $httpCode != 200) {
+        $errorMessages['holder_connection_error'] = 'Error: Failed to connect to Holder Wallet';
+        return false;
+    }
 
     $responseDecoded = json_decode($response, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        $errorMessages['holder_json_error'] = 'Error: Failed to decode JSON';
+        return false;
+    }
 
-    // Hier prüfen wir, ob 'their_did' im ersten Element des 'results'-Arrays vorhanden ist
     if (!isset($responseDecoded['results'][0]['their_did'])) {
-        global $errorMessages;
-        $errorMessages['no_wallet_connected'] = 'No Holder Wallet is connected';
-        return 'Unknown';
+        $errorMessages['holder_did_error'] = 'Error: Holder DID not found';
+        return false;
     }
 
     return $responseDecoded['results'][0]['their_did'];
@@ -92,12 +103,30 @@ function getTheirDid() {
 
 
 
+
+
 function extractBadgeId($url) {
+    global $errorMessages;
+
+    // Prüfen, ob die URL gültig ist
+    if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        $errorMessages['url_invalid'] = 'Error: Invalid URL provided';
+        return null;
+    }
+
+    // Parsen der Query-Parameter
     $queryParams = [];
     parse_str(parse_url($url, PHP_URL_QUERY), $queryParams);
-    // Rückgabe der 'id' aus den Query-Parametern, wenn verfügbar.
-    return isset($queryParams['id']) ? $queryParams['id'] : null;
+
+    // Überprüfen, ob der 'id'-Parameter existiert
+    if (!isset($queryParams['id']) || empty($queryParams['id'])) {
+        $errorMessages['badge_id_missing'] = 'Error: Badge ID not found in URL';
+        return null;
+    }
+
+    return $queryParams['id'];
 }
+
 
 function generateUUID() {
     return sprintf(
@@ -111,108 +140,53 @@ function generateUUID() {
 }
 
 
-#Openbadges without shading
-foreach ($badges_detail as $badge_id => $badge) {
-    $issuerId = getIssuerIdFromCurl(); 
-    
-    #local DID of holder agent:
-    $theirDid = getTheirDid(); 
 
-    
-    
-    $issuanceDatetime = new DateTime($badge->issued['badge']['issuedOn']);
-    $issuanceDate = $issuanceDatetime->format('Y-m-d\TH:i:s\Z');
-    
+foreach ($badges_detail as $badge_id => $badge) {
+    // Standardwerte für issuerId und theirDid
+    $issuerId = 'Unknown';
+    $theirDid = 'Unknown';
+
+    // Funktionen aufrufen und Ergebnisse überprüfen
+    $fetchedIssuerId = getIssuerIdFromCurl();
+    if ($fetchedIssuerId !== false) {
+        $issuerId = $fetchedIssuerId;
+    }
+
+    $fetchedTheirDid = getTheirDid();
+    if ($fetchedTheirDid !== false) {
+        $theirDid = $fetchedTheirDid;
+    }
+
+    // Datum überprüfen und formatieren
+    try {
+        $issuanceDatetime = new DateTime($badge->issued['badge']['issuedOn']);
+        $issuanceDate = $issuanceDatetime->format('Y-m-d\TH:i:s\Z');
+    } catch (Exception $e) {
+        $errorMessages['date_error_' . $badge_id] = 'Error: Invalid date for badge ID ' . $badge_id . ' - ' . $e->getMessage();
+        $issuanceDate = 'Unknown';
+    }
+
+    // Erstellen des Badge-Datenarrays
     $JSON_badges[$badge_id] = [
-        [
-            "name" => "@context",
-            "value" => $badge->issued['badge']['@context'],
-        ],
-        [
-            "name" => "id",
-            "value" => generateUUID(),
-        ],                
-        [
-            "name" => "type",
-            "value" => "VerifiableCredential, OpenBadgeCredential",
-        ],
-        [
-            "name" => "name",
-            "value" => $badge->issued['badge']['name'],
-        ],
-        [
-            "name" => "issuer.id",
-            "value" => "did:key:" . $issuerId, 
-        ],
-        [
-            "name" => "issuer.name",
-            "value" => $badge->issued['badge']['issuer']['name'],
-        ],
-        [
-            "name" => "issuer.issuanceDate",
-            "value" => $issuanceDate,
-        ],
-        [
-            "name" => "credentialSubject.id",
-            #Set global DID for Holder which is stored in a register such as a matriculation number
-            #"value" => "did:key:" . "I4c9nMZWgG7vpS0w8ps26C",
-            
-            #local DID of holder:
-            "value" => "did:key:" . $theirDid,
-        ],
-        [
-            "name" => "credentialSubject.name",
-            "value" => $badge->recipient->firstname . ($badge->recipient->middlename === "" ? "" : " " . $badge->recipient->middlename) . " " . $badge->recipient->lastname,
-        ],
-        [
-            "name" => "credentialSubject.achievement.id",
-            "value" => generateUUID(),
-        ],        
-        [
-            "name" => "credentialSubject.achievement.name",
-            "value" => $badge->issued['badge']['name'],
-        ],
-        [
-            "name" => "credentialSubject.achievement.description",
-            "value" => $badge->issued['badge']['description'],
-        ],
-        [
-            "name" => "credentialSubject.achievement.criteria.narrative",
-            "value" => $badge->issued['badge']['criteria']['narrative'],
-        ],
+        ["name" => "@context", "value" => $badge->issued['badge']['@context']],
+        ["name" => "id", "value" => generateUUID()],
+        ["name" => "type", "value" => "VerifiableCredential, OpenBadgeCredential"],
+        ["name" => "name", "value" => $badge->issued['badge']['name']],
+        ["name" => "issuer.id", "value" => "did:key:" . $issuerId],
+        ["name" => "issuer.name", "value" => $badge->issued['badge']['issuer']['name']],
+        ["name" => "issuer.issuanceDate", "value" => $issuanceDate],
+        ["name" => "credentialSubject.id", "value" => "did:key:" . $theirDid],
+        ["name" => "credentialSubject.name", "value" => $badge->recipient->firstname . ($badge->recipient->middlename === "" ? "" : " " . $badge->recipient->middlename) . " " . $badge->recipient->lastname],
+        ["name" => "credentialSubject.achievement.id", "value" => generateUUID()],
+        ["name" => "credentialSubject.achievement.name", "value" => $badge->issued['badge']['name']],
+        ["name" => "credentialSubject.achievement.description", "value" => $badge->issued['badge']['description']],
+        ["name" => "credentialSubject.achievement.criteria.narrative", "value" => $badge->issued['badge']['criteria']['narrative']]
     ];
 }
 
 
-#Openbadges Standard with shading:
-/* 
-foreach ($badges_detail as $badge_id => $badge) {
-    $JSON_badges[$badge_id] = [
-        "@context" => [$badge->issued['badge']['@context']],
-        "id" => [$badge->issued['badge']['id']],
-        "type" => [
-            "VerifiableCredential",
-            "OpenBadgeCredential"
-        ],
-        "name" => $badge->issued['badge']['name'],
-        "issuer" => [
-            "id" => $badge->issued['badge']['issuer']['id'],
-            "name" => $badge->issued['badge']['issuer']['name'],
-            "issuanceDate" => date('c', $badge->issued['badge']['issuedOn']),
-        ],
-        "credentialSubject" => [
-            "id" => $badge->recipient->id,
-            "name" => $badge->recipient->firstname . ($badge->recipient->middlename === "" ? "" : " " . $badge->recipient->middlename) . " " . $badge->recipient->lastname,
-            "achievement" => [
-                "id" => [$badge->issued['badge']['id']],
-                "name" => $badge->issued['badge']['name'],
-                "description" => $badge->issued['badge']['description'],
-                "criteria" => $badge->issued['badge']['criteria'],
-            ]
-        ]
-    ];
-}
-*/
+
+
 
 foreach ($errorMessages as $message) {
     echo $message . '<br>';
@@ -286,21 +260,35 @@ foreach ($errorMessages as $message) {
 </style>
 
 <script>
+    // Validierung der aus PHP stammenden Daten
     var badgesData = <?php echo json_encode($JSON_badges); ?>;
-    document.getElementById('JSON').value = '';
+    if (!badgesData) {
+        console.error('Error: Badge data does not exist or is invalid.');
+    }
 
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
-    var schemaId = 'JLXngoc4ahRhFhjZcMzvNs:2:OpenBadge:1.0'; // Statische Schema-ID
-    var credentialDefinitionId = '6PKJmvEKPHWriwPqfNZeTG:3:CL:227059:default'; // Statische Credential-Definition-ID, muss vom issuer bei erstellung über swagger angepasst werden!!!!
-    var connectionId = ''; // Variable zum Speichern der Connection-ID
 
+    var schemaId = 'JLXngoc4ahRhFhjZcMzvNs:2:OpenBadge:1.0'; // Statische Schema-ID
+    var credentialDefinitionId = 'BP37sHcbVSbPvVh5yk7uVh:3:CL:227059:default'; // Statische Credential-Definition-ID
+    var connectionId = ''; // Variable zum Speichern der Connection-ID
     var selectedBadgeId; // Variable zum Speichern der ausgewählten Badge-ID
 
     // Funktion zum Erzeugen eines QR-Codes aus dem Textarea-Inhalt
     function generateTextareaQRCode() {
-        var textareaContent = document.getElementById('JSON').value;
+        var textarea = document.getElementById('JSON');
+        if (!textarea) {
+            console.error('Error: Textarea element was not found in the DOM.');
+            return; // Frühes Beenden der Funktion, wenn das Element nicht gefunden wird
+        }
+
+        var textareaContent = textarea.value;
         if (textareaContent) {
             var qrCodeContainer = document.getElementById('textarea-qr-code');
+            if (!qrCodeContainer) {
+                console.error('Error: QR code container was not found in the DOM.');
+                return; // Frühes Beenden der Funktion, wenn das Element nicht gefunden wird
+            }
+
             qrCodeContainer.innerHTML = ''; // Alten Inhalt leeren
 
             // Erstellen der Überschrift und des Rahmens
@@ -314,69 +302,105 @@ foreach ($errorMessages as $message) {
             qrCodeContainer.appendChild(qrCodeBox);
 
             // QR-Code generieren
-            var qr = qrcode(0, 'L');
-            qr.addData(textareaContent);
-            qr.make();
-            qrCodeBox.innerHTML = qr.createImgTag(4);
+            try {
+                var qr = qrcode(0, 'L');
+                qr.addData(textareaContent);
+                qr.make();
+                qrCodeBox.innerHTML = qr.createImgTag(4);
+            } catch (error) {
+                console.error('Error when creating the QR code: ', error);
+            }
         } else {
-            alert('Textarea ist leer.');
+            alert('Textarea is empty.');
         }
     }
 
     function fillTextarea(badgeId, liElem) {
-        document.getElementById('JSON').value = JSON.stringify(JSONBadge[badgeId], null, "\t");
-        generateTextareaQRCode(); // QR-Code aus dem Inhalt der Textarea generieren
-        liElem.parentElement.children.forEach(function (elem) {
-            elem.classList.remove('selected');
-        });
-        liElem.classList.add('selected');
-        selectedBadgeId = badgeId; // Setzen Sie die ausgewählte Badge-ID
+    if (!badgeId || !liElem) {
+        console.error('Error: Invalid parameters passed to fillTextarea.');
+        return;
     }
 
+    var textarea = document.getElementById('JSON');
+    if (!textarea) {
+        console.error('Error: Textarea element not found.');
+        return;
+    }
+
+    var badgeData = JSONBadge[badgeId];
+    if (!badgeData) {
+        console.error('Error: Badge data not found for badge ID:', badgeId);
+        return;
+    }
+
+    textarea.value = JSON.stringify(badgeData, null, "\t");
+    generateTextareaQRCode(); // QR-Code aus dem Inhalt der Textarea generieren
+
+    liElem.parentElement.children.forEach(function (elem) {
+        elem.classList.remove('selected');
+    });
+
+    liElem.classList.add('selected');
+    selectedBadgeId = badgeId; // Setzen Sie die ausgewählte Badge-ID
+    }
+
+
+
     function runCurl() {
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:8021/connections/create-invitation?alias=Alice", true);
-    xhr.setRequestHeader("accept", "application/json");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                var response = JSON.parse(xhr.responseText);
-                var invitationData = response.invitation;
-
-                // Container für den QR-Code vorbereiten
-                var qrCodeContainer = document.getElementById('qr-code');
-                qrCodeContainer.innerHTML = ''; // Vorherigen Inhalt löschen
-
-                // Erstellen und Einfügen der QR-Code-Beschreibung
-                var label = document.createElement('span');
-                label.className = 'description-text';
-                label.textContent = 'Invitation Data';
-                qrCodeContainer.appendChild(label);
-
-                // Erstellen und Einfügen des Containers für den QR-Code
-                var qrCodeBox = document.createElement('div');
-                qrCodeBox.className = 'qr-code-box';
-                qrCodeContainer.appendChild(qrCodeBox);
-
-                // QR-Code generieren
-                var qr = qrcode(0, 'L');
-                qr.addData(JSON.stringify(invitationData));
-                qr.make();
-                qrCodeBox.innerHTML = qr.createImgTag(6);
-
-                // Invitation Data direkt unter dem QR-Code anzeigen
-                var invitationDataDisplay = document.createElement('pre');
-                invitationDataDisplay.textContent = JSON.stringify(invitationData, null, 2);
-                qrCodeContainer.appendChild(invitationDataDisplay);
-            } else {
-                // Fehlermeldung anzeigen, wenn die Anfrage nicht erfolgreich war
-                alert("Error: Unable to execute cURL command.");
-            }
+        var createInvitationUrl = "<?php echo $CFG->plugin_create_invitation_url; ?>";
+        if (!createInvitationUrl) {
+            alert('Error: Invitation URL is not set.');
+            return;
         }
-    };
-    xhr.send("{}");
-}
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", createInvitationUrl, true);
+        xhr.setRequestHeader("accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    if (response.invitation) {
+                        var qrCodeContainer = document.getElementById('qr-code');
+                        qrCodeContainer.innerHTML = '';
+
+                        var label = document.createElement('span');
+                        label.className = 'description-text';
+                        label.textContent = 'Invitation Data';
+                        qrCodeContainer.appendChild(label);
+
+                        var qrCodeBox = document.createElement('div');
+                        qrCodeBox.className = 'qr-code-box';
+                        qrCodeContainer.appendChild(qrCodeBox);
+
+                        var qr = qrcode(0, 'L');
+                        qr.addData(JSON.stringify(response.invitation));
+                        qr.make();
+                        qrCodeBox.innerHTML = qr.createImgTag(6);
+
+                        var invitationDataDisplay = document.createElement('pre');
+                        invitationDataDisplay.style.overflow = 'auto';
+                        invitationDataDisplay.style.maxHeight = '150px'; 
+                        invitationDataDisplay.textContent = JSON.stringify(response.invitation, null, 2);
+                        qrCodeContainer.appendChild(invitationDataDisplay);
+                    } else {
+                        alert('Error: Invitation data is missing in the response.');
+                    }
+                } else {
+                    alert('Error: Unable to execute cURL command with status ' + xhr.status);
+                }
+            }
+        };
+
+        xhr.onerror = function () {
+            alert('Network error occurred during the HTTP request.');
+        };
+
+        xhr.send("{}");
+    }
+
 
 
 
@@ -384,64 +408,100 @@ foreach ($errorMessages as $message) {
 
 
     function issueCredential() {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://localhost:8021/connections", true);
-        xhr.setRequestHeader("accept", "application/json");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === XMLHttpRequest.DONE) {
-                if (xhr.status === 200) {
+    var connectionsUrl = "<?php echo $CFG->plugin_connections_url; ?>";
+    if (!connectionsUrl) {
+        console.error('Error: Connections URL is not set.');
+        return;
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", connectionsUrl, true);
+    xhr.setRequestHeader("accept", "application/json");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                try {
                     var response = JSON.parse(xhr.responseText);
                     if (response.results && response.results.length > 0) {
                         connectionId = response.results[0].connection_id;
                         
-                        var selectedBadgeData = JSONBadge[selectedBadgeId]; // Wir holen das ausgewählte Badge durch die zuvor festgelegte selectedBadgeId
+                        var selectedBadgeData = JSONBadge[selectedBadgeId];
                         if (!selectedBadgeData) {
                             alert("Error: No badge selected.");
                             return;
                         }
 
-                        var xhr2 = new XMLHttpRequest();
-                        xhr2.open("POST", "http://localhost:8021/issue-credential-2.0/send", true);
-                        xhr2.setRequestHeader("accept", "application/json");
-                        xhr2.setRequestHeader("Content-Type", "application/json");
-                        xhr2.onreadystatechange = function () {
-                            if (xhr2.readyState === XMLHttpRequest.DONE) {
-                                if (xhr2.status === 200) {
-                                    alert("Badge Issued!");
-                                } else {
-                                    alert("Error: Unable to issue the badge.");
-                                }
-                            }
-                        };
-                        
-                        var dataToSend = {
-                            "auto_remove": true,
-                            "comment": "Ausstellung des OpenBadge für French A1",
-                            "connection_id": connectionId,
-                            "credential_preview": {
-                                "@type": "issue-credential/2.0/credential-preview",
-                                "attributes": selectedBadgeData // Wir senden das ausgewählte Badge als Attribut
-                            },
-                            "filter": {
-                                "indy": {
-                                    "cred_def_id": credentialDefinitionId,
-                                    "schema_id": schemaId
-                                }
-                            },
-                            "trace": false
-                        };
-                        xhr2.send(JSON.stringify(dataToSend));
+                        sendCredential(connectionId, selectedBadgeData);
                     } else {
                         alert("Error: No connections found.");
                     }
-                } else {
-                    alert("Error: Unable to get connections.");
+                } catch (e) {
+                    console.error('Error parsing JSON response:', e);
                 }
+            } else {
+                alert('Error: Unable to get connections with status ' + xhr.status);
             }
-        };
-        xhr.send();
-}
+        }
+    };
 
+    xhr.onerror = function () {
+        console.error('Network error occurred during the HTTP request.');
+    };
+
+    xhr.send();
+    }
+
+
+    function sendCredential(connectionId, badgeData) {
+    var issueCredentialUrl = "<?php echo $CFG->plugin_issue_credential_url; ?>";
+    if (!issueCredentialUrl) {
+        console.error('Error: Issue credential URL is not set.');
+        return;
+    }
+
+    var xhr2 = new XMLHttpRequest();
+    xhr2.open("POST", issueCredentialUrl, true);
+    xhr2.setRequestHeader("accept", "application/json");
+    xhr2.setRequestHeader("Content-Type", "application/json");
+
+    xhr2.onreadystatechange = function () {
+        if (xhr2.readyState === XMLHttpRequest.DONE) {
+            if (xhr2.status === 200) {
+                alert("Badge Issued!");
+            } else {
+                console.error('Error: Unable to issue the badge with status:', xhr2.status);
+            }
+        }
+    };
+
+    xhr2.onerror = function () {
+        console.error('Network error occurred during the HTTP request.');
+    };
+
+    var dataToSend = {
+        "auto_remove": true,
+        "comment": "Ausstellung des OpenBadge für French A1",
+        "connection_id": connectionId,
+        "credential_preview": {
+            "@type": "issue-credential/2.0/credential-preview",
+            "attributes": badgeData
+        },
+        "filter": {
+            "indy": {
+                "cred_def_id": credentialDefinitionId,
+                "schema_id": schemaId
+            }
+        },
+        "trace": false
+    };
+
+    try {
+        xhr2.send(JSON.stringify(dataToSend));
+    } catch (error) {
+        console.error('Error sending the credential:', error);
+    }
+}
 
 
 </script>
