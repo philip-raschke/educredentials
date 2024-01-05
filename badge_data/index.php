@@ -40,7 +40,7 @@ $JSON_badges = [];
 // Globales Array zum Sammeln von Fehlermeldungen
 $errorMessages = [];
 function getIssuerIdFromCurl() {
-    global $CFG, $errorMessages;
+    global $CFG;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $CFG->plugin_wallet_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -52,26 +52,27 @@ function getIssuerIdFromCurl() {
     curl_close($ch);
 
     if ($response === false || $httpCode != 200) {
-        $errorMessages['issuer_connection_error'] = 'Error: Failed to connect to Issuer Agent';
+        echo get_string('issuer_connection_error', 'local_badge_data');
         return false; 
     }
 
     $responseDecoded = json_decode($response, true);
     if (json_last_error() !== JSON_ERROR_NONE) {
-        $errorMessages['issuer_json_error'] = 'Error: Failed to decode JSON';
+        echo get_string('issuer_json_error', 'local_badge_data');
         return false;
     }
 
     if (!isset($responseDecoded['results'][0]['did'])) {
-        $errorMessages['issuer_did_error'] = 'Error: Issuer DID not found';
+        echo get_string('issuer_did_error', 'local_badge_data');
         return false;
     }
 
     return $responseDecoded['results'][0]['did'];
 }
 
+
 function getTheirDid() {
-    global $CFG, $errorMessages;
+    global $CFG;
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $CFG->plugin_connections_url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -83,18 +84,18 @@ function getTheirDid() {
     curl_close($ch);
 
     if ($response === false || $httpCode != 200) {
-        $errorMessages['holder_connection_error'] = 'Error: Failed to connect to Holder Wallet';
+        echo get_string('holder_connection_error', 'local_badge_data');
         return false;
     }
 
     $responseDecoded = json_decode($response, true);
     if (json_last_error() !== JSON_ERROR_NONE) {
-        $errorMessages['holder_json_error'] = 'Error: Failed to decode JSON';
+        echo get_string('holder_json_error', 'local_badge_data');
         return false;
     }
 
     if (!isset($responseDecoded['results'][0]['their_did'])) {
-        $errorMessages['holder_did_error'] = 'Error: Holder DID not found';
+        echo get_string('holder_connection_error', 'local_badge_data');
         return false;
     }
 
@@ -105,12 +106,12 @@ function getTheirDid() {
 
 
 
-function extractBadgeId($url) {
-    global $errorMessages;
 
+
+function extractBadgeId($url) {
     // Prüfen, ob die URL gültig ist
     if (!filter_var($url, FILTER_VALIDATE_URL)) {
-        $errorMessages['url_invalid'] = 'Error: Invalid URL provided';
+        echo get_string('url_invalid', 'local_badge_data');
         return null;
     }
 
@@ -120,12 +121,13 @@ function extractBadgeId($url) {
 
     // Überprüfen, ob der 'id'-Parameter existiert
     if (!isset($queryParams['id']) || empty($queryParams['id'])) {
-        $errorMessages['badge_id_missing'] = 'Error: Badge ID not found in URL';
+        echo get_string('badge_id_missing', 'local_badge_data');
         return null;
     }
 
     return $queryParams['id'];
 }
+
 
 
 function generateUUID() {
@@ -162,7 +164,7 @@ foreach ($badges_detail as $badge_id => $badge) {
         $issuanceDatetime = new DateTime($badge->issued['badge']['issuedOn']);
         $issuanceDate = $issuanceDatetime->format('Y-m-d\TH:i:s\Z');
     } catch (Exception $e) {
-        $errorMessages['date_error_' . $badge_id] = 'Error: Invalid date for badge ID ' . $badge_id . ' - ' . $e->getMessage();
+        echo get_string('date_error', 'local_badge_data', $badge_id) . ' - ' . $e->getMessage() . '<br>';
         $issuanceDate = 'Unknown';
     }
 
@@ -269,7 +271,7 @@ foreach ($errorMessages as $message) {
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
 
     var schemaId = 'JLXngoc4ahRhFhjZcMzvNs:2:OpenBadge:1.0'; // Statische Schema-ID
-    var credentialDefinitionId = 'BP37sHcbVSbPvVh5yk7uVh:3:CL:227059:default'; // Statische Credential-Definition-ID
+    var credentialDefinitionId = '8h84ZyQbkXi6c6HgZS4wxz:3:CL:227059:default'; // Statische Credential-Definition-ID
     var connectionId = ''; // Variable zum Speichern der Connection-ID
     var selectedBadgeId; // Variable zum Speichern der ausgewählten Badge-ID
 
