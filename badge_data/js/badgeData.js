@@ -60,10 +60,20 @@ function runCurl() {
                     var qrCodeContainer = document.getElementById('qr-code');
                     qrCodeContainer.innerHTML = '';
 
+                    // QR-Code generieren
                     var qr = qrcode(0, 'L');
                     qr.addData(JSON.stringify(response.invitation));
                     qr.make();
-                    qrCodeContainer.innerHTML = qr.createImgTag(6);
+                    var qrCodeImage = document.createElement('div');
+                    qrCodeImage.innerHTML = qr.createImgTag(6);
+                    qrCodeContainer.appendChild(qrCodeImage);
+
+                    // Anzeigen der Einladungsdaten
+                    var invitationDataDisplay = document.createElement('pre');
+                    invitationDataDisplay.style.overflow = 'auto';
+                    invitationDataDisplay.style.maxHeight = '150px';
+                    invitationDataDisplay.textContent = JSON.stringify(response.invitation, null, 2);
+                    qrCodeContainer.appendChild(invitationDataDisplay);
                 } else {
                     alert('Error: Invitation data is missing in the response.');
                 }
@@ -79,6 +89,9 @@ function runCurl() {
 
     xhr.send("{}");
 }
+
+
+
 
 function issueCredential() {
     if (!connectionsUrl) {

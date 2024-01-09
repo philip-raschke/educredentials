@@ -11,4 +11,3 @@ $string['badge_id_missing'] = 'Error: Badge ID not found in URL';
 $string['date_error'] = 'Error: Invalid date for badge ID {$a}';
 
 //JavaScript Error Messages
-

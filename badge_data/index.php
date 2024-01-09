@@ -268,7 +268,7 @@ foreach ($errorMessages as $message) {
     var issueCredentialUrl = "<?php echo $CFG->plugin_issue_credential_url; ?>";
     var JSONBadge = <?= json_encode($JSON_badges, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>;
     var schemaId = 'JLXngoc4ahRhFhjZcMzvNs:2:OpenBadge:1.0';
-    var credentialDefinitionId = 'VdzxjctRRqAJKEMQKdSCR5:3:CL:227059:default';
+    var credentialDefinitionId = '8511L3aK9VaotjG6BgYhdv:3:CL:227059:default';
 </script>
 <script src="/moodle4/local/badge_data/js/badgeData.js"></script>
 
