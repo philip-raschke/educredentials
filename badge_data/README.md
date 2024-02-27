@@ -64,7 +64,7 @@ Install Docker for the Aries Cloud Agent Python from here: https://docs.docker.c
 21. type "wsl" to start WSL
 22. navigate to the demo folder
 23. Execute the command "LEDGER_URL=http://dev.greenlight.bcovrin.vonx.io ./run_demo alice" to start the Holder Agent
-24. If the Alice Agent is running, then reloade "http://localhost/moodle4/local/badge_data/"! This will save the changes you made in the index.php and will give you the oportunity to connect to the Alice Agent.
+24. If the Alice Agent is running, then reload "http://localhost/moodle4/local/badge_data/"! This will save the changes you made in the index.php and will give you the oportunity to connect to the Alice Agent.
 25. Click on the "Connect to Holder Wallet" Button. This will display a QR Code representing the invitation data. Additionally it will display the actual invitation data.
 26. Copy the invitation data and go to the holder/alice terminal and paste them there!
 27. Now you can see in both terminals that Issuer (Faber) and Holder (Alice) are connected. Reload the page in your browser!
