@@ -43,13 +43,13 @@ Install Docker for the Aries Cloud Agent Python from here: https://docs.docker.c
 8. Start Docker
 9. Open a Terminal
    - type "wsl" to start WSL
-   - navigate to the demo folder.
+   - navigate to the demo folder
    - Execute the command "LEDGER_URL=http://dev.greenlight.bcovrin.vonx.io ./run_demo faber" to start the Issuer Agent.
 11. If the Faber Agent is running, then reloade "http://localhost/moodle4/local/badge_data/"! This will remove the corresponding error message.
 12. Open the Swagger UI "http://localhost:8021/api/doc" in your browser!
 13. Go to the Credential Definition section and click on "Post" at "/credential-definitions"!
 14. Then click on "Try it out"!
-15. Enter this as the credential definition:
+15. Enter the following as the credential definition and click on "Execute":
 
 ```bash  
 {
@@ -58,3 +58,15 @@ Install Docker for the Aries Cloud Agent Python from here: https://docs.docker.c
   "tag": "default"
 }
 ```
+16. Copy the generated credential definition id from the previous step.
+17. Go to the code of "C:\wamp64\www\moodle4\local\badge_data\index.php" and change the "credentialDefinitionId" in line 271 by pasting what you copied from the previous step. Afterwards save the changes!
+18. Now open a second Terminal
+    - type "wsl" to start WSL
+    - navigate to the demo folder
+    - Execute the command "LEDGER_URL=http://dev.greenlight.bcovrin.vonx.io ./run_demo alice" to start the Holder Agent
+19. If the Alice Agent is running, then reloade "http://localhost/moodle4/local/badge_data/"! This will save the changes you made in the index.php and will give you the oportunity to connect to the Alice Agent.
+20. Click on the "Connect to Holder Wallet" Button. This will display a QR Code representing the invitation data. Additionally it will display the actual invitation data.
+21. Copy the invitation data and go to the holder/alice terminal and paste them there!
+22. Now you can see in both terminals that Issuer (Faber) and Holder (Alice) are connected. Reload the page in your browser!
+23. Now select a badge icon and click on "Issue Credential to Holder Wallet"!
+24. Now go to the holder/alice terminal! You can see there the badge which is now in the holder wallet! 
