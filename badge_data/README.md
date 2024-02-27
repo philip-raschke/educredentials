@@ -1,6 +1,6 @@
 # Moodle Plugin for Verifiable Credentials
 
-The Moodle Plugin for Verifiable Credentials is designed for Moodle version 4.1.2. It enables students or course participants to view their earned badges in JSON format, which can be useful for transferring them to the esatus Self-Sovereign Identity (SSI) agent.
+The Moodle Plugin for Verifiable Credentials is designed for Moodle version 4.1.2. It enables students or course participants to issue their earned badges in JSON format to their own Holder Wallet.
 
 ## Installation of WSL
 
