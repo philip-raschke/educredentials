@@ -11,6 +11,12 @@ The Moodle Plugin for Verifiable Credentials is designed for Moodle version 4.1.
 5. Follow the prompts to update Moodle.
 6. Once the installation is complete, the plugin should be installed and ready to use.
 
+## Installation of Aries Cloud Agent Python
+Clone the repository to your C drive by running the following command in your terminal:
+```bash
+git clone https://github.com/hyperledger/aries-cloudagent-python
+```
+
 ## Usage of the Plugin
 
 1. After installing the plugin, log in to Moodle as a course participant.
