@@ -48,6 +48,7 @@ Install Docker for the Aries Cloud Agent Python from here: https://docs.docker.c
     LEDGER_URL=http://dev.greenlight.bcovrin.vonx.io ./run_demo faber
     ```
 In Aca-Py the Issuer is called Faber!
+
 14. The Issuer Agent should run now on "http://localhost:8021/". If the Issuer Agent is running and the Terminal displays at the end
 ```
 Waiting for connection...
@@ -66,6 +67,7 @@ then reload "http://localhost/moodle4/local/badge_data/" in your browser! This w
   "tag": "default"
 }
 ```
+
 18. Copy the generated credential definition id from the previous step (Example of a credential definition id: "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag").
 19. Go to the code of "C:\wamp64\www\moodle4\local\badge_data\index.php" and change the "credentialDefinitionId" in line 271 by pasting what you copied from the previous step. Afterwards save the changes!
 20. Now open a second Terminal and type "wsl" to start WSL
@@ -75,12 +77,14 @@ then reload "http://localhost/moodle4/local/badge_data/" in your browser! This w
     LEDGER_URL=http://dev.greenlight.bcovrin.vonx.io ./run_demo alice
     ```
 In Aca-Py the Holder is called Alice!
+
 25. The Holder Agent should run now on "http://localhost:8031/". If the Alice Agent is running and displays in the Terminal at the end
 ```
 #9 Input faber.py invitation details
 Invite details:
 ```
 , then reload "http://localhost/moodle4/local/badge_data/" in yout browser! This will save the changes you made in the index.php and will give you the oportunity to connect to the Alice Agent.
+
 26. Click on the webpage in your browser the "Connect to Holder Wallet" Button. This will display a QR Code representing the invitation data. Additionally it will display the actual invitation data.
 27. Copy the invitation data and go to the terminal of Alice and paste them there!
 28. Now you can see in both terminals that Issuer (Faber) and Holder (Alice) are connected. Reload the webpage in your browser!
