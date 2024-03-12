@@ -83,7 +83,7 @@ In Aca-Py the Holder is called Alice!
 #9 Input faber.py invitation details
 Invite details:
 ```
-, then reload "http://localhost/moodle4/local/badge_data/" in yout browser! This will save the changes you made in the index.php and will give you the oportunity to connect to the Alice Agent.
+, then reload "http://localhost/moodle4/local/badge_data/" in yout browser! This will save the changes you made and will give you the oportunity to connect to the Alice Agent.
 
 26. Click on the webpage in your browser the "Connect to Holder Wallet" Button. This will display a QR Code representing the invitation data. Additionally it will display the actual invitation data.
 27. Copy the invitation data and go to the terminal of Alice and paste them there!
