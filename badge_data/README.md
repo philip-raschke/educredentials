@@ -42,8 +42,8 @@ Install Docker for the Aries Cloud Agent Python from here: https://docs.docker.c
 7. Clicking on a badge will display its corresponding JSON format in the field on the right side. Additionally it shows the generated QR Code of the badge. As we can see "Error: Failed to connect to Issuer AgentError: No Holder Wallet is connectedError: Failed to connect to Issuer AgentError: No Holder Wallet is connected" is displayed. 
 8. Start Docker
 9. Open a Terminal and type "wsl" to start WSL
-11. navigate in the Terminal to the "C:\aries-cloudagent-python\demo" folder
-12. Execute the following command in the Terminal to start the Issuer Agent (Make sure that Docker is running):
+10. navigate in the Terminal to the "C:\aries-cloudagent-python\demo" folder
+11. Execute the following command in the Terminal to start the Issuer Agent (Make sure that Docker is running):
 
      ```
     LEDGER_URL=http://dev.greenlight.bcovrin.vonx.io ./run_demo faber
@@ -51,7 +51,7 @@ Install Docker for the Aries Cloud Agent Python from here: https://docs.docker.c
 
 In Aca-Py the Issuer is called Faber!
 
-13. The Issuer Agent should run now on "http://localhost:8021/". If the Issuer Agent is running and the Terminal displays at the end
+12. The Issuer Agent should run now on "http://localhost:8021/". If the Issuer Agent is running and the Terminal displays at the end
 ```
 Waiting for connection...
 ```
