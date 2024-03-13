@@ -43,7 +43,7 @@ Install Docker for the Aries Cloud Agent Python from here: https://docs.docker.c
 8. Start Docker
 9. Open a Terminal and type "wsl" to start WSL
 11. navigate in the Terminal to the "C:\aries-cloudagent-python\demo" folder
-12. Execute the following command in the Terminal to start the Issuer Agent:
+12. Execute the following command in the Terminal to start the Issuer Agent (Make sure that Docker is running):
     ```
     LEDGER_URL=http://dev.greenlight.bcovrin.vonx.io ./run_demo faber
     ```
