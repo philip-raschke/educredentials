@@ -68,9 +68,9 @@ then reload "http://localhost/moodle4/local/badge_data/" in your browser! This w
 }
 ```
 
-18. Copy the generated credential definition id from the previous step (Example of a credential definition id: "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag").
-19. Go to the code of "C:\wamp64\www\moodle4\local\badge_data\index.php" and change the "credentialDefinitionId" in line 271 by pasting what you copied from the previous step. Afterwards save the changes!
-20. Now open a second Terminal and type "wsl" to start WSL
+19. Copy the generated credential definition id from the previous step (Example of a credential definition id: "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag").
+20. Go to the code of "C:\wamp64\www\moodle4\local\badge_data\index.php" and change the "credentialDefinitionId" in line 271 by pasting what you copied from the previous step. Afterwards save the changes!
+21. Now open a second Terminal and type "wsl" to start WSL
 22. Navigate in the Terminal to the "C:\aries-cloudagent-python\demo" folder
 23. Execute the following command to start the Holder Agent:
     ``` 
@@ -78,15 +78,15 @@ then reload "http://localhost/moodle4/local/badge_data/" in your browser! This w
     ```
 In Aca-Py the Holder is called Alice!
 
-25. The Holder Agent should run now on "http://localhost:8031/". If the Alice Agent is running and displays in the Terminal at the end
+24. The Holder Agent should run now on "http://localhost:8031/". If the Alice Agent is running and displays in the Terminal at the end
 ```
 #9 Input faber.py invitation details
 Invite details:
 ```
 , then reload "http://localhost/moodle4/local/badge_data/" in yout browser! This will save the changes you made and will give you the oportunity to connect to the Alice Agent.
 
-26. Click on the webpage in your browser the "Connect to Holder Wallet" Button. This will display a QR Code representing the invitation data. Additionally it will display the actual invitation data.
-27. Copy the invitation data and go to the terminal of Alice and paste them there!
-28. Now you can see in both terminals that Issuer (Faber) and Holder (Alice) are connected. Reload the webpage in your browser!
-29. Now select a badge icon and click on "Issue Credential to Holder Wallet"!
-30. Now go to the holder/alice terminal! You can see there the badge which is now in the holder wallet! 
+25. Click on the webpage in your browser the "Connect to Holder Wallet" Button. This will display a QR Code representing the invitation data. Additionally it will display the actual invitation data.
+26. Copy the invitation data and go to the terminal of Alice and paste them there!
+27. Now you can see in both terminals that Issuer (Faber) and Holder (Alice) are connected. Reload the webpage in your browser!
+28. Now select a badge icon and click on "Issue Credential to Holder Wallet"!
+29. Now go to the holder/alice terminal! You can see there the badge which is now in the holder wallet! 
