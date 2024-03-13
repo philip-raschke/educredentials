@@ -60,7 +60,7 @@ then reload "http://localhost/moodle4/local/badge_data/" in your browser! This w
 13. Open the Swagger UI "http://localhost:8021/api/doc" in your browser!
 14. Go to the Credential Definition section and click on "Post" at "/credential-definitions"!
 15. Then click on "Try it out"!
-16. Enter the following as the credential definition and click on "Execute":
+16. Create a new Credential Definition: Enter the following as the credential definition and click on "Execute":
 
 ```  
 {
@@ -70,6 +70,7 @@ then reload "http://localhost/moodle4/local/badge_data/" in your browser! This w
 }
 ```
 
+The Schema was created by an other issuer and is stored in the Blockchain "http://dev.greenlight.bcovrin.vonx.io/browse/domain". After your Execution in the Swagger UI, the credential definition is also stored on the Blockchain "http://dev.greenlight.bcovrin.vonx.io/browse/domain".
 17. Copy the generated credential definition id from the previous step (E.g. "XqAYYysM62BHHhvru9VmeQ:3:CL:227059:default").
 18. Go to the code of "C:\wamp64\www\moodle4\local\badge_data\index.php" and change the "credentialDefinitionId" in line 271 by pasting what you copied from the previous step. Afterwards save the changes!
 19. Now open a second Terminal and type "wsl" to start WSL
