@@ -83,16 +83,16 @@ The Schema was created by an other issuer and is stored in the Blockchain "http:
 <img width="953" alt="16" src="https://github.com/pherbke/educredentials/assets/103564990/5743ef61-b211-49c4-93a6-39c0a11871bc">
 
 17. Copy the generated credential definition id from the previous step (E.g. "XqAYYysM62BHHhvru9VmeQ:3:CL:227059:default").
-18. 
+    
 <img width="914" alt="17" src="https://github.com/pherbke/educredentials/assets/103564990/81fcb66b-0a9c-47f9-81e7-0d364d97a161">
 
-19. Go to the code of "C:\wamp64\www\moodle4\local\badge_data\index.php" and change the "credentialDefinitionId" in line 271 by pasting what you copied from the previous step. Afterwards save the changes!
-20. 
+18. Go to the code of "C:\wamp64\www\moodle4\local\badge_data\index.php" and change the "credentialDefinitionId" in line 271 by pasting what you copied from the previous step. Afterwards save the changes!
+ 
 <img width="574" alt="18" src="https://github.com/pherbke/educredentials/assets/103564990/0bb0cba8-00af-4685-ad0a-3aea3e80bf1b">
 
-21. Now open a second Terminal and type "wsl" to start WSL
-22. Navigate in the Terminal to the "C:\aries-cloudagent-python\demo" folder
-23. Execute the following command to start the Holder Agent:
+19. Now open a second Terminal and type "wsl" to start WSL
+20. Navigate in the Terminal to the "C:\aries-cloudagent-python\demo" folder
+21. Execute the following command to start the Holder Agent:
     ``` 
     LEDGER_URL=http://dev.greenlight.bcovrin.vonx.io ./run_demo alice
     ```
