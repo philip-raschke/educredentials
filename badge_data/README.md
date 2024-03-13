@@ -40,9 +40,10 @@ Install Docker for the Aries Cloud Agent Python from here: https://docs.docker.c
    ![JSON Button](https://github.com/pherbke/educredentials/assets/103564990/4f305ca6-3099-4037-839b-3ca78d0c06ff)
 6. On the left side of the page, you will find a list of all your badges. 
 7. Clicking on a badge will display its corresponding JSON format in the field on the right side. Additionally it shows the generated QR Code of the badge. As we can see "Error: Failed to connect to Issuer AgentError: No Holder Wallet is connectedError: Failed to connect to Issuer AgentError: No Holder Wallet is connected" is displayed.
+
+ <img width="948" alt="6  7" src="https://github.com/pherbke/educredentials/assets/103564990/e5ecce96-920c-4634-b393-73bbff4f3604">
+ 
 8. Start Docker
-   <img width="948" alt="6  7" src="https://github.com/pherbke/educredentials/assets/103564990/e5ecce96-920c-4634-b393-73bbff4f3604">
-   
 9. Open a Terminal and type "wsl" to start WSL
 10. navigate in the Terminal to the "C:\aries-cloudagent-python\demo" folder
 11. Execute the following command in the Terminal to start the Issuer Agent (Make sure that Docker is running):
