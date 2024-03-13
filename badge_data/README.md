@@ -70,7 +70,7 @@ then reload "http://localhost/moodle4/local/badge_data/" in your browser! This w
 }
 ```
 
-17. Copy the generated credential definition id from the previous step (Example of a credential definition id: "WgWxqztrNooG92RXvxSTWv:3:CL:20:tag").
+17. Copy the generated credential definition id from the previous step (E.g. "XqAYYysM62BHHhvru9VmeQ:3:CL:227059:default").
 18. Go to the code of "C:\wamp64\www\moodle4\local\badge_data\index.php" and change the "credentialDefinitionId" in line 271 by pasting what you copied from the previous step. Afterwards save the changes!
 19. Now open a second Terminal and type "wsl" to start WSL
 20. Navigate in the Terminal to the "C:\aries-cloudagent-python\demo" folder
