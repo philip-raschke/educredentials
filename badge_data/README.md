@@ -65,10 +65,10 @@ then reload "http://localhost/moodle4/local/badge_data/" in your browser! This w
 13. Open the Swagger UI "http://localhost:8021/api/doc" in your browser!
 14. Go to the Credential Definition section and click on "Post" at "/credential-definitions"!
 15. Then click on "Try it out"!
-16. 
+  
 <img width="949" alt="12  13  14  15" src="https://github.com/pherbke/educredentials/assets/103564990/66fa3705-fc4a-4f06-86e0-d97ecf0abcb8">
 
-17. Create a new Credential Definition: Enter the following as the credential definition and click on "Execute":
+16. Create a new Credential Definition: Enter the following as the credential definition and click on "Execute":
 
 ```  
 {
