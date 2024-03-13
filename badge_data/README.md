@@ -43,15 +43,15 @@ Install Docker for the Aries Cloud Agent Python from here: https://docs.docker.c
    <img width="948" alt="6  7" src="https://github.com/pherbke/educredentials/assets/103564990/e5ecce96-920c-4634-b393-73bbff4f3604">
 8. Start Docker
 9. Open a Terminal and type "wsl" to start WSL
-11. navigate in the Terminal to the "C:\aries-cloudagent-python\demo" folder
-12. Execute the following command in the Terminal to start the Issuer Agent (Make sure that Docker is running):
+10. navigate in the Terminal to the "C:\aries-cloudagent-python\demo" folder
+11. Execute the following command in the Terminal to start the Issuer Agent (Make sure that Docker is running):
 
      ```
     LEDGER_URL=http://dev.greenlight.bcovrin.vonx.io ./run_demo faber
     ```
 
 In Aca-Py the Issuer is called Faber!
-
+<img width="943" alt="8  9  10  11" src="https://github.com/pherbke/educredentials/assets/103564990/42b95768-798d-4392-a1a1-17d48efdfcf5">
 12. The Issuer Agent should run now on "http://localhost:8021/". If the Issuer Agent is running and the Terminal displays at the end
 ```
 Waiting for connection...
@@ -61,6 +61,7 @@ then reload "http://localhost/moodle4/local/badge_data/" in your browser! This w
 13. Open the Swagger UI "http://localhost:8021/api/doc" in your browser!
 14. Go to the Credential Definition section and click on "Post" at "/credential-definitions"!
 15. Then click on "Try it out"!
+<img width="949" alt="12  13  14  15" src="https://github.com/pherbke/educredentials/assets/103564990/66fa3705-fc4a-4f06-86e0-d97ecf0abcb8">
 16. Create a new Credential Definition: Enter the following as the credential definition and click on "Execute":
 
 ```  
@@ -73,8 +74,11 @@ then reload "http://localhost/moodle4/local/badge_data/" in your browser! This w
 
 The Schema was created by an other issuer and is stored in the Blockchain "http://dev.greenlight.bcovrin.vonx.io/browse/domain". After your Execution in the Swagger UI, the credential definition is also stored on the Blockchain "http://dev.greenlight.bcovrin.vonx.io/browse/domain".
 
+<img width="953" alt="16" src="https://github.com/pherbke/educredentials/assets/103564990/5743ef61-b211-49c4-93a6-39c0a11871bc">
 17. Copy the generated credential definition id from the previous step (E.g. "XqAYYysM62BHHhvru9VmeQ:3:CL:227059:default").
+<img width="914" alt="17" src="https://github.com/pherbke/educredentials/assets/103564990/81fcb66b-0a9c-47f9-81e7-0d364d97a161">
 18. Go to the code of "C:\wamp64\www\moodle4\local\badge_data\index.php" and change the "credentialDefinitionId" in line 271 by pasting what you copied from the previous step. Afterwards save the changes!
+<img width="574" alt="18" src="https://github.com/pherbke/educredentials/assets/103564990/0bb0cba8-00af-4685-ad0a-3aea3e80bf1b">
 19. Now open a second Terminal and type "wsl" to start WSL
 20. Navigate in the Terminal to the "C:\aries-cloudagent-python\demo" folder
 21. Execute the following command to start the Holder Agent:
@@ -82,7 +86,7 @@ The Schema was created by an other issuer and is stored in the Blockchain "http:
     LEDGER_URL=http://dev.greenlight.bcovrin.vonx.io ./run_demo alice
     ```
 In Aca-Py the Holder is called Alice!
-
+<img width="952" alt="19  20  21" src="https://github.com/pherbke/educredentials/assets/103564990/89d63f4f-7051-4d57-b596-5b97c1e90557">
 22. The Holder Agent should run now on "http://localhost:8031/". If the Alice Agent is running and displays in the Terminal at the end
 ```
 #9 Input faber.py invitation details
@@ -91,7 +95,11 @@ Invite details:
 , then reload "http://localhost/moodle4/local/badge_data/" in yout browser! This will save the changes you made and will give you the oportunity to connect to the Alice Agent.
 
 23. Click on the webpage in your browser the "Connect to Holder Wallet" Button. This will display a QR Code representing the invitation data. Additionally it will display the actual invitation data.
+<img width="944" alt="22  23" src="https://github.com/pherbke/educredentials/assets/103564990/d69384ca-b037-4f9c-a52a-55e76542e375">
 24. Copy the invitation data and go to the terminal of Alice and paste them there!
 25. Now you can see in both terminals that Issuer (Faber) and Holder (Alice) are connected. Reload the webpage in your browser!
+<img width="959" alt="24  25" src="https://github.com/pherbke/educredentials/assets/103564990/5531a0fc-b178-461d-9bb6-2a61167fca97">
 26. Now select a badge icon and click on "Issue Credential to Holder Wallet"!
+<img width="954" alt="26" src="https://github.com/pherbke/educredentials/assets/103564990/54f869fe-667b-40e2-91fe-fe713e45f3b2">
 27. Now go to the holder/alice terminal! You can see there the badge which is now in the holder wallet! 
+<img width="947" alt="27" src="https://github.com/pherbke/educredentials/assets/103564990/6097ddb3-e488-4bf9-9bc9-07bac770b2b0">
