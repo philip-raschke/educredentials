@@ -139,7 +139,7 @@ After acknowledging that you want to show a credential you will be led to the in
 
 # Note: If you went through the earlier steps of issuing a credential to your mobile wallet and your faber agent is still running,
         your wallet will already be connected to the agent and the index.html page gets skipped. In a real-world setting,
-        the agent doing the verification would be a different one from a different university, in this example case the HU Berlin.
+        the agent doing the verification would be a different one, from a different university, in this example case the HU Berlin.
         That agent would not have a connection with your wallet yet. If you want to go through this process "realistically",
         shut down your agent by pressing CTRL+C in your GitBash, and starting the agent again with the command shown above.
         You will now have to connect your wallet to the agent using the QR code shown on the index.html page.
