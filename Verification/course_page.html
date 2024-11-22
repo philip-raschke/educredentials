@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>course_page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <button class="close-btn">✖</button>
+        <ul class="sidebar-menu">
+            <li>
+                <span class="sidebar-section-title">Welcome!</span>
+                <ul class="nested-menu">
+                    <li>About this course</li>
+                </ul>
+            </li>
+            <li>
+                <span class="sidebar-section-title collapsible active">Module 1</span>
+                <ul class="nested-menu">
+                    <li>Overview</li>
+                    <li>Practice A1 </li>
+                    <li>Module discussion: Speak...</li>
+                    <li>Learning materials for this...</li>
+                    <li>Tasks to complete</li>
+                    <li>Module 1 quick check</li>
+                </ul>
+            </li>
+            <li>
+                <span class="sidebar-section-title collapsible">Module 2 </span>
+                <ul class="nested-menu">
+                    <li>Module discussion: Speak...</li>
+                    <li>Learning materials for this...</li>
+                    <li>Tasks to complete</li>
+                    <li>Module 2 quick check</li>
+                </ul>
+            </li>
+            <li>
+                <span class="sidebar-section-title collapsible">Module 3 </span>
+                <ul class="nested-menu">
+                    <li>Module discussion: Speak...</li>
+                    <li>Learning materials for this...</li>
+                    <li>Tasks to complete</li>
+                    <li>Module 3 quick check</li>
+                </ul>
+            </li>
+            <li>
+                <span class="sidebar-section-title collapsible">Module 4 </span>
+                <ul class="nested-menu">
+                    <li>Module discussion: Speak...</li>
+                    <li>Learning materials for this...</li>
+                    <li>Tasks to complete</li>
+                    <li>Module 4 quick check</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Breadcrumb Example -->
+        <div class="breadcrumb">
+            <a href="#">My Courses</a> / <a href="#">German A2</a>
+        </div>
+
+        <!-- Header Title and Navigation Example -->
+        <header>
+            <h1>German A2</h1>
+            <nav>
+                <a href="#" class="active">Course</a>
+                <a href="#">Settings</a>
+                <a href="#">Participants</a>
+                <a href="#">Grades</a>
+                <a href="#">Reports</a>
+                <a href="#">Question Bank</a>
+                <a href="#">More</a>
+            </nav>
+        </header>
+
+        
+        <section class="introduction">
+            
+            <p>Welcome to the German A2 Course!
+
+                Willkommen! In this course, we’ll continue building on your foundational knowledge of German. By the end of the A2 level,
+                 you'll feel more comfortable in everyday conversations, understand basic grammar structures, and expand your vocabulary for 
+                 common topics like travel, hobbies, and daily routines.
+                
+                 You’ll learn to express yourself in the past tense, describe your preferences and plans, and navigate practical situations 
+                 such as ordering in a restaurant or asking for directions.
+                
+                Get ready to dive deeper into the German language and culture. Viel Erfolg (Good luck), and let’s get started!</p>
+        </section>
+
+
+        <section id="announcements">
+            <h2>General</h2>
+            <p>Stay up to date with course announcements.</p>
+            <div class="announcement">
+                <h3>Module 1: Intro to A2 syllabus</h3>
+                <p>The first assisgnment is due by Friday, October 15th. Make sure to complete it by then.</p>
+            </div>
+            <div class="announcement">
+                <h3>Module 2: Reading</h3>
+                <p>Module 2, focusing on Reading, is now live! You can start the module on your dashboard.</p>
+            </div>
+            <div class="announcement">
+                <h3>Module 3: Reading from textbook </h3>
+                <p>Module 3, focusing on Continue Chapter Reading from textbook, is now live! You can start the module on your dashboard.</p>
+            </div>
+            <div class="announcement">
+                <h3>Module 4: Listening</h3>
+                <p>Module 4, focusing on listening, is now live! You can start the module on your dashboard.</p>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section class="resources">
+            <div class="resource-item">
+                <div class="icon book">📘</div>
+                <div class="resource-info">
+                    <h3>Books</h3>
+                </div>
+            </div>
+            <div class="resource-item">
+                <div class="icon glossary">📖</div>
+                <div class="resource-info">
+                    <h3>Resources</h3>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.querySelectorAll('.sidebar-section-title').forEach(section => {
+            section.addEventListener('click', () => {
+                section.classList.toggle('active');
+                
+                let nestedMenu = section.nextElementSibling;
+                if (nestedMenu.style.display === "block") {
+                    nestedMenu.style.display = "none";
+                } else {
+                    nestedMenu.style.display = "block";
+                }
+            });
+        });
+        </script>
+        
+        
+</body>
+</html>

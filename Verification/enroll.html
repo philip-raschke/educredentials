@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Enrollment</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .course-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .course-card {
+            width: 300px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            text-align: center;
+        }
+        .course-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .institute-image{
+            width: 50%;
+            height: 50%;
+            object-fit: cover;
+            margin-left: -100px;
+            margin-top: -40px;
+        }
+        .course-info {
+            padding: 20px;
+        }
+        .course-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .course-university {
+            color: #555;
+            font-size: 14px;
+        }
+        .enroll-btn {
+            background-color: #06be44;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .enroll-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        #confirmation, #result {
+            margin-top: 20px;
+            display: none;
+        }
+        .response-btn {
+            background-color: #06be44;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 15px 0;
+            border-radius: 5px;
+            
+        }
+        
+        #confirmation, #confirmation-text, #btns{
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Choose a Course to Enroll</h1>
+
+    <!-- Course Cards -->
+    <div class="course-container">
+            
+        <!-- Course 1 -->
+        <div class="course-card">
+            <img src="Eng.png" alt="Course 1 Image" class="course-image">
+            <div class="course-info">
+                <img src="HU.png" alt="Harvard Logo" class="institute-image">
+                <div class="course-title">English A2</div>
+                <div class="course-university">Humboldt University</div>
+                <button class="enroll-btn" onclick="confirmEnrollment('English A2', this)">Enroll</button>
+            </div>
+        </div>
+
+        <!-- Course 2 -->
+        <div class="course-card">
+            <img src="Detusch.png" alt="Course 2 Image" class="course-image">
+            <div class="course-info">
+                <img src="HU.png" alt="IBM Logo" class="institute-image">
+                <div class="course-title">German B1</div>
+                <div class="course-university">Humboldt University</div>
+                <button class="enroll-btn" onclick="confirmEnrollment('German A2', this)">Enroll</button>
+            </div>
+        </div>
+
+        <!-- Course 3 -->
+        <div class="course-card">
+            <img src="spain.png" alt="Course 3 Image" class="course-image">
+            <div class="course-info">
+                <img src="HU.png" alt="Harvard Logo" class="institute-image">
+                <div class="course-title">Spanish A2</div>
+                <div class="course-university">Humboldt University</div>
+                <button class="enroll-btn" onclick="confirmEnrollment('French A2', this)">Enroll</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Message -->
+    <div id="confirmation">
+        <p id="confirmation-text"></p>
+        <div id="btns">
+                <button class="response-btn" onclick="handleResponse(true)">Yes</button>
+                <button class="response-btn" onclick="handleResponse(false)">No</button>
+        </div>
+    </div>
+
+    <!-- Result Message -->
+    <div id="result">
+        <p id="result-message"></p>
+    </div>
+
+    <script>
+        const confirmationDiv = document.getElementById('confirmation');
+        const confirmationText = document.getElementById('confirmation-text');
+        const resultDiv = document.getElementById('result');
+        const resultMessage = document.getElementById('result-message');
+        let selectedCourse = "";
+        let selectedButton = null;
+
+        function confirmEnrollment(courseName, button) {
+            selectedCourse = courseName;
+            selectedButton = button;
+
+            // Disable all other enroll buttons
+            const allEnrollButtons = document.querySelectorAll('.enroll-btn');
+            allEnrollButtons.forEach(btn => {
+                if (btn !== button) {
+                    btn.disabled = true;
+                }
+            });
+
+            confirmationText.textContent = `For enrolling in ${courseName} you need to proof that you passed the A1 course. So do you want to proceed to the verification page?`;
+            confirmationDiv.style.display = 'block';
+            resultDiv.style.display = 'none';
+        }
+
+        function handleResponse(isEnrolled) {
+            confirmationDiv.style.display = 'none';
+
+            if (isEnrolled) {
+                // Navigate to new webpage for enrollment confirmation
+                window.location.href = 'index.html';
+            } else {
+                // Re-enable all enroll buttons if "No" is selected
+                const allEnrollButtons = document.querySelectorAll('.enroll-btn');
+                allEnrollButtons.forEach(btn => btn.disabled = false);
+
+                resultMessage.textContent = `You can't get enrolled in the course: ${selectedCourse}`;
+                resultDiv.style.display = 'block';
+            }
+        }
+    </script>
+
+</body>
+</html>

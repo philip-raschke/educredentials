@@ -111,14 +111,14 @@
                 return [];
             }
         }
-    
+
         async function checkVerificationStatus(presentationExchangeId, retries = 5, delay = 3000) {
             for (let i = 0; i < retries; i++) {
-                const verificationResponse = await fetch(`http://localhost:8021/present-proof-2.0/records/${presentationExchangeId}`);
+                const verificationResponse = await fetch(`http://localhost:8021/present-proof/records/${presentationExchangeId}`);
                 const presentationData = await verificationResponse.json();
                 console.log("Verification Attempt:", i + 1, "Response:", presentationData);
 
-                if (presentationData.state === "done" && presentationData.verified === "true") {
+                if (presentationData.verified === "true") {
                     return true;
                 }
                 await new Promise(resolve => setTimeout(resolve, delay));
@@ -151,27 +151,25 @@
                 const connection = connectionData.results[0];
                 if (!connection) throw new Error("No connections found.");
 
-                const proofRequestResponse = await fetch("http://localhost:8021/present-proof-2.0/send-request", {
+                const proofRequestResponse = await fetch("http://localhost:8021/present-proof/send-request", {
                     method: "POST",
                     headers: { "Accept": "application/json", "Content-Type": "application/json" },
                     body: JSON.stringify({
                         "comment": "Proof Request for Language Badge",
                         "connection_id": connection.connection_id,
-                        "presentation_request": {
-                            "indy": {
-                                "name": "Proof for Language",
-                                "nonce": "123456789",
-                                "version": "1.0",
-                                "requested_attributes": {
-                                    "0_name": {
-                                        "name": "name",
-                                        "restrictions": [{ "attr::name::value": badgeName }]
-                                    },
-                                    "0_issuer.id": { "name": "issuer.id", "restrictions": issuerRestrictions },
-                                    "0_credentialSubject.id": { "name": "credentialSubject.id", "restrictions": holderRestrictions }
+                        "proof_request": {
+                            "name": "Proof for Language",
+                            "nonce": "123456789",
+                            "version": "1.0",
+                            "requested_attributes": {
+                                "0_name": {
+                                    "name": "name",
+                                    "restrictions": [{ "attr::name::value": badgeName }]
                                 },
-                                "requested_predicates": {}
-                            }
+                                "0_issuer.id": { "name": "issuer.id", "restrictions": issuerRestrictions },
+                                "0_credentialSubject.id": { "name": "credentialSubject.id", "restrictions": holderRestrictions }
+                            },
+                            "requested_predicates": {}
                         },
                         "trace": false
                     })
@@ -180,7 +178,7 @@
                 if (!proofRequestResponse.ok) throw new Error("Error sending proof request");
 
                 const proofRequestData = await proofRequestResponse.json();
-                const presentationExchangeId = proofRequestData.pres_ex_id;
+                const presentationExchangeId = proofRequestData.presentation_exchange_id;
                 console.log("Proof Request Sent. Presentation Exchange ID:", presentationExchangeId);
 
                 const isVerified = await checkVerificationStatus(presentationExchangeId);
@@ -203,8 +201,6 @@
             } catch (error) {
                 console.error("Verification Error:", error);
                 loadingSpinner.style.display = 'none';
-                failureIcon.classList.remove("hidden");
-                failureIcon.innerText = `❌ \n Verification failed: ${error.message}`;
             }
         };
     </script>

@@ -1,0 +1,112 @@
+/* Resetting some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header Section */
+header {
+    background-color: #0073e6;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.course-title {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.course-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.course-nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+.course-nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.course-nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Main Section */
+main {
+    margin-top: 30px;
+}
+
+/* Section Styles */
+section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: #0073e6;
+    margin-bottom: 15px;
+}
+
+p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+.announcement {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px 0;
+    border-left: 5px solid #0073e6;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.announcement h3 {
+    font-size: 1.2em;
+    color: #0073e6;
+}
+
+.announcement p {
+    font-size: 1em;
+    color: #555;
+}
+
+/* Footer Section */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 40px;
+}
+
+footer p {
+    font-size: 1em;
+}

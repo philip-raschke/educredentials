@@ -71,7 +71,6 @@
     
     
     <script>
-        // Function to check if the issuer agent is running
         function checkIssuerAgent() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "http://localhost:8021/connections/create-invitation?alias=Alice", true);
@@ -95,13 +94,44 @@
             xhr.send("{}");
         }
     
-        // Function to generate a QR code and invitation link
+        function getTheirDid() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "http://localhost:8021/connections", true);
+            xhr.setRequestHeader("accept", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    var holderDiv = document.getElementById("holder-did");
+                    if (xhr.status === 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.results && response.results.length > 0 && response.results[0].their_did) {
+                            holderDiv.innerHTML = "<p>Success: Wallet is connected";
+                            holderDiv.style.display = "none";
+                        } else {
+                            holderDiv.innerHTML = "<p>No Holder Wallet is connected</p>";
+                            holderDiv.style.display = "block";
+                        }
+                    } else {
+                        holderDiv.innerHTML = "<p>No Holder Wallet is connected</p>";
+                        holderDiv.style.display = "block";
+                    }
+                }
+            };
+
+            xhr.send();
+        }
+
+        // Erweitern der window.onload Funktion
+        window.onload = function() {
+            checkIssuerAgent();
+            getTheirDid();
+        };
+
         function runCurl() {
             var xhr = new XMLHttpRequest();
             xhr.open("POST", "http://localhost:8021/connections/create-invitation?alias=Alice", true);
             xhr.setRequestHeader("accept", "application/json");
             xhr.setRequestHeader("Content-Type", "application/json");
-    
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     if (xhr.status === 200) {
@@ -110,16 +140,13 @@
                         var resultDiv = document.getElementById("curl-result");
                         resultDiv.innerHTML = "<pre>" + JSON.stringify(invitationData, null, 2) + "</pre>";
                         resultDiv.style.display = "none";
-    
-                        // Generate QR code
+
+                        // QR-Code-Erzeugung
                         var qrCodeElement = document.getElementById('qr-code');
                         var qr = qrcode(0, 'L');
                         qr.addData(JSON.stringify(invitationData));
                         qr.make();
                         qrCodeElement.innerHTML = qr.createImgTag(6);
-    
-                        // Start checking for connection status
-                        pollConnectionStatus();
                     } else {
                         alert("Error: Verifier Agent is down.");
                     }
@@ -127,54 +154,25 @@
             };
             xhr.send("{}");
         }
-    
-        // Function to continuously check for a connection
-        function pollConnectionStatus(retries = 10, delay = 2000) {
-            let attempts = 0;
-    
-            function checkConnection() {
-                attempts++;
-                if (attempts > retries) {
-                    console.log("Connection check timed out.");
-                    return;
-                }
-    
-                var xhr = new XMLHttpRequest();
-                xhr.open("GET", "http://localhost:8021/connections", true);
-                xhr.setRequestHeader("accept", "application/json");
-    
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                        var response = JSON.parse(xhr.responseText);
-                        if (response.results && response.results.length > 0 && response.results[0].their_did) {
-                            // Connection is established; redirect to verify.html
-                            console.log("Connection established! Redirecting to verify page...");
-                            window.location.href = 'verify.html';
-                        } else {
-                            console.log("No connection found yet. Retrying...");
-                            setTimeout(checkConnection, delay); // Retry after delay
-                        }
-                    }
-                };
-    
-                xhr.onerror = function() {
-                    console.log("Error checking connection. Retrying...");
-                    setTimeout(checkConnection, delay); // Retry after delay
-                };
-    
-                xhr.send();
-            }
-    
-            checkConnection();
+
+        runCurl();
+
+        function handleVerifyLinkClick(event) {
+            // Prevent default link behavior so additional tasks can be done first
+            event.preventDefault();
+
+            // Perform other tasks here, such as logging, validations, or animations
+            // console.log("Preparing to navigate to verification page...");
+
+            // // Example: Display a confirmation message
+            // alert("Navigating to verification page...");
+
+            // Navigate to the verify.html page
+            window.location.href = 'verify.html';
         }
-    
-        // Run the QR code generation function on page load
-        window.onload = function() {
-            checkIssuerAgent();
-            runCurl();  // Generate QR code and start checking for connection status
-        };
+
     </script>
-    
+
 </head>
 
 <body>
@@ -184,12 +182,16 @@
         <div id="holder-did"></div>
         <h1>HU Berlin - Language Badge Verifier</h1>
         <img src="HU.png" alt="HU Logo"><br>
-        <p> To verify your eligibility for the course, simply scan the QR code using your mobile wallet.
-            Next, tap the Share button in your wallet app to complete the verification process.</p>
+        <p>To get connected to your mobile Wallet click on the "Connect to Holder Wallet" button
+            which will show a QR code and then scan the QR code with your mobile wallet</p>
         <!-- <button id="connect-button" onclick="runCurl()">Connect to Holder Wallet</button> -->
         <div id="qr-code"></div>
         <div id="curl-result"></div>
+        <!-- <p>If you have connected your Holder Wallet to the verifier agent (HU Berlin Agent), then click on <a href="verify.html">Next</a>.</p> -->
         
+            <p> Then for the verification (HU Berlin Agent) click on 
+            <a href="verify.html" onclick="handleVerifyLinkClick(event)">Next</a>.
+            </p>
 
     </div>
 </body>
