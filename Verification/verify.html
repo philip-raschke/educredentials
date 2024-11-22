@@ -112,7 +112,7 @@
             }
         }
     
-        async function checkVerificationStatus(presentationExchangeId, retries = 5, delay = 3000) {
+        async function checkVerificationStatus(presentationExchangeId, retries = 10, delay = 4000) {
             for (let i = 0; i < retries; i++) {
                 const verificationResponse = await fetch(`http://localhost:8021/present-proof-2.0/records/${presentationExchangeId}`);
                 const presentationData = await verificationResponse.json();
