@@ -138,11 +138,11 @@ Select a course you would like to enroll in and have the necessary credential fo
 After acknowledging that you want to show a credential you will be led to the index.html page, in which you will find an invitation QR code to scan with your mobile wallet app.
 
 # Note: If you went through the earlier steps of issuing a credential to your mobile wallet and your faber agent is still running,
-  your wallet will already be connected to the agent and the index.html page gets skipped. In a real-world setting,
-  the agent doing the verification would be a different one from a different university, in this example case the HU Berlin.
-  That agent would not have a connection with your wallet yet. If you want to go through this process "realistically",
-  shut down your agent by pressing CTRL+C in your GitBash, and starting the agent again with the command shown above.
-  You will now have to connect your wallet to the agent using the QR code shown on the index.html page.
+        your wallet will already be connected to the agent and the index.html page gets skipped. In a real-world setting,
+        the agent doing the verification would be a different one from a different university, in this example case the HU Berlin.
+        That agent would not have a connection with your wallet yet. If you want to go through this process "realistically",
+        shut down your agent by pressing CTRL+C in your GitBash, and starting the agent again with the command shown above.
+        You will now have to connect your wallet to the agent using the QR code shown on the index.html page.
 
 Upon connecting your wallet by scanning the QR code, a proof request is sent to your wallet app. You need to acknowledge this request. (In the BC wallet, click "View" and then "Share".)
 A zero-knowledge proof of the credential's existence in your wallet will be created and the result is shown on the page. Upon successful verification, you can continue to the course page.
