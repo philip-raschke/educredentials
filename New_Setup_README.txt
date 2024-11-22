@@ -128,7 +128,7 @@ Click on the "Badges as JSON" button under the badges to get to the plugin page.
 Follow the steps in the provided guide section.
 
 
-### Verification
+### Verification of a credential in your wallet
 Open the "enroll.html" in the "Verification" folder from this repository.
 Select a course you would like to enroll in and have the necessary credential for.
 
