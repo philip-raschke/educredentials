@@ -133,7 +133,8 @@ Follow the steps in the provided guide section.
 Open the "enroll.html" in the "Verification" folder from this repository.
 Select a course you would like to enroll in and have the necessary credential for.
 
-# Note: The verification process is currently hardcoded for a credential of the schema shown above by the name "English A1", so select the "English A2" course.
+# Note: The verification process is currently hardcoded for a credential of the schema shown above by the name "English A1", so select the "English A2" course
+        and have a credential by the name "English A1" in your wallet.
 
 After acknowledging that you want to show a credential you will be led to the index.html page, in which you will find an invitation QR code to scan with your mobile wallet app.
 
